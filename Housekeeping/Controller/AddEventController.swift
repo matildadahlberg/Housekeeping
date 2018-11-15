@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class AddEventController: UIViewController {
+class AddEventController: UIViewController, UITextFieldDelegate {
     
     var ref: DatabaseReference?
     var databaseHandle: DatabaseHandle?
@@ -46,6 +46,8 @@ class AddEventController: UIViewController {
         //datePicker.isHidden = true
         
         titleLabel.text = "Titel:"
+        
+       // enabledButtons()
         
     }
     

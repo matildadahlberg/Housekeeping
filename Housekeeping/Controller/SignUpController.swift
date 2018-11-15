@@ -56,9 +56,15 @@ class SignUpController: UIViewController {
     @IBAction func SignUpPressed(_ sender: UIButton) {
         SVProgressHUD.show()
         Auth.auth().createUser(withEmail: EmailTextField.text!, password: PasswordTextField.text!)
-        let eventDB = Database.database().reference().child(currentUserId!)
-        let nameDictionary = ["User": Auth.auth().currentUser?.email, "name" : NameTextField.text]
-        eventDB.childByAutoId().setValue(nameDictionary)
+            
+        let users = User(name: NameTextField.text!, email: EmailTextField.text!) 
+        
+        let userDB = Database.database().reference().child(currentUserId!).child("User")
+        let childRef = userDB.childByAutoId()
+        childRef.setValue(users.toAnyObject())
+//        let eventDB = Database.database().reference().child(currentUserId!)
+//        let nameDictionary = ["User": Auth.auth().currentUser?.email, "name" : NameTextField.text]
+//        eventDB.childByAutoId().setValue(nameDictionary)
             
         { (user, error) in
             if error != nil {

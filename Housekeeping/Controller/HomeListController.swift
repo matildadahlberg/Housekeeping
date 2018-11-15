@@ -9,10 +9,6 @@
 import UIKit
 import Firebase
 
-class myCell {
-    
-
-}
 
 class HomeListController: UIViewController, UITableViewDelegate, UITableViewDataSource, ExpandableHeaderViewDelegate {
 
@@ -23,8 +19,8 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     var events : [Event] = []
     
     var event : Event?
-    
-    var signUpName : SignUpController?
+
+    var users : [User] = []
     
     var expanded : Bool = true
  
@@ -42,8 +38,12 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.register(UINib(nibName: "cell", bundle: nil), forCellReuseIdentifier: "myCell")
 
         self.navigationController?.navigationBar.isHidden = false
+        
+        
         
         ref = Database.database().reference().child(currentUserId!)
    
@@ -67,6 +67,8 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             print(self.events)
             
         })
+      
+        fetchUser()
         
     }
     
@@ -84,7 +86,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (expanded == true){
-            return 44
+            return 64
         } else{
             return 0
         }
@@ -103,11 +105,13 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "labelCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! CustomTableViewCell
         
-        cell.textLabel?.text = events[indexPath.row].eventTitle
-     
+        cell.eventtitleCell.text = events[indexPath.row].eventTitle
+        //cell.userNameCell.text = users[indexPath.row].name
+
         return cell
+        
     }
     
     
@@ -150,19 +154,27 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
 //        }
     
 
-    func nameInCell(){
+    func fetchUser() {
+        let userDB = Database.database().reference().child(currentUserId!)
         
-        let evDB = Database.database().reference().child(currentUserId!)
-        
-        evDB.observeSingleEvent(of: .value, with: { (DataSnapshot) in
-            let data = DataSnapshot.value as! Dictionary <String, String>
+        userDB.child("User").observe(.value, with: {(snapshot) in
             
-            let username = data["name"]
+            var newUsers: [User] = []
             
-//            self.usernameLabel.text = username as? String
-       
+            for user in snapshot.children{
+                
+                let listUser = User(snapshot: user as! DataSnapshot)
+                newUsers.append(listUser)
+            }
+            
+            self.users = newUsers
+            self.tableView.reloadData()
+            print(self.users)
+            
         })
     }
+    
+
     
 }
 

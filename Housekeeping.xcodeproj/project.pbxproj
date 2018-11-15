@@ -13,6 +13,8 @@
 		455239DA2199BA63005A8C8B /* CleaningListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455239D92199BA63005A8C8B /* CleaningListViewController.swift */; };
 		455239DC2199C16B005A8C8B /* ShowCleaningListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455239DB2199C16B005A8C8B /* ShowCleaningListViewController.swift */; };
 		455239DE2199C3C4005A8C8B /* SectionsForCleaningList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455239DD2199C3C4005A8C8B /* SectionsForCleaningList.swift */; };
+		455C1E0C219D7DFE000EFDEE /* cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 455C1E0B219D7DFE000EFDEE /* cell.xib */; };
+		455C1E0E219D7EEB000EFDEE /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455C1E0D219D7EEB000EFDEE /* CustomTableViewCell.swift */; };
 		456B1828219083B100DBF5D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B1827219083B100DBF5D6 /* AppDelegate.swift */; };
 		456B182A219083B100DBF5D6 /* HomeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B1829219083B100DBF5D6 /* HomeListController.swift */; };
 		456B182D219083B100DBF5D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 456B182B219083B100DBF5D6 /* Main.storyboard */; };
@@ -60,6 +62,8 @@
 		455239D92199BA63005A8C8B /* CleaningListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleaningListViewController.swift; sourceTree = "<group>"; };
 		455239DB2199C16B005A8C8B /* ShowCleaningListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCleaningListViewController.swift; sourceTree = "<group>"; };
 		455239DD2199C3C4005A8C8B /* SectionsForCleaningList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsForCleaningList.swift; sourceTree = "<group>"; };
+		455C1E0B219D7DFE000EFDEE /* cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cell.xib; sourceTree = "<group>"; };
+		455C1E0D219D7EEB000EFDEE /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		456B1824219083B100DBF5D6 /* Housekeeping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Housekeeping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		456B1827219083B100DBF5D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		456B1829219083B100DBF5D6 /* HomeListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListController.swift; sourceTree = "<group>"; };
@@ -119,6 +123,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		455C1E06219D79D1000EFDEE /* Custom Cell */ = {
+			isa = PBXGroup;
+			children = (
+				455C1E0B219D7DFE000EFDEE /* cell.xib */,
+				455C1E0D219D7EEB000EFDEE /* CustomTableViewCell.swift */,
+			);
+			path = "Custom Cell";
+			sourceTree = "<group>";
+		};
 		456B181B219083B100DBF5D6 = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +203,7 @@
 			children = (
 				456B182B219083B100DBF5D6 /* Main.storyboard */,
 				456B1833219083B200DBF5D6 /* LaunchScreen.storyboard */,
+				455C1E06219D79D1000EFDEE /* Custom Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -342,6 +356,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				455C1E0C219D7DFE000EFDEE /* cell.xib in Resources */,
 				456B1835219083B200DBF5D6 /* LaunchScreen.storyboard in Resources */,
 				450D0D6A21931BB000F1A102 /* GoogleService-Info.plist in Resources */,
 				456B1832219083B200DBF5D6 /* Assets.xcassets in Resources */,
@@ -478,6 +493,7 @@
 				456B1830219083B100DBF5D6 /* Housekeeping.xcdatamodeld in Sources */,
 				45FB3F39219435D700211006 /* LogInController.swift in Sources */,
 				455239D82199B192005A8C8B /* ProfileViewController.swift in Sources */,
+				455C1E0E219D7EEB000EFDEE /* CustomTableViewCell.swift in Sources */,
 				455239D62199ADC4005A8C8B /* SettingsTableViewController.swift in Sources */,
 				457280952197011B002AD90D /* Section.swift in Sources */,
 				455239DC2199C16B005A8C8B /* ShowCleaningListViewController.swift in Sources */,
