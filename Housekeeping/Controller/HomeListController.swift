@@ -10,7 +10,8 @@ import UIKit
 import Firebase
 
 
-class HomeListController: UIViewController, UITableViewDelegate, UITableViewDataSource, ExpandableHeaderViewDelegate {
+class HomeListController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
+    //ExpandableHeaderViewDelegate
 
     var ref: DatabaseReference! 
     var databaseHandle: DatabaseHandle?
@@ -21,12 +22,10 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     var event : Event?
 
     var users : [User] = []
-    
+
     var expanded : Bool = true
  
-    @IBOutlet weak var tableView: UITableView!
-
- 
+    @IBOutlet weak var tableViewHome: UITableView!
     
     //    var sections = [
 //        Section(date: "E, d MMM yyyy HH:mm", event: [String](), expanded: false)
@@ -39,16 +38,16 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UINib(nibName: "cell", bundle: nil), forCellReuseIdentifier: "myCell")
+        tableViewHome.register(UINib(nibName: "cell", bundle: nil), forCellReuseIdentifier: "myCell")
 
         self.navigationController?.navigationBar.isHidden = false
         
         
         
         ref = Database.database().reference().child(currentUserId!)
-   
-//        if (eventList == nil) {
-//            eventList = []
+
+//        if (events == nil) {
+//            events = []
 //
 //        }
         
@@ -63,7 +62,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             }
             
             self.events = newEvents
-            self.tableView.reloadData()
+            self.tableViewHome.reloadData()
             print(self.events)
             
         })
@@ -72,9 +71,9 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return events.count
-    }
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return events.count
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
@@ -96,13 +95,13 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         return 2
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = ExpandableHeaderView()
-        //if let ev = event{
-            header.customInit(title: events[section].dateTitle, section: section, delegate: self)
-
-        return header
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let header = ExpandableHeaderView()
+//        //if let ev = event{
+//            header.customInit(title: events[section].dateTitle, section: section, delegate: self)
+//
+//        return header
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! CustomTableViewCell
@@ -115,43 +114,45 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    func toggleSection(header: ExpandableHeaderView, section: Int) {
-        //events[section].expanded = !events[section].expanded
-        if(expanded == true){
-            tableView.beginUpdates()
-            for i in 0 ..< events[section].eventTitle.count{
-                tableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
-            }
-            tableView.endUpdates()
-        }
-    }
-    
-
-    //radera genom att swipa
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//
-//        if editingStyle == .delete {
-//            event?.eventTitle.remove(at: indexPath.row)
-//
-//            let eventRef = ref.child(currentUserId!).child("Events").child((event?.id)!)
-//            eventRef.child("EventTitle").setValue(event?.eventTitle)
-//            tableView.reloadData()
-//
+//    func toggleSection(header: ExpandableHeaderView, section: Int) {
+//        //events[section].expanded = !events[section].expanded
+//        if(expanded == true){
+//            tableView.beginUpdates()
+//            for i in 0 ..< events[section].eventTitle.count{
+//                tableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+//            }
+//            tableView.endUpdates()
 //        }
 //    }
     
+
+    //radera genom att swipa
+    func tableView(_ tableView: UITableView, commit editingStyle: CustomTableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+
+        if editingStyle == .delete {
+            let event = events[indexPath.row]
+            events.remove(at: indexPath.row)
+            removeFromDB(event: event)
+            tableViewHome.reloadData()
+        }    }
+    
     // lägger till ett checkmark vid högra sidan i tableviewn om man klickar på den och tar bort om man klickar igen
-//        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//            if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-//                tableView.cellForRow(at: indexPath)?.accessoryType = .none
-//
-//            } else {
-//                tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-//            }
-//
-//            tableView.deselectRow(at: indexPath, animated: true)
-//        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+            {
+
+                tableViewHome.deselectRow(at: indexPath, animated: true)
+                
+                if tableView == tableViewHome {
+                    if tableView.cellForRow(at: indexPath)?.accessoryType == CustomTableViewCell.AccessoryType.checkmark{
+                        tableView.cellForRow(at: indexPath)?.accessoryType = CustomTableViewCell.AccessoryType.none
+                    }else{
+                        tableView.cellForRow(at: indexPath)?.accessoryType = CustomTableViewCell.AccessoryType.checkmark
+                    }
+                }
+            }
+
+    
+    
     
 
     func fetchUser() {
@@ -168,11 +169,18 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             }
             
             self.users = newUsers
-            self.tableView.reloadData()
+            self.tableViewHome.reloadData()
             print(self.users)
             
         })
     }
+    
+    func removeFromDB(event : Event){
+        
+        let evRef = ref.child(currentUserId!).child("Events").child(event.id)
+        evRef.removeValue()
+    }
+  
     
 
     

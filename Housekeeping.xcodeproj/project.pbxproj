@@ -10,7 +10,6 @@
 		450D0D6A21931BB000F1A102 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 450D0D6921931BB000F1A102 /* GoogleService-Info.plist */; };
 		455239D62199ADC4005A8C8B /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455239D52199ADC4005A8C8B /* SettingsTableViewController.swift */; };
 		455239D82199B192005A8C8B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455239D72199B192005A8C8B /* ProfileViewController.swift */; };
-		455239DA2199BA63005A8C8B /* CleaningListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455239D92199BA63005A8C8B /* CleaningListViewController.swift */; };
 		455239DC2199C16B005A8C8B /* ShowCleaningListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455239DB2199C16B005A8C8B /* ShowCleaningListViewController.swift */; };
 		455239DE2199C3C4005A8C8B /* SectionsForCleaningList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455239DD2199C3C4005A8C8B /* SectionsForCleaningList.swift */; };
 		455C1E0C219D7DFE000EFDEE /* cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 455C1E0B219D7DFE000EFDEE /* cell.xib */; };
@@ -59,7 +58,6 @@
 		450D0D6921931BB000F1A102 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		455239D52199ADC4005A8C8B /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		455239D72199B192005A8C8B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		455239D92199BA63005A8C8B /* CleaningListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleaningListViewController.swift; sourceTree = "<group>"; };
 		455239DB2199C16B005A8C8B /* ShowCleaningListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCleaningListViewController.swift; sourceTree = "<group>"; };
 		455239DD2199C3C4005A8C8B /* SectionsForCleaningList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsForCleaningList.swift; sourceTree = "<group>"; };
 		455C1E0B219D7DFE000EFDEE /* cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cell.xib; sourceTree = "<group>"; };
@@ -219,7 +217,6 @@
 				45FE0DD121946F0C00AC4D3B /* AddEventController.swift */,
 				455239D52199ADC4005A8C8B /* SettingsTableViewController.swift */,
 				455239D72199B192005A8C8B /* ProfileViewController.swift */,
-				455239D92199BA63005A8C8B /* CleaningListViewController.swift */,
 				455239DB2199C16B005A8C8B /* ShowCleaningListViewController.swift */,
 			);
 			path = Controller;
@@ -499,7 +496,6 @@
 				455239DC2199C16B005A8C8B /* ShowCleaningListViewController.swift in Sources */,
 				455239DE2199C3C4005A8C8B /* SectionsForCleaningList.swift in Sources */,
 				456B1828219083B100DBF5D6 /* AppDelegate.swift in Sources */,
-				455239DA2199BA63005A8C8B /* CleaningListViewController.swift in Sources */,
 				45FB3F3B219436BD00211006 /* SignUpController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

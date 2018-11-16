@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-var settingArray = ["Min Profil","Använd färdig städlista","Vänner","Logga ut"]
+var settingArray = ["Min Profil","Vänner","Logga ut"]
 var myIndex = 0
 
 class SettingsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -44,12 +44,9 @@ class SettingsTableViewController: UIViewController, UITableViewDelegate, UITabl
             performSegue(withIdentifier: "goToProfile", sender: self)
         }
         if indexPath.row == 1{
-            performSegue(withIdentifier: "goToCleanList", sender: self)
-        }
-        if indexPath.row == 2{
             performSegue(withIdentifier: "goToFriends", sender: self)
         }
-        if indexPath.row == 3{
+        if indexPath.row == 2{
             do {
                 try Auth.auth().signOut()
                 performSegue(withIdentifier: "logOut", sender: self)
@@ -64,15 +61,4 @@ class SettingsTableViewController: UIViewController, UITableViewDelegate, UITabl
         
     }
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
