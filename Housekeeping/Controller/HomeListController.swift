@@ -66,6 +66,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             print(self.events)
             
         })
+        
       
         fetchUser()
         
@@ -151,9 +152,6 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
                 }
             }
 
-    
-    
-    
 
     func fetchUser() {
         let userDB = Database.database().reference().child(currentUserId!)

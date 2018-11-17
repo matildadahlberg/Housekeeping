@@ -57,11 +57,12 @@ class SignUpController: UIViewController {
         SVProgressHUD.show()
         Auth.auth().createUser(withEmail: EmailTextField.text!, password: PasswordTextField.text!)
             
-        let users = User(name: NameTextField.text!, email: EmailTextField.text!) 
+        let users = User(name: NameTextField.text!, email: EmailTextField.text!)
         
         let userDB = Database.database().reference().child(currentUserId!).child("User")
         let childRef = userDB.childByAutoId()
         childRef.setValue(users.toAnyObject())
+            
 //        let eventDB = Database.database().reference().child(currentUserId!)
 //        let nameDictionary = ["User": Auth.auth().currentUser?.email, "name" : NameTextField.text]
 //        eventDB.childByAutoId().setValue(nameDictionary)
@@ -107,30 +108,6 @@ class SignUpController: UIViewController {
         
         CreateAccButton.layer.cornerRadius = 15
         CreateAccButton.showsTouchWhenHighlighted = true
-        
-        redButton.layer.cornerRadius = 15
-        redButton.showsTouchWhenHighlighted = true
-        
-        yellowButton.layer.cornerRadius = 15
-        yellowButton.showsTouchWhenHighlighted = true
-        
-        orangeButton.layer.cornerRadius = 15
-        orangeButton.showsTouchWhenHighlighted = true
-        
-        greenButton.layer.cornerRadius = 15
-        greenButton.showsTouchWhenHighlighted = true
-        
-        babyBlueButton.layer.cornerRadius = 15
-        babyBlueButton.showsTouchWhenHighlighted = true
-        
-        blueButton.layer.cornerRadius = 15
-        blueButton.showsTouchWhenHighlighted = true
-        
-        purpleButton.layer.cornerRadius = 15
-        purpleButton.showsTouchWhenHighlighted = true
-        
-        blackButton.layer.cornerRadius = 15
-        blackButton.showsTouchWhenHighlighted = true
 
     }
     

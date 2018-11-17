@@ -600,27 +600,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Datum:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sgm-De-h2x">
-                                <rect key="frame" x="16" y="209" width="343" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upprepa:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qK9-2a-iLA">
-                                <rect key="frame" x="143" y="530" width="89" height="27"/>
+                                <rect key="frame" x="16" y="512" width="71" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lHu-qS-mbo">
-                                <rect key="frame" x="16" y="143" width="343" height="44"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lHu-qS-mbo">
+                                <rect key="frame" x="0.0" y="143" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="hv0-sq-kym">
-                                <rect key="frame" x="0.0" y="263" width="375" height="259"/>
+                                <rect key="frame" x="0.0" y="263" width="375" height="241"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="563464553.88770294">
                                     <!--2018-11-09 13:55:53 +0000-->
@@ -630,30 +624,22 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Titel:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7g-xv-roJ">
                                 <rect key="frame" x="16" y="105" width="54" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="Iat-aB-MYB">
-                                <rect key="frame" x="47" y="625" width="280" height="29"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Tryck här om du vill upprepa" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Of-R5-IL6">
+                                <rect key="frame" x="0.0" y="544" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Varannan vecka" width="100"/>
-                                    <segment title="Varje månad" width="90"/>
-                                    <segment title="Varje år" width="90"/>
-                                </segments>
-                                <color key="tintColor" red="0.1647058824" green="0.47450980390000003" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Psz-Qx-XjE">
-                                <rect key="frame" x="47" y="578" width="280" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Datum:" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sgm-De-h2x">
+                                <rect key="frame" x="0.0" y="195" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Aldrig" width="100"/>
-                                    <segment title="Varje dag" width="90"/>
-                                    <segment title="Varje vecka" width="90"/>
-                                </segments>
-                                <color key="tintColor" red="0.1647058824" green="0.47450980390000003" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </segmentedControl>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="AXk-dk-jGv"/>
@@ -669,7 +655,7 @@
                         <outlet property="addbuttonStyle" destination="n3y-CJ-EkM" id="S7d-vZ-J9M"/>
                         <outlet property="datePicker" destination="hv0-sq-kym" id="Vq7-hd-erl"/>
                         <outlet property="inputDateTextfield" destination="sgm-De-h2x" id="OaC-8E-OGA"/>
-                        <outlet property="repeatBtn" destination="Psz-Qx-XjE" id="3M5-oa-57T"/>
+                        <outlet property="repeatTextfield" destination="2Of-R5-IL6" id="9em-D1-dfb"/>
                         <outlet property="titleLabel" destination="g7g-xv-roJ" id="DRI-sn-JbI"/>
                         <outlet property="titleTextfield" destination="lHu-qS-mbo" id="zv4-pl-BRV"/>
                         <segue destination="uzK-Ki-qmg" kind="show" identifier="goToHome" id="FEV-Et-h1L"/>
@@ -677,7 +663,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NwM-vM-VOX" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4631" y="-553"/>
+            <point key="canvasLocation" x="4629.6000000000004" y="-553.44827586206895"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pfx-Xh-YCL">
@@ -708,7 +694,7 @@
         <image name="settings" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jZ8-2a-bjR"/>
+        <segue reference="KQa-8M-NX9"/>
         <segue reference="0i0-BX-pxH"/>
         <segue reference="FEV-Et-h1L"/>
     </inferredMetricsTieBreakers>

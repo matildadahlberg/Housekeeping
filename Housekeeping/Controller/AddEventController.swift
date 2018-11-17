@@ -9,20 +9,19 @@
 import UIKit
 import Firebase
 
-class AddEventController: UIViewController, UITextFieldDelegate {
+class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource  {
+
     
     var ref: DatabaseReference?
     var databaseHandle: DatabaseHandle?
     var currentUserId = Auth.auth().currentUser?.uid
     
     var events : [Event] = []
-    
-    @IBOutlet weak var repeatBtn: UISegmentedControl!
-    
 
     let segueHome = "goToHome"
 
-   
+    @IBOutlet weak var repeatTextfield: UITextField!
+    
     @IBOutlet weak var addbuttonStyle: UIBarButtonItem!
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -32,26 +31,34 @@ class AddEventController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var datePicker: UIDatePicker!
     
+    var pickerRepeat = UIPickerView()
+    
+    var repeatDay = ["Aldrig","Varje dag", "Varje vecka", "Varannan vecka","Varje månad", "Varje år"]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
         
- 
         ref = Database.database().reference()
-       
 
         datePicker?.datePickerMode = .dateAndTime
         datePicker?.addTarget(self, action: #selector(AddEventController.dateChanged(datePicker:)), for: .valueChanged)
-   
-        //datePicker.isHidden = true
+        
+        
+        repeatTextfield.inputView = pickerRepeat
+        
+        pickerRepeat.delegate = self
+        pickerRepeat.dataSource = self
+
         
         titleLabel.text = "Titel:"
         
-       // enabledButtons()
+        enabledButtons()
+        
+       
         
     }
-    
-    
+
     @objc func dateChanged(datePicker: UIDatePicker){
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "E, d MMM yyyy HH:mm"
@@ -74,23 +81,41 @@ class AddEventController: UIViewController, UITextFieldDelegate {
         performSegue(withIdentifier: segueHome, sender: self)
         
     }
-    
-//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-//            return true
-//        }
-    
-        
-        //dismiss the popover
-    //presentingViewController?.dismiss(animated: true, completion: nil)
-
     func enabledButtons() {
-        if (titleTextfield.text != ""){
+        if ((titleTextfield.inputView) != nil){
             addbuttonStyle.isEnabled = true
         }else{
             addbuttonStyle.isEnabled = false
         }
         
     }
+    
+    
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return repeatDay.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return repeatDay[row]
+    }
+    
+  
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        repeatTextfield.text = repeatDay[row]
+        self.view.endEditing(false)
+    }
+
+  
+    
+    
 
 
 }
