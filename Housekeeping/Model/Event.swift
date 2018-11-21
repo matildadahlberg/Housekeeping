@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseAuth
 
 class Event {
     
@@ -20,7 +21,7 @@ class Event {
     init(dateTitle: String, eventTitle: String, repeatTime: Int){
         dateFormatter.dateFormat = "E, d MMM yyyy"
         self.dateTitle = dateFormatter.string(from: Date())
-        self.eventTitle = eventTitle;
+        self.eventTitle = eventTitle
         self.repeatTime = repeatTime
         self.id = ""
     }

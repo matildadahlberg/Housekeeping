@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		450D0D6A21931BB000F1A102 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 450D0D6921931BB000F1A102 /* GoogleService-Info.plist */; };
+		4544ACDA21A4358A00DE3448 /* addFriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4544ACD921A4358A00DE3448 /* addFriendController.swift */; };
+		4544ACDC21A436E800DE3448 /* searchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4544ACDB21A436E800DE3448 /* searchTableViewCell.swift */; };
 		455239D62199ADC4005A8C8B /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455239D52199ADC4005A8C8B /* SettingsTableViewController.swift */; };
 		455239D82199B192005A8C8B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455239D72199B192005A8C8B /* ProfileViewController.swift */; };
 		455239DC2199C16B005A8C8B /* ShowCleaningListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455239DB2199C16B005A8C8B /* ShowCleaningListViewController.swift */; };
@@ -56,6 +58,8 @@
 		1F7577EE2E88B501875DF53B /* Pods-Housekeeping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Housekeeping.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Housekeeping/Pods-Housekeeping.debug.xcconfig"; sourceTree = "<group>"; };
 		35849AA4E6671A8CABC413B9 /* Pods-HousekeepingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HousekeepingUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HousekeepingUITests/Pods-HousekeepingUITests.release.xcconfig"; sourceTree = "<group>"; };
 		450D0D6921931BB000F1A102 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4544ACD921A4358A00DE3448 /* addFriendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addFriendController.swift; sourceTree = "<group>"; };
+		4544ACDB21A436E800DE3448 /* searchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchTableViewCell.swift; sourceTree = "<group>"; };
 		455239D52199ADC4005A8C8B /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		455239D72199B192005A8C8B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		455239DB2199C16B005A8C8B /* ShowCleaningListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCleaningListViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +130,7 @@
 			children = (
 				455C1E0B219D7DFE000EFDEE /* cell.xib */,
 				455C1E0D219D7EEB000EFDEE /* CustomTableViewCell.swift */,
+				4544ACDB21A436E800DE3448 /* searchTableViewCell.swift */,
 			);
 			path = "Custom Cell";
 			sourceTree = "<group>";
@@ -218,6 +223,7 @@
 				455239D52199ADC4005A8C8B /* SettingsTableViewController.swift */,
 				455239D72199B192005A8C8B /* ProfileViewController.swift */,
 				455239DB2199C16B005A8C8B /* ShowCleaningListViewController.swift */,
+				4544ACD921A4358A00DE3448 /* addFriendController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -489,6 +495,7 @@
 				459C7113219ACFF90051A813 /* Event.swift in Sources */,
 				456B1830219083B100DBF5D6 /* Housekeeping.xcdatamodeld in Sources */,
 				45FB3F39219435D700211006 /* LogInController.swift in Sources */,
+				4544ACDA21A4358A00DE3448 /* addFriendController.swift in Sources */,
 				455239D82199B192005A8C8B /* ProfileViewController.swift in Sources */,
 				455C1E0E219D7EEB000EFDEE /* CustomTableViewCell.swift in Sources */,
 				455239D62199ADC4005A8C8B /* SettingsTableViewController.swift in Sources */,
@@ -497,6 +504,7 @@
 				455239DE2199C3C4005A8C8B /* SectionsForCleaningList.swift in Sources */,
 				456B1828219083B100DBF5D6 /* AppDelegate.swift in Sources */,
 				45FB3F3B219436BD00211006 /* SignUpController.swift in Sources */,
+				4544ACDC21A436E800DE3448 /* searchTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

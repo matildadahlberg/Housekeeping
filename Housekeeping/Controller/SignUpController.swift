@@ -12,6 +12,8 @@ import SVProgressHUD
 
 class SignUpController: UIViewController {
     
+    //"https://housekeeping-5d390.firebaseio.com/"
+    
     var ref: DatabaseReference!
     var currentUserId = Auth.auth().currentUser?.uid
     
@@ -37,6 +39,8 @@ class SignUpController: UIViewController {
     @IBOutlet weak var PasswordTextField: UITextField!
     @IBOutlet weak var CreateAccButton: UIButton!
   
+    var user : [User] = []
+    var users: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,36 +53,45 @@ class SignUpController: UIViewController {
         buttonDesign()
 
     }
+  
     
-    
+    //        let eventDB = Database.database().reference().child(currentUserId!)
+    //        let nameDictionary = ["email": Auth.auth().currentUser?.email, "name" : NameTextField.text]
+    //        eventDB.childByAutoId().setValue(nameDictionary)
     
     
     @IBAction func SignUpPressed(_ sender: UIButton) {
         SVProgressHUD.show()
         Auth.auth().createUser(withEmail: EmailTextField.text!, password: PasswordTextField.text!)
             
-        let users = User(name: NameTextField.text!, email: EmailTextField.text!)
-        
-        let userDB = Database.database().reference().child(currentUserId!).child("User")
-        let childRef = userDB.childByAutoId()
-        childRef.setValue(users.toAnyObject())
-            
-//        let eventDB = Database.database().reference().child(currentUserId!)
-//        let nameDictionary = ["User": Auth.auth().currentUser?.email, "name" : NameTextField.text]
-//        eventDB.childByAutoId().setValue(nameDictionary)
-            
         { (user, error) in
             if error != nil {
                 print(error)
                 SVProgressHUD.dismiss()
-                
+
                 self.createAlertSignUp(title: "Något gick fel!", message: "Antingen används redan e-postadressen eller så är lösenordet för kort")
             }
             else {
                 SVProgressHUD.dismiss()
                 print("Inloggning lyckades")
                 
+                let users = User(name: self.NameTextField.text!, email: self.EmailTextField.text!)
+                
+                let changeName = Auth.auth().currentUser?.createProfileChangeRequest()
+                changeName?.displayName = self.NameTextField.text
+                changeName?.commitChanges { (error) in
+                    print(error)
+
+                }
+                
+                self.currentUserId = Auth.auth().currentUser?.uid
+                
+                print("signup: " + self.currentUserId!)
+                
+
+                
                 self.performSegue(withIdentifier: "goToHome", sender: self)
+                
             }
         }
     }

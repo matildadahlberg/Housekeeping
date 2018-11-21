@@ -53,7 +53,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
         titleLabel.text = "Titel:"
         
-        enabledButtons()
+        //enabledButtons()
         
        
         

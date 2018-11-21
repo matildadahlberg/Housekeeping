@@ -41,7 +41,7 @@ class SettingsTableViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0{
-            performSegue(withIdentifier: "goToProfile", sender: self)
+            performSegue(withIdentifier: "segueToProfile", sender: self)
         }
         if indexPath.row == 1{
             performSegue(withIdentifier: "goToFriends", sender: self)
