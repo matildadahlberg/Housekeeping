@@ -7,25 +7,30 @@
 //
 
 import UIKit
+import Firebase
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var nameTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
 
-        // Do any additional setup after loading the view.
+        let name = Auth.auth().currentUser?.displayName
+        self.nameTextField.text = name
+        
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func changeNameButton(_ sender: Any) {
+        let changeName = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeName?.displayName = self.nameTextField.text
+        changeName?.commitChanges { (error) in
+            print(error)
+            
+        }
     }
-    */
+    
 
 }

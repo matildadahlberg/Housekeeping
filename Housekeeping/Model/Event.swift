@@ -16,7 +16,7 @@ class Event {
     var dateFormatter = DateFormatter()
     var eventTitle: String!
     var repeatTime: Int
-    var id: String
+    var id: String!
     
     init(dateTitle: String, eventTitle: String, repeatTime: Int){
         dateFormatter.dateFormat = "E, d MMM yyyy"

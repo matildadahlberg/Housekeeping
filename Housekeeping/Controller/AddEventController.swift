@@ -52,12 +52,9 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
 
         
         titleLabel.text = "Titel:"
-        
         //enabledButtons()
-        
-       
-        
     }
+   
 
     @objc func dateChanged(datePicker: UIDatePicker){
         let dateFormatter = DateFormatter()
@@ -66,6 +63,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         //datePicker.isHidden = false
         
         inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
+        //print(dateFormatter.string(from: datePicker.date))
     
     }
 
@@ -82,9 +80,12 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
     }
     func enabledButtons() {
-        if ((titleTextfield.inputView) != nil){
+        if (titleTextfield.text != "")
+        {
             addbuttonStyle.isEnabled = true
-        }else{
+        }
+        if(titleTextfield.text == "")
+        {
             addbuttonStyle.isEnabled = false
         }
         

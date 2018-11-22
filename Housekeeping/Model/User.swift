@@ -13,7 +13,7 @@ class User {
 
     var name: String!
     var email: String!
-    //var id = Auth.auth().currentUser?.email
+    //var id = Auth.auth().currentUser?.uid
     var friends: String!
 
     init(name: String, email: String){
