@@ -39,10 +39,24 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
         
+        titleTextfield.layer.borderColor = UIColor(red: 42.0/255.0, green: 121.0/255.0, blue: 103.0/255.0, alpha: 1.0).cgColor
+        titleTextfield.layer.borderWidth = 1.0
+        
+        inputDateTextfield.layer.borderColor = UIColor(red: 42.0/255.0, green: 121.0/255.0, blue: 103.0/255.0, alpha: 1.0).cgColor
+        
+        inputDateTextfield.layer.borderWidth = 1.0
+        
+        repeatTextfield.layer.borderColor = UIColor(red: 42.0/255.0, green: 121.0/255.0, blue: 103.0/255.0, alpha: 1.0).cgColor
+        
+        repeatTextfield.layer.borderWidth = 1.0
+        
+        
         ref = Database.database().reference()
 
         datePicker?.datePickerMode = .dateAndTime
         datePicker?.addTarget(self, action: #selector(AddEventController.dateChanged(datePicker:)), for: .valueChanged)
+        
+
         
         
         repeatTextfield.inputView = pickerRepeat
@@ -52,15 +66,17 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
 
         
         titleLabel.text = "Titel:"
-        //enabledButtons()
+ 
     }
-   
+
 
     @objc func dateChanged(datePicker: UIDatePicker){
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "E, d MMM yyyy HH:mm"
-        
-        //datePicker.isHidden = false
+        dateFormatter.locale = Locale(identifier: "sv")
+        dateFormatter.dateFormat = "E, d MMM HH:mm"
+ 
+        datePicker.minimumDate = Date()
+        //datePicker.locale = Locale.current
         
         inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
         //print(dateFormatter.string(from: datePicker.date))
@@ -69,7 +85,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
 
     @IBAction func pressedAdd(_ sender: Any) {
         //post the data to firebase
-        
+ 
         let event = Event(dateTitle: inputDateTextfield.text!, eventTitle: titleTextfield.text!, repeatTime: 1)
         
         let eventDB = Database.database().reference().child(currentUserId!).child("Events")
@@ -79,20 +95,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         performSegue(withIdentifier: segueHome, sender: self)
         
     }
-    func enabledButtons() {
-        if (titleTextfield.text != "")
-        {
-            addbuttonStyle.isEnabled = true
-        }
-        if(titleTextfield.text == "")
-        {
-            addbuttonStyle.isEnabled = false
-        }
-        
-    }
-    
-    
-    
+  
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -114,7 +117,31 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         self.view.endEditing(false)
     }
 
-  
+
+    func checkName(){
+        let text = titleTextfield.text ?? ""
+        addbuttonStyle.isEnabled = !text.isEmpty
+        
+    }
+    
+//    func checkDate(){
+//        if Date.earlierDate(datePicker.date) == datePicker.date{
+//            addbuttonStyle.isEnabled = false
+//        }
+//
+//    }
+    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        checkName()
+//    }
+    
+    
+    
+    
     
     
 

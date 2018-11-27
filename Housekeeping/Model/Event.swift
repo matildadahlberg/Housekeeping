@@ -16,10 +16,12 @@ class Event {
     var dateFormatter = DateFormatter()
     var eventTitle: String!
     var repeatTime: Int
+    
     var id: String!
     
     init(dateTitle: String, eventTitle: String, repeatTime: Int){
-        dateFormatter.dateFormat = "E, d MMM yyyy"
+        dateFormatter.locale = Locale(identifier: "sv")
+        dateFormatter.dateFormat = "E, d MMM HH:mm"
         self.dateTitle = dateFormatter.string(from: Date())
         self.eventTitle = eventTitle
         self.repeatTime = repeatTime

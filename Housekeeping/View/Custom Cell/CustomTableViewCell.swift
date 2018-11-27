@@ -13,6 +13,8 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var userNameCell: UILabel!
     @IBOutlet weak var eventtitleCell: UILabel!
     
+    @IBOutlet weak var dateLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

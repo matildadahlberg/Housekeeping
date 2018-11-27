@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
 
 class HomeListController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
@@ -22,9 +23,9 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     
     var event : Event?
     var eventList = [Event]()
-
     
-    var expanded : Bool = true
+    
+    //var expanded = Bool()
     
     
     @IBOutlet weak var tableViewHome: UITableView!
@@ -39,6 +40,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in })
         
         tableViewHome.register(UINib(nibName: "cell", bundle: nil), forCellReuseIdentifier: "myCell")
         
@@ -47,7 +49,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         currentUserId = Auth.auth().currentUser?.uid
         print( currentUserId)
         ref = Database.database().reference().child(currentUserId!)
-     
+        
         //
         //        if (events == nil) {
         //            events = []
@@ -72,76 +74,35 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return events.count
-//    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return events.count
     }
     
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 44
-//    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (expanded == true){
-            return 64
-        } else{
-            return 0
-        }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //        if events[section].expanded == true{
+        //            return events[section].eventTitle.count + 1
+        //        }else{
+        //            return 1
+        //        }
+        return events.count
     }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 2
-    }
-    
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let header = ExpandableHeaderView()
-//        header.customInit(title: events[section].dateTitle, section: section, delegate: self)
-//
-//        return header
-//    }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! CustomTableViewCell
         
         cell.eventtitleCell.text = events[indexPath.row].eventTitle
         print(Auth.auth().currentUser?.uid)
         cell.userNameCell.text = Auth.auth().currentUser?.displayName
+        cell.dateLabel.text = events[indexPath.row].dateTitle
         
         return cell
         
     }
     
     
-//    func toggleSection(header: ExpandableHeaderView, section: Int) {
-//        //events[section].expanded = !events[section].expanded
-//        if(expanded == true){
-//            tableViewHome.beginUpdates()
-//            for i in 0 ..< events[section].eventTitle.count{
-//                tableViewHome.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
-//            }
-//            if(expanded == false){
-//                tableViewHome.endUpdates()
-//            }
-//
-//        }
-        //        if (expanded == true){
-        //        UIView.animate(withDuration: 0.3){
-        //            self.tableViewHome.isHidden = true
-        //        }
-        //        }else{
-        //            UIView.animate(withDuration: 0.3){
-        //                self.tableViewHome.isHidden = false
-        //            }
-        //        }
-    //}
-    
-    
     //radera genom att swipa
     func tableView(_ tableView: UITableView, commit editingStyle: CustomTableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-
+        
         if editingStyle == .delete {
             let event = events[indexPath.row]
             self.events.remove(at: indexPath.row)
@@ -150,14 +111,13 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             tableViewHome.reloadData()
             print(indexPath.row)
         }
-       
+        
         
     }
     
     // lägger till ett checkmark vid högra sidan i tableviewn om man klickar på den och tar bort om man klickar igen
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        
         tableViewHome.deselectRow(at: indexPath, animated: true)
         
         if tableView == tableViewHome {
@@ -168,24 +128,120 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
+    
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-   
-    
     
     func removeFromDB(event : Event){
-
+        
         let eventDB = Database.database().reference().child(currentUserId!).child("Events").child(event.id)
         eventDB.removeValue()
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+    //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    //        return 44
+    //    }
+    
+    //    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    //        return 2
+    //    }
+    
+    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    //        let header = ExpandableHeaderView()
+    //        header.customInit(title: events[section].dateTitle, section: section, delegate: self)
+    //
+    //        return header
+    //    }
+    
+    //    func toggleSection(header: ExpandableHeaderView, section: Int) {
+    //        //events[section].expanded = !events[section].expanded
+    //        if(expanded == true){
+    //            tableViewHome.beginUpdates()
+    //            for i in 0 ..< events[section].eventTitle.count{
+    //                tableViewHome.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+    //            }
+    //            if(expanded == false){
+    //                tableViewHome.endUpdates()
+    //            }
+    //
+    //        }
+    //        if (expanded == true){
+    //        UIView.animate(withDuration: 0.3){
+    //            self.tableViewHome.isHidden = true
+    //        }
+    //        }else{
+    //            UIView.animate(withDuration: 0.3){
+    //                self.tableViewHome.isHidden = false
+    //            }
+    //        }
+    //}
+    
+    //    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    //        if indexPath.row == 0{
+    //            if events[indexPath.section].expanded == true {
+    //                events[indexPath.section].expanded = false
+    //                let sections = IndexSet.init(integer: indexPath.section)
+    //                tableViewHome.reloadSections(sections, with: .none)
+    //            } else{
+    //                events[indexPath.section].expanded = true
+    //                let sections = IndexSet.init(integer: indexPath.section)
+    //                tableViewHome.reloadSections(sections, with: .none)
+    //            }
+    //
+    //        } else{
+    //            tableViewHome.deselectRow(at: indexPath, animated: true)
+    //
+    //            if tableView == tableViewHome {
+    //                if tableView.cellForRow(at: indexPath)?.accessoryType == CustomTableViewCell.AccessoryType.checkmark{
+    //                    tableView.cellForRow(at: indexPath)?.accessoryType = CustomTableViewCell.AccessoryType.none
+    //                }else{
+    //                    tableView.cellForRow(at: indexPath)?.accessoryType = CustomTableViewCell.AccessoryType.checkmark
+    //                }
+    //            }
+    //
+    //        }
+    //    }
+    
 
+    //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    //
+    //        //        let dataIndex = indexPath.row - 1
+    //        //        if indexPath.row == 0{
+    //        //            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") else {return UITableViewCell()}
+    //        //            cell.textLabel?.text = events[indexPath.section].dateTitle
+    //        //            return cell
+    //        //        }
+    //        //
+    //        //        else {
+    //        //            guard let cell = tableView.dequeueReusableCell(withIdentifier: "myCell") as? CustomTableViewCell else {return UITableViewCell()}
+    //        //            cell.eventtitleCell.text = events[indexPath.section].eventTitle[dataIndex]
+    //        //            cell.userNameCell.text = Auth.auth().currentUser?.displayName
+    //        //
+    //        //            return cell
+    //        //        }
+    //        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! CustomTableViewCell
+    //
+    //        cell.eventtitleCell.text = events[indexPath.row].eventTitle
+    //        cell.userNameCell.text = Auth.auth().currentUser?.displayName
+    //        cell.dateLabel.text = events[indexPath.row].dateTitle
+    //
+    //        print(Auth.auth().currentUser?.uid)
+    //        return cell
+    //
+    //    }
+    
 }
-    
-    
-    
-    
+
+
+
+
 
 
 
