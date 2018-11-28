@@ -22,7 +22,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     var events : [Event] = []
     
     var event : Event?
-    var eventList = [Event]()
+    //var eventList = [Event]()
     
     
     //var expanded = Bool()
@@ -75,7 +75,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return events.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -88,6 +88,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! CustomTableViewCell
         
         cell.eventtitleCell.text = events[indexPath.row].eventTitle

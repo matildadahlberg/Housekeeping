@@ -13,14 +13,14 @@ class User {
 
     var name: String!
     var email: String!
-    //var id = Auth.auth().currentUser?.uid
+    var uid = Auth.auth().currentUser?.uid
     var friends: String!
 
     init(name: String, email: String){
         self.name = name
         self.friends = ""
         self.email = email
-        //self.id = ""
+        self.uid = ""
 
     }
 
@@ -31,7 +31,6 @@ class User {
         email = (snapshotValue["email"] as! String)
         //id = snapshot.key
     }
-
 
     func toAnyObject() -> Any {
         return ["name": name, "email": email, "friends": friends]

@@ -53,8 +53,7 @@ class SignUpController: UIViewController {
         buttonDesign()
 
     }
-  
-    
+
     //        let eventDB = Database.database().reference().child(currentUserId!)
     //        let nameDictionary = ["email": Auth.auth().currentUser?.email, "name" : NameTextField.text]
     //        eventDB.childByAutoId().setValue(nameDictionary)
@@ -87,9 +86,7 @@ class SignUpController: UIViewController {
                 self.currentUserId = Auth.auth().currentUser?.uid
                 
                 print("signup: " + self.currentUserId!)
-                
 
-                
                 self.performSegue(withIdentifier: "goToHome", sender: self)
                 
             }

@@ -65,6 +65,7 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
         return currentArray.count
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = addFriendTable.dequeueReusableCell(withIdentifier: "Cell") as? searchTableViewCell else{
             return UITableViewCell()

@@ -26,6 +26,7 @@
 		456B184B219083B200DBF5D6 /* HousekeepingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B184A219083B200DBF5D6 /* HousekeepingUITests.swift */; };
 		457280952197011B002AD90D /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457280942197011B002AD90D /* Section.swift */; };
 		4572809721970151002AD90D /* ExpandableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572809621970151002AD90D /* ExpandableHeaderView.swift */; };
+		457C806121AE9FD100022FB9 /* ShowFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C806021AE9FD100022FB9 /* ShowFriendsViewController.swift */; };
 		459C7113219ACFF90051A813 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C7112219ACFF80051A813 /* Event.swift */; };
 		459C7115219AE0210051A813 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C7114219AE0210051A813 /* User.swift */; };
 		45FB3F39219435D700211006 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB3F38219435D700211006 /* LogInController.swift */; };
@@ -82,6 +83,7 @@
 		456B184C219083B200DBF5D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		457280942197011B002AD90D /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		4572809621970151002AD90D /* ExpandableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableHeaderView.swift; sourceTree = "<group>"; };
+		457C806021AE9FD100022FB9 /* ShowFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFriendsViewController.swift; sourceTree = "<group>"; };
 		459C7112219ACFF80051A813 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		459C7114219AE0210051A813 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		45FB3F38219435D700211006 /* LogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				455239D72199B192005A8C8B /* ProfileViewController.swift */,
 				455239DB2199C16B005A8C8B /* ShowCleaningListViewController.swift */,
 				4544ACD921A4358A00DE3448 /* addFriendController.swift */,
+				457C806021AE9FD100022FB9 /* ShowFriendsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 			files = (
 				456B182A219083B100DBF5D6 /* HomeListController.swift in Sources */,
 				4572809721970151002AD90D /* ExpandableHeaderView.swift in Sources */,
+				457C806121AE9FD100022FB9 /* ShowFriendsViewController.swift in Sources */,
 				45FB3F3D2194488700211006 /* ResetPasswordController.swift in Sources */,
 				45FE0DD221946F0C00AC4D3B /* AddEventController.swift in Sources */,
 				459C7115219AE0210051A813 /* User.swift in Sources */,
