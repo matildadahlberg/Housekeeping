@@ -10,41 +10,35 @@ import UIKit
 
 class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var acceptBtn: UIButton!
-    
-    @IBOutlet weak var removeBtn: UIButton!
-    
-    var friendsData: [String] = ["Namn", "Namn", "Namn"]
-    var requestData: [String] = ["Namn förfrågan", "Namn förfrågan"]
+    var friendsData = ["Namn", "Namn", "Namn","Vänförfrågningar:"]
+    //var requestData: [String] = ["Vänförfrågningar:"]
 
-    var sections: [String] = ["Vänner", "Vänförfrågningar"]
+    var sections: [String] = ["Vänner"]
     
-    var sectionData: [Int: [String]] = [:]
+    //var sectionData: [Int: [String]] = [:]
+    
+    var segueId = "goToFriendreq"
 
     @IBOutlet weak var friendstableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        acceptBtn.layer.cornerRadius = 10
-        removeBtn.layer.cornerRadius = 10
-        removeBtn.layer.borderWidth = 1
-        removeBtn.layer.borderColor = UIColor.black.cgColor
         
-        sectionData = [0 : friendsData, 1 : requestData]
+        //sectionData = [0 : friendsData, 1 : requestData]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (sectionData[section]?.count)!
+        return friendsData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+       
+        cell.textLabel?.text = friendsData[indexPath.row]
+        //cell?.textLabel?.text = requestData[indexPath.row]
         
-        
-        cell?.textLabel?.text = sectionData[indexPath.section]![indexPath.row]
-        
-        return cell!
+        return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -69,6 +63,19 @@ class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableV
             
             self.friendsData.remove(at: indexPath.row)
             self.friendstableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == friendsData.count - 1 {
+        performSegue(withIdentifier: segueId, sender: self)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == friendsData.count - 1 {
+            cell.accessoryType = .disclosureIndicator
+            cell.textLabel?.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
         }
     }
     

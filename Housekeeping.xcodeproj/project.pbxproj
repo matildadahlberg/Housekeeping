@@ -27,6 +27,7 @@
 		457280952197011B002AD90D /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457280942197011B002AD90D /* Section.swift */; };
 		4572809721970151002AD90D /* ExpandableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572809621970151002AD90D /* ExpandableHeaderView.swift */; };
 		457C806121AE9FD100022FB9 /* ShowFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C806021AE9FD100022FB9 /* ShowFriendsViewController.swift */; };
+		457C806321B0633100022FB9 /* friendRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C806221B0633100022FB9 /* friendRequestViewController.swift */; };
 		459C7113219ACFF90051A813 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C7112219ACFF80051A813 /* Event.swift */; };
 		459C7115219AE0210051A813 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C7114219AE0210051A813 /* User.swift */; };
 		45FB3F39219435D700211006 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB3F38219435D700211006 /* LogInController.swift */; };
@@ -84,6 +85,7 @@
 		457280942197011B002AD90D /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		4572809621970151002AD90D /* ExpandableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableHeaderView.swift; sourceTree = "<group>"; };
 		457C806021AE9FD100022FB9 /* ShowFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFriendsViewController.swift; sourceTree = "<group>"; };
+		457C806221B0633100022FB9 /* friendRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = friendRequestViewController.swift; sourceTree = "<group>"; };
 		459C7112219ACFF80051A813 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		459C7114219AE0210051A813 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		45FB3F38219435D700211006 /* LogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				455239DB2199C16B005A8C8B /* ShowCleaningListViewController.swift */,
 				4544ACD921A4358A00DE3448 /* addFriendController.swift */,
 				457C806021AE9FD100022FB9 /* ShowFriendsViewController.swift */,
+				457C806221B0633100022FB9 /* friendRequestViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				457280952197011B002AD90D /* Section.swift in Sources */,
 				455239DC2199C16B005A8C8B /* ShowCleaningListViewController.swift in Sources */,
 				455239DE2199C3C4005A8C8B /* SectionsForCleaningList.swift in Sources */,
+				457C806321B0633100022FB9 /* friendRequestViewController.swift in Sources */,
 				456B1828219083B100DBF5D6 /* AppDelegate.swift in Sources */,
 				45FB3F3B219436BD00211006 /* SignUpController.swift in Sources */,
 				4544ACDC21A436E800DE3448 /* searchTableViewCell.swift in Sources */,
