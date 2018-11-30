@@ -19,8 +19,6 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var addFriendTable: UITableView!
 
-//    var array = [Animal]()
-//    var currentArray = [Animal]()
     
     var users : [User] = []
     
@@ -120,16 +118,6 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
-    }
-    
-    
-    class Animal{
-        let name : String
-        
-        init(name: String) {
-            self.name = name
-        }
         
     }
 
