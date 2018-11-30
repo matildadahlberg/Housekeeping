@@ -28,6 +28,9 @@
 		4572809721970151002AD90D /* ExpandableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572809621970151002AD90D /* ExpandableHeaderView.swift */; };
 		457C806121AE9FD100022FB9 /* ShowFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C806021AE9FD100022FB9 /* ShowFriendsViewController.swift */; };
 		457C806321B0633100022FB9 /* friendRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C806221B0633100022FB9 /* friendRequestViewController.swift */; };
+		457C806521B1322100022FB9 /* cellFriendReq.xib in Resources */ = {isa = PBXBuildFile; fileRef = 457C806421B1322100022FB9 /* cellFriendReq.xib */; };
+		457C806721B1359600022FB9 /* cellFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C806621B1359600022FB9 /* cellFriendTableViewCell.swift */; };
+		457C806B21B1624900022FB9 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C806A21B1624900022FB9 /* Friends.swift */; };
 		459C7113219ACFF90051A813 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C7112219ACFF80051A813 /* Event.swift */; };
 		459C7115219AE0210051A813 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C7114219AE0210051A813 /* User.swift */; };
 		45FB3F39219435D700211006 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB3F38219435D700211006 /* LogInController.swift */; };
@@ -86,6 +89,9 @@
 		4572809621970151002AD90D /* ExpandableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableHeaderView.swift; sourceTree = "<group>"; };
 		457C806021AE9FD100022FB9 /* ShowFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFriendsViewController.swift; sourceTree = "<group>"; };
 		457C806221B0633100022FB9 /* friendRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = friendRequestViewController.swift; sourceTree = "<group>"; };
+		457C806421B1322100022FB9 /* cellFriendReq.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cellFriendReq.xib; sourceTree = "<group>"; };
+		457C806621B1359600022FB9 /* cellFriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellFriendTableViewCell.swift; sourceTree = "<group>"; };
+		457C806A21B1624900022FB9 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
 		459C7112219ACFF80051A813 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		459C7114219AE0210051A813 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		45FB3F38219435D700211006 /* LogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
@@ -135,6 +141,8 @@
 				455C1E0B219D7DFE000EFDEE /* cell.xib */,
 				455C1E0D219D7EEB000EFDEE /* CustomTableViewCell.swift */,
 				4544ACDB21A436E800DE3448 /* searchTableViewCell.swift */,
+				457C806421B1322100022FB9 /* cellFriendReq.xib */,
+				457C806621B1359600022FB9 /* cellFriendTableViewCell.swift */,
 			);
 			path = "Custom Cell";
 			sourceTree = "<group>";
@@ -201,6 +209,7 @@
 				455239DD2199C3C4005A8C8B /* SectionsForCleaningList.swift */,
 				459C7112219ACFF80051A813 /* Event.swift */,
 				459C7114219AE0210051A813 /* User.swift */,
+				457C806A21B1624900022FB9 /* Friends.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -365,6 +374,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				457C806521B1322100022FB9 /* cellFriendReq.xib in Resources */,
 				455C1E0C219D7DFE000EFDEE /* cell.xib in Resources */,
 				456B1835219083B200DBF5D6 /* LaunchScreen.storyboard in Resources */,
 				450D0D6A21931BB000F1A102 /* GoogleService-Info.plist in Resources */,
@@ -496,6 +506,7 @@
 				456B182A219083B100DBF5D6 /* HomeListController.swift in Sources */,
 				4572809721970151002AD90D /* ExpandableHeaderView.swift in Sources */,
 				457C806121AE9FD100022FB9 /* ShowFriendsViewController.swift in Sources */,
+				457C806B21B1624900022FB9 /* Friends.swift in Sources */,
 				45FB3F3D2194488700211006 /* ResetPasswordController.swift in Sources */,
 				45FE0DD221946F0C00AC4D3B /* AddEventController.swift in Sources */,
 				459C7115219AE0210051A813 /* User.swift in Sources */,
@@ -513,6 +524,7 @@
 				456B1828219083B100DBF5D6 /* AppDelegate.swift in Sources */,
 				45FB3F3B219436BD00211006 /* SignUpController.swift in Sources */,
 				4544ACDC21A436E800DE3448 /* searchTableViewCell.swift in Sources */,
+				457C806721B1359600022FB9 /* cellFriendTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

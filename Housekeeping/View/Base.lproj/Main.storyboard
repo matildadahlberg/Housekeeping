@@ -273,7 +273,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jMA-1S-GuE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2396" y="131.52709359605913"/>
+            <point key="canvasLocation" x="1758" y="151"/>
         </scene>
         <!--InstructionPage-->
         <scene sceneID="XfV-BA-iyW">
@@ -560,7 +560,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kyE-X3-LmV" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="584.79999999999995" y="-552.70935960591135"/>
+            <point key="canvasLocation" x="585" y="-1000"/>
         </scene>
         <!--ResetPasswordPage-->
         <scene sceneID="GUU-Nv-QtT">
@@ -628,7 +628,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wBN-MZ-IYq" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="585" y="896"/>
+            <point key="canvasLocation" x="585" y="1105"/>
         </scene>
         <!--MyProfilePage-->
         <scene sceneID="PBP-Nn-kSc">
@@ -740,55 +740,17 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="641"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="4UL-ul-2KJ" rowHeight="60" style="IBUITableViewCellStyleDefault" id="n3A-DF-o06">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="n3A-DF-o06" id="lDq-Xr-T0O">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.666666666666664"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4UL-ul-2KJ">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="59.666666666666664"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="urX-PZ-U3N" id="6HJ-4K-gsn"/>
                                     <outlet property="delegate" destination="urX-PZ-U3N" id="AUz-ER-YwL"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3G-f0-DY1">
-                                <rect key="frame" x="294" y="130" width="65" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Ta bort">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CLG-vu-KAM">
-                                <rect key="frame" x="209" y="130" width="65" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.1647058824" green="0.47450980390000003" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="tintColor" red="0.1647058824" green="0.47450980390000003" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Bekräfta">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="dqu-up-h0m"/>
                     </view>
                     <connections>
-                        <outlet property="acceptBtn" destination="CLG-vu-KAM" id="T7U-6n-HhQ"/>
-                        <outlet property="removeBtn" destination="G3G-f0-DY1" id="RKg-DD-Xi0"/>
+                        <outlet property="reqTableView" destination="egy-rp-q0D" id="VqA-dz-4g2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xH3-s7-ulN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -897,8 +859,8 @@
         <image name="settings" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KQa-8M-NX9"/>
+        <segue reference="jZ8-2a-bjR"/>
         <segue reference="XNV-ES-0XY"/>
-        <segue reference="FEV-Et-h1L"/>
+        <segue reference="ln6-U8-KsQ"/>
     </inferredMetricsTieBreakers>
 </document>

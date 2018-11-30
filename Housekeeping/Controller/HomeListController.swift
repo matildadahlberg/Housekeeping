@@ -14,6 +14,7 @@ import UserNotifications
 class HomeListController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
     //ExpandableHeaderViewDelegate
     
+    
     var ref: DatabaseReference!
     var refUser: DatabaseReference!
     var databaseHandle: DatabaseHandle?
@@ -22,11 +23,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     var events : [Event] = []
     
     var event : Event?
-    //var eventList = [Event]()
-    
-    
-    //var expanded = Bool()
-    
+
     
     @IBOutlet weak var tableViewHome: UITableView!
     
@@ -79,14 +76,9 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //        if events[section].expanded == true{
-        //            return events[section].eventTitle.count + 1
-        //        }else{
-        //            return 1
-        //        }
         return events.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! CustomTableViewCell
@@ -146,97 +138,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         return 80
     }
     
-    //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    //        return 44
-    //    }
     
-    //    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    //        return 2
-    //    }
-    
-    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    //        let header = ExpandableHeaderView()
-    //        header.customInit(title: events[section].dateTitle, section: section, delegate: self)
-    //
-    //        return header
-    //    }
-    
-    //    func toggleSection(header: ExpandableHeaderView, section: Int) {
-    //        //events[section].expanded = !events[section].expanded
-    //        if(expanded == true){
-    //            tableViewHome.beginUpdates()
-    //            for i in 0 ..< events[section].eventTitle.count{
-    //                tableViewHome.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
-    //            }
-    //            if(expanded == false){
-    //                tableViewHome.endUpdates()
-    //            }
-    //
-    //        }
-    //        if (expanded == true){
-    //        UIView.animate(withDuration: 0.3){
-    //            self.tableViewHome.isHidden = true
-    //        }
-    //        }else{
-    //            UIView.animate(withDuration: 0.3){
-    //                self.tableViewHome.isHidden = false
-    //            }
-    //        }
-    //}
-    
-    //    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-    //        if indexPath.row == 0{
-    //            if events[indexPath.section].expanded == true {
-    //                events[indexPath.section].expanded = false
-    //                let sections = IndexSet.init(integer: indexPath.section)
-    //                tableViewHome.reloadSections(sections, with: .none)
-    //            } else{
-    //                events[indexPath.section].expanded = true
-    //                let sections = IndexSet.init(integer: indexPath.section)
-    //                tableViewHome.reloadSections(sections, with: .none)
-    //            }
-    //
-    //        } else{
-    //            tableViewHome.deselectRow(at: indexPath, animated: true)
-    //
-    //            if tableView == tableViewHome {
-    //                if tableView.cellForRow(at: indexPath)?.accessoryType == CustomTableViewCell.AccessoryType.checkmark{
-    //                    tableView.cellForRow(at: indexPath)?.accessoryType = CustomTableViewCell.AccessoryType.none
-    //                }else{
-    //                    tableView.cellForRow(at: indexPath)?.accessoryType = CustomTableViewCell.AccessoryType.checkmark
-    //                }
-    //            }
-    //
-    //        }
-    //    }
-    
-
-    //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    //
-    //        //        let dataIndex = indexPath.row - 1
-    //        //        if indexPath.row == 0{
-    //        //            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") else {return UITableViewCell()}
-    //        //            cell.textLabel?.text = events[indexPath.section].dateTitle
-    //        //            return cell
-    //        //        }
-    //        //
-    //        //        else {
-    //        //            guard let cell = tableView.dequeueReusableCell(withIdentifier: "myCell") as? CustomTableViewCell else {return UITableViewCell()}
-    //        //            cell.eventtitleCell.text = events[indexPath.section].eventTitle[dataIndex]
-    //        //            cell.userNameCell.text = Auth.auth().currentUser?.displayName
-    //        //
-    //        //            return cell
-    //        //        }
-    //        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! CustomTableViewCell
-    //
-    //        cell.eventtitleCell.text = events[indexPath.row].eventTitle
-    //        cell.userNameCell.text = Auth.auth().currentUser?.displayName
-    //        cell.dateLabel.text = events[indexPath.row].dateTitle
-    //
-    //        print(Auth.auth().currentUser?.uid)
-    //        return cell
-    //
-    //    }
     
 }
 

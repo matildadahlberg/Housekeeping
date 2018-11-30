@@ -76,6 +76,7 @@ class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         if indexPath.row == friendsData.count - 1 {
             cell.accessoryType = .disclosureIndicator
             cell.textLabel?.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
+        
         }
     }
     

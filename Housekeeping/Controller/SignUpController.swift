@@ -17,43 +17,27 @@ class SignUpController: UIViewController {
     var ref: DatabaseReference!
     var currentUserId = Auth.auth().currentUser?.uid
     
-    @IBOutlet weak var redButton: UIButton!
-    
-    @IBOutlet weak var orangeButton: UIButton!
-    
-    @IBOutlet weak var yellowButton: UIButton!
-    
-    @IBOutlet weak var greenButton: UIButton!
-    
-    @IBOutlet weak var babyBlueButton: UIButton!
-    
-    @IBOutlet weak var blueButton: UIButton!
-    
-    @IBOutlet weak var purpleButton: UIButton!
-    
-    @IBOutlet weak var blackButton: UIButton!
-    
     
     @IBOutlet weak var NameTextField: UITextField!
     @IBOutlet weak var EmailTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
     @IBOutlet weak var CreateAccButton: UIButton!
-  
+    
     var user : [User] = []
     var users: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         CreateAccButton.layer.cornerRadius = 15
         CreateAccButton.showsTouchWhenHighlighted = true
         
         self.navigationController?.navigationBar.isHidden = false
         
         buttonDesign()
-
+        
     }
-
+    
     //        let eventDB = Database.database().reference().child(currentUserId!)
     //        let nameDictionary = ["email": Auth.auth().currentUser?.email, "name" : NameTextField.text]
     //        eventDB.childByAutoId().setValue(nameDictionary)
@@ -63,41 +47,49 @@ class SignUpController: UIViewController {
         SVProgressHUD.show()
         Auth.auth().createUser(withEmail: EmailTextField.text!, password: PasswordTextField.text!)
             
+            
         { (user, error) in
             if error != nil {
                 print(error)
                 SVProgressHUD.dismiss()
-
+                
                 self.createAlertSignUp(title: "Något gick fel!", message: "Antingen används redan e-postadressen eller så är lösenordet för kort")
             }
-            else {
+                //            else if let user = user{
+                //                let userDB = Database.database().reference().child(user.uid).child("User")
+                //                userDB.setValue(user.email)
+                //            }
+            else if let user = user{
+                let userDB = Database.database().reference().child(user.uid).child("User")
+                userDB.setValue(user.email)
                 SVProgressHUD.dismiss()
                 print("Inloggning lyckades")
-                
-                let users = User(name: self.NameTextField.text!, email: self.EmailTextField.text!)
+//                
+//                let users = User(name: self.NameTextField.text!, email: self.EmailTextField.text!)
                 
                 let changeName = Auth.auth().currentUser?.createProfileChangeRequest()
                 changeName?.displayName = self.NameTextField.text
                 changeName?.commitChanges { (error) in
                     print(error)
-
+                    
                 }
                 
                 self.currentUserId = Auth.auth().currentUser?.uid
                 
                 print("signup: " + self.currentUserId!)
-
+                
                 self.performSegue(withIdentifier: "goToHome", sender: self)
                 
             }
+            
         }
     }
-
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return(true)
@@ -118,7 +110,7 @@ class SignUpController: UIViewController {
         
         CreateAccButton.layer.cornerRadius = 15
         CreateAccButton.showsTouchWhenHighlighted = true
-
+        
     }
     
 }

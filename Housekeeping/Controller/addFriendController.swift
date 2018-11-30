@@ -19,19 +19,25 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var addFriendTable: UITableView!
 
-    var array = [Animal]()
-    var currentArray = [Animal]()
+//    var array = [Animal]()
+//    var currentArray = [Animal]()
     
     var users : [User] = []
+    
+//    var array = [User]()
+    var currentArray = [User]()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpFriends()
         setUpSearchBar()
         
-        currentArray = array
         
-        ref = Database.database().reference().child(currentUserId!)
+        
+//        currentArray = array
+        ref = Database.database().reference()
         
         ref.observe(.value, with: {(snapshot) in
             
@@ -41,16 +47,36 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
                 
                 let listUser = User(snapshot: user as! DataSnapshot)
                 newUsers.append(listUser)
-     
             }
             self.users = newUsers
             self.addFriendTable.reloadData()
             print(self.users)
             
+            
         })
+//        ref = Database.database().reference().child()
+//
+//        ref.observe(.value, with: {(snapshot) in
+//
+//            var newUsers: [User] = []
+//
+//            for user in snapshot.children{
+//
+//                let listUser = User(snapshot: user as! DataSnapshot)
+//                newUsers.append(listUser)
+//
+//            }
+//            self.users = newUsers
+//            self.addFriendTable.reloadData()
+//            print(self.users)
+//
+//        })
   
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("PRESSED")
+    }
   
     
     private func setUpSearchBar(){
@@ -58,7 +84,7 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     private func setUpFriends(){
-        array.append(Animal(name: "info.matildadahlberg@gmail.com"))
+//        array.append(User(email: currentUserId!))
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,7 +96,8 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
         guard let cell = addFriendTable.dequeueReusableCell(withIdentifier: "Cell") as? searchTableViewCell else{
             return UITableViewCell()
         }
-        cell.emailLabel.text = currentArray[indexPath.row].name
+        cell.emailLabel.text = currentArray[indexPath.row].email
+        
         return cell
     }
     
@@ -81,15 +108,15 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
     //Search bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard !searchText.isEmpty else{
-            currentArray = array
+            currentArray = []
             addFriendTable.reloadData()
             return
         }
-        currentArray = array.filter({ animal -> Bool in
-            animal.name.lowercased().contains(searchText.lowercased())
+        currentArray = users.filter({ user -> Bool in
+            user.email.lowercased().contains(searchText.lowercased())
         })
         addFriendTable.reloadData()
-        
+
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
