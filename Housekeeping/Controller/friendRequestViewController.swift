@@ -18,7 +18,7 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        reqTableView.register(UINib(nibName: "cell", bundle: nil), forCellReuseIdentifier: "myCellForFriend")
+        reqTableView.register(UINib(nibName: "cellFriendReq", bundle: nil), forCellReuseIdentifier: "myCellForFriend")
 
     }
     

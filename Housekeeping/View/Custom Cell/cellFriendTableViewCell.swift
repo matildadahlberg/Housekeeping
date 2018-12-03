@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class cellFriendTableViewCell: UITableViewCell {
 
@@ -35,6 +36,9 @@ class cellFriendTableViewCell: UITableViewCell {
     }
     
     @IBAction func acceptPressed(_ sender: Any) {
+        
+        
+        
     }
     
     

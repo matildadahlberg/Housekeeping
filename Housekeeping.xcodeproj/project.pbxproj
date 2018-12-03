@@ -26,6 +26,7 @@
 		456B184B219083B200DBF5D6 /* HousekeepingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B184A219083B200DBF5D6 /* HousekeepingUITests.swift */; };
 		457280952197011B002AD90D /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457280942197011B002AD90D /* Section.swift */; };
 		4572809721970151002AD90D /* ExpandableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572809621970151002AD90D /* ExpandableHeaderView.swift */; };
+		457BE4DF21B57E97004F90DA /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457BE4DE21B57E97004F90DA /* StartViewController.swift */; };
 		457C806121AE9FD100022FB9 /* ShowFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C806021AE9FD100022FB9 /* ShowFriendsViewController.swift */; };
 		457C806321B0633100022FB9 /* friendRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C806221B0633100022FB9 /* friendRequestViewController.swift */; };
 		457C806521B1322100022FB9 /* cellFriendReq.xib in Resources */ = {isa = PBXBuildFile; fileRef = 457C806421B1322100022FB9 /* cellFriendReq.xib */; };
@@ -87,6 +88,7 @@
 		456B184C219083B200DBF5D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		457280942197011B002AD90D /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		4572809621970151002AD90D /* ExpandableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableHeaderView.swift; sourceTree = "<group>"; };
+		457BE4DE21B57E97004F90DA /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		457C806021AE9FD100022FB9 /* ShowFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFriendsViewController.swift; sourceTree = "<group>"; };
 		457C806221B0633100022FB9 /* friendRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = friendRequestViewController.swift; sourceTree = "<group>"; };
 		457C806421B1322100022FB9 /* cellFriendReq.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cellFriendReq.xib; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				4544ACD921A4358A00DE3448 /* addFriendController.swift */,
 				457C806021AE9FD100022FB9 /* ShowFriendsViewController.swift */,
 				457C806221B0633100022FB9 /* friendRequestViewController.swift */,
+				457BE4DE21B57E97004F90DA /* StartViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 			files = (
 				456B182A219083B100DBF5D6 /* HomeListController.swift in Sources */,
 				4572809721970151002AD90D /* ExpandableHeaderView.swift in Sources */,
+				457BE4DF21B57E97004F90DA /* StartViewController.swift in Sources */,
 				457C806121AE9FD100022FB9 /* ShowFriendsViewController.swift in Sources */,
 				457C806B21B1624900022FB9 /* Friends.swift in Sources */,
 				45FB3F3D2194488700211006 /* ResetPasswordController.swift in Sources */,

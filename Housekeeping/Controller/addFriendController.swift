@@ -14,6 +14,7 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle?
     var currentUserId = Auth.auth().currentUser?.uid
+
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -29,7 +30,7 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpFriends()
+        //setUpFriends()
         setUpSearchBar()
         
         
@@ -52,23 +53,6 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
             
             
         })
-//        ref = Database.database().reference().child()
-//
-//        ref.observe(.value, with: {(snapshot) in
-//
-//            var newUsers: [User] = []
-//
-//            for user in snapshot.children{
-//
-//                let listUser = User(snapshot: user as! DataSnapshot)
-//                newUsers.append(listUser)
-//
-//            }
-//            self.users = newUsers
-//            self.addFriendTable.reloadData()
-//            print(self.users)
-//
-//        })
   
     }
     

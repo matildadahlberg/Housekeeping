@@ -28,13 +28,13 @@ class User {
         let snapshotValue = snapshot.value as! [String: AnyObject]
         //name = (snapshotValue["User"] as! String)
         //friends = (snapshotValue["friends"] as! String)
-        email = (snapshotValue["User"] as! String)
+        email = (snapshotValue["Email"] as! String)
         print("mail:\(email)")
         //uid = (snapshotValue["userId"] as! String)
         //id = snapshot.key
     }
 
     func toAnyObject() -> Any {
-        return ["User": email]
+        return ["Email": email]
     }
 }

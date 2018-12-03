@@ -60,7 +60,7 @@ class SignUpController: UIViewController {
                 //                userDB.setValue(user.email)
                 //            }
             else if let user = user{
-                let userDB = Database.database().reference().child(user.uid).child("User")
+                let userDB = Database.database().reference().child(user.uid).child("Email")
                 userDB.setValue(user.email)
                 SVProgressHUD.dismiss()
                 print("Inloggning lyckades")
@@ -79,6 +79,7 @@ class SignUpController: UIViewController {
                 print("signup: " + self.currentUserId!)
                 
                 self.performSegue(withIdentifier: "goToHome", sender: self)
+                
                 
             }
             

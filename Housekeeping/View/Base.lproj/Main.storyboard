@@ -123,7 +123,7 @@
         <!--addFriendPage-->
         <scene sceneID="rSj-M6-vkt">
             <objects>
-                <viewController id="ghU-b8-lI0" userLabel="addFriendPage" customClass="addFriendController" customModule="Housekeeping" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Lägg till vänner" id="ghU-b8-lI0" userLabel="addFriendPage" customClass="addFriendController" customModule="Housekeeping" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2dI-Sq-emY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -193,21 +193,6 @@
             </objects>
             <point key="canvasLocation" x="3504.8000000000002" y="-1361.0837438423646"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="ptQ-8F-bh4">
-            <objects>
-                <viewController id="okJ-7Z-gKC" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="rrt-Hn-wdQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="qpH-FO-AQ7"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KmZ-mN-CSI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4630" y="-1361"/>
-        </scene>
         <!--HomePage-->
         <scene sceneID="BZ0-96-Ykp">
             <objects>
@@ -254,10 +239,10 @@
             </objects>
             <point key="canvasLocation" x="3516" y="-553.44827586206895"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Start View Controller-->
         <scene sceneID="3wz-Zi-Obl">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Qkl-pN-cPa" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Qkl-pN-cPa" customClass="StartViewController" customModule="Housekeeping" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4NV-DH-J1A">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -341,7 +326,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ivn-Bd-QV5">
-                                <rect key="frame" x="0.0" y="88" width="375" height="161"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="186"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
