@@ -17,6 +17,9 @@ class SignUpController: UIViewController {
     var ref: DatabaseReference!
     var currentUserId = Auth.auth().currentUser?.uid
     
+    private let userRef = Database.database().reference()
+    
+    static let system = User()
     
     @IBOutlet weak var NameTextField: UITextField!
     @IBOutlet weak var EmailTextField: UITextField!
@@ -60,12 +63,18 @@ class SignUpController: UIViewController {
                 //                userDB.setValue(user.email)
                 //            }
             else if let user = user{
-                let userDB = Database.database().reference().child(user.uid).child("Email")
-                userDB.setValue(user.email)
                 SVProgressHUD.dismiss()
-                print("Inloggning lyckades")
+//                let userDB = Database.database().reference().child(user.uid).child("Email")
+//                userDB.setValue(user.email)
+//                SVProgressHUD.dismiss()
+                
 //                
 //                let users = User(name: self.NameTextField.text!, email: self.EmailTextField.text!)
+                
+                var userInfo = [String: AnyObject]()
+                
+                userInfo = ["email" : Auth.auth().currentUser?.email as AnyObject, "id" : user.uid as AnyObject,]
+                self.userRef.child(user.uid).setValue(userInfo)
                 
                 let changeName = Auth.auth().currentUser?.createProfileChangeRequest()
                 changeName?.displayName = self.NameTextField.text
@@ -73,6 +82,9 @@ class SignUpController: UIViewController {
                     print(error)
                     
                 }
+                
+                
+                print("Inloggning lyckades")
                 
                 self.currentUserId = Auth.auth().currentUser?.uid
                 

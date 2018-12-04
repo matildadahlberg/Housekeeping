@@ -74,12 +74,11 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "sv")
         dateFormatter.dateFormat = "E, d MMM HH:mm"
- 
-        datePicker.minimumDate = Date()
+        //datePicker.minimumDate = Date()
         //datePicker.locale = Locale.current
         
         inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
-        //print(dateFormatter.string(from: datePicker.date))
+        print(dateFormatter.string(from: datePicker.date))
     
     }
 
@@ -87,10 +86,11 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         //post the data to firebase
  
         let event = Event(dateTitle: inputDateTextfield.text!, eventTitle: titleTextfield.text!, repeatTime: 1)
-        
         let eventDB = Database.database().reference().child(currentUserId!).child("Events")
         let childRef = eventDB.childByAutoId()
         childRef.setValue(event.toAnyObject())
+        
+        print("HÄR!!!!: \(Date())")
         
         performSegue(withIdentifier: segueHome, sender: self)
         

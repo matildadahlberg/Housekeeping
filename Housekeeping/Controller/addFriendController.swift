@@ -47,12 +47,25 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
                 let listUser = User(snapshot: user as! DataSnapshot)
                 newUsers.append(listUser)
             }
+            
             self.users = newUsers
-            self.addFriendTable.reloadData()
-            print(self.users)
-            
-            
+
         })
+//        ref.observe(.value, with: {(snapshot) in
+//
+//            var newUsers: [User] = []
+//
+//            for user in snapshot.children{
+//
+//                let listUser = User(snapshot: user as! DataSnapshot)
+//                newUsers.append(listUser)
+//            }
+//            self.users = newUsers
+//            self.addFriendTable.reloadData()
+//            print(self.users)
+//
+//
+//        })
   
     }
     
@@ -79,6 +92,7 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
             return UITableViewCell()
         }
         cell.emailLabel.text = currentArray[indexPath.row].email
+        cell.user = currentArray[indexPath.row]
         
         return cell
     }

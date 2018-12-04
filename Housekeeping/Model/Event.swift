@@ -20,9 +20,10 @@ class Event {
     var id: String!
     
     init(dateTitle: String, eventTitle: String, repeatTime: Int){
-        dateFormatter.locale = Locale(identifier: "sv")
-        dateFormatter.dateFormat = "E, d MMM HH:mm"
-        self.dateTitle = dateFormatter.string(from: Date())
+//        dateFormatter.locale = Locale(identifier: "sv")
+//        dateFormatter.dateFormat = "E, d MMM HH:mm"
+        self.dateTitle = dateTitle
+//        self.dateTitle = dateFormatter.string(from: Date(dateTitle))
         self.eventTitle = eventTitle
         self.repeatTime = repeatTime
         self.id = ""

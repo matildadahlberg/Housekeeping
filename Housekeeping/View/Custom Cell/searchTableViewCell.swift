@@ -12,9 +12,10 @@ import Firebase
 class searchTableViewCell: UITableViewCell {
     
     var arrayOfUsers = [User]()
-    var users : User?
+    var user : User?
     var Users : [User] = []
 
+    
     @IBOutlet weak var emailLabel: UILabel!
     
     var databaseReference : DatabaseReference!
@@ -34,7 +35,6 @@ class searchTableViewCell: UITableViewCell {
         
 
     }
-    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -44,19 +44,18 @@ class searchTableViewCell: UITableViewCell {
     
     func sendFriendRequest(){
 
-
         if let currentUser = Auth.auth().currentUser{
 
             databaseReference = Database.database().reference()
 
-
-            let referens = databaseReference.child(currentUserId!)
-            referens.child("friendRequests").child(currentUser.uid).setValue(true)
+            let referens = databaseReference.child((user?.id)!)
+            referens.child("friendRequests").child(currentUser.uid).setValue(false)
 
         }
 
 
 
     }
+
 
 }

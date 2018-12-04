@@ -11,30 +11,40 @@ import Firebase
 
 class User {
 
-    //var name: String!
-    var email: String!
-    //var uid = Auth.auth().currentUser?.uid
-    //var friends: String!
+    var email: String
+    var id : String
+  
 
-    init(email: String){
-        //self.name = name
-        //self.friends = ""
+    init(email: String, id: String){
+      
         self.email = email
-        //self.uid = ""
+        self.id = id
 
+    }
+    
+    init() {
+        
+        self.email = "empty"
+        self.id = "empty"
+        
     }
 
     init(snapshot: DataSnapshot) {
         let snapshotValue = snapshot.value as! [String: AnyObject]
-        //name = (snapshotValue["User"] as! String)
-        //friends = (snapshotValue["friends"] as! String)
-        email = (snapshotValue["Email"] as! String)
-        print("mail:\(email)")
-        //uid = (snapshotValue["userId"] as! String)
-        //id = snapshot.key
+//        if let email = snapshotValue["email"] as? String{
+//            self.email = email
+//        }
+        self.email = snapshotValue["email"] as! String
+//        if let id = snapshotValue["id"] as? String{
+//            self.id = id
+//        }
+        self.id = snapshotValue["id"] as! String
+        
+        //print("mail:\(email)")
+   
     }
-
-    func toAnyObject() -> Any {
-        return ["Email": email]
-    }
+//
+//    func toAnyObject() -> Any {
+//        return ["email": email, "id": id]
+//    }
 }
