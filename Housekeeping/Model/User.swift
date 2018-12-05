@@ -31,17 +31,11 @@ class User {
 
     init(snapshot: DataSnapshot) {
         let snapshotValue = snapshot.value as! [String: AnyObject]
-//        if let email = snapshotValue["email"] as? String{
-//            self.email = email
-//        }
+
         self.email = snapshotValue["email"] as! String
-//        if let id = snapshotValue["id"] as? String{
-//            self.id = id
-//        }
+
         self.id = snapshotValue["id"] as! String
-        
-        //print("mail:\(email)")
-   
+
     }
 //
 //    func toAnyObject() -> Any {

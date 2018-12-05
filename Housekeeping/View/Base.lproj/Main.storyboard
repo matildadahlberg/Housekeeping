@@ -191,7 +191,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rS-em-Zi7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3504.8000000000002" y="-1361.0837438423646"/>
+            <point key="canvasLocation" x="6030" y="-596"/>
         </scene>
         <!--HomePage-->
         <scene sceneID="BZ0-96-Ykp">
@@ -237,7 +237,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="00T-oq-rNi" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3516" y="-553.44827586206895"/>
+            <point key="canvasLocation" x="4142" y="-553"/>
         </scene>
         <!--Start View Controller-->
         <scene sceneID="3wz-Zi-Obl">
@@ -315,7 +315,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ApV-Nj-CB5" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5400.8000000000002" y="495.81280788177344"/>
+            <point key="canvasLocation" x="4142" y="151"/>
         </scene>
         <!--SettingPage-->
         <scene sceneID="kLc-aF-rrc">
@@ -395,7 +395,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d01-Sa-DKG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4458.3999999999996" y="495.81280788177344"/>
+            <point key="canvasLocation" x="3154" y="151"/>
         </scene>
         <!--Navigation Controller Home-->
         <scene sceneID="Lxm-tR-qfw">
@@ -420,7 +420,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h6x-qz-Lap" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2481" y="-553"/>
+            <point key="canvasLocation" x="3153" y="-553"/>
         </scene>
         <!--Navigation Controller Settings-->
         <scene sceneID="3wl-Xj-BMP">
@@ -545,7 +545,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kyE-X3-LmV" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="585" y="-1000"/>
+            <point key="canvasLocation" x="1758" y="-996"/>
         </scene>
         <!--ResetPasswordPage-->
         <scene sceneID="GUU-Nv-QtT">
@@ -711,7 +711,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tdN-JF-0N0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5400.8000000000002" y="1254.6798029556651"/>
+            <point key="canvasLocation" x="5150" y="1255"/>
         </scene>
         <!--Friend Request View Controller-->
         <scene sceneID="eaC-I7-ZC2">
@@ -725,6 +725,16 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="641"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="8t3-4P-XAv">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8t3-4P-XAv" id="o1V-wY-oSq">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="urX-PZ-U3N" id="6HJ-4K-gsn"/>
                                     <outlet property="delegate" destination="urX-PZ-U3N" id="AUz-ER-YwL"/>
@@ -740,7 +750,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xH3-s7-ulN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6348" y="1256.8965517241379"/>
+            <point key="canvasLocation" x="6169" y="1255"/>
         </scene>
         <!--AddEventPage-->
         <scene sceneID="gkl-r2-prf">
@@ -813,7 +823,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NwM-vM-VOX" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4629.6000000000004" y="-553.44827586206895"/>
+            <point key="canvasLocation" x="6030" y="151"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pfx-Xh-YCL">
@@ -832,7 +842,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Yz-Nf-ixJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-858" y="132"/>
+            <point key="canvasLocation" x="-833" y="151"/>
         </scene>
     </scenes>
     <resources>
@@ -846,6 +856,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="jZ8-2a-bjR"/>
         <segue reference="XNV-ES-0XY"/>
-        <segue reference="FEV-Et-h1L"/>
+        <segue reference="ln6-U8-KsQ"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -18,6 +18,10 @@ class cellFriendTableViewCell: UITableViewCell {
     
   
     @IBOutlet weak var nameLabel: UILabel!
+    
+    var user : User?
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -37,13 +41,33 @@ class cellFriendTableViewCell: UITableViewCell {
     
     @IBAction func acceptPressed(_ sender: Any) {
         
+        if let currentUser = Auth.auth().currentUser{
+            
+            let reference = Database.database().reference()
+            
+            // add to friendpage.
+            reference.child(currentUser.uid).child("friends").child((user?.id)!).setValue(true)
+            
+            //Add to the other users "friends" page
+            reference.child((user?.id)!).child("friends").child(currentUser.uid).setValue(true)
+
+        }
         
         
     }
     
     
     @IBAction func removePressed(_ sender: Any) {
+        
+        if let currentUser = Auth.auth().currentUser{
+            
+            //delete request.
+            let reference = Database.database().reference()
+            reference.child(currentUser.uid).child("friendRequests").child((user?.id)!).removeValue()
+        }
     }
+    
+    
     
 
 }

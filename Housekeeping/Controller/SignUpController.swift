@@ -58,18 +58,10 @@ class SignUpController: UIViewController {
                 
                 self.createAlertSignUp(title: "Något gick fel!", message: "Antingen används redan e-postadressen eller så är lösenordet för kort")
             }
-                //            else if let user = user{
-                //                let userDB = Database.database().reference().child(user.uid).child("User")
-                //                userDB.setValue(user.email)
-                //            }
+            
             else if let user = user{
                 SVProgressHUD.dismiss()
-//                let userDB = Database.database().reference().child(user.uid).child("Email")
-//                userDB.setValue(user.email)
-//                SVProgressHUD.dismiss()
-                
-//                
-//                let users = User(name: self.NameTextField.text!, email: self.EmailTextField.text!)
+
                 
                 var userInfo = [String: AnyObject]()
                 

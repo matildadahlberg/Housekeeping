@@ -47,13 +47,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         currentUserId = Auth.auth().currentUser?.uid
         print( currentUserId)
         ref = Database.database().reference().child(currentUserId!)
-        
-        //
-        //        if (events == nil) {
-        //            events = []
-        //
-        //        }
-        
+   
         ref.child("Events").observe(.value, with: {(snapshot) in
             
             var newEvents: [Event] = []

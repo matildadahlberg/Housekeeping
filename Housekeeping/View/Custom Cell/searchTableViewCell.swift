@@ -11,7 +11,7 @@ import Firebase
 
 class searchTableViewCell: UITableViewCell {
     
-    var arrayOfUsers = [User]()
+    
     var user : User?
     var Users : [User] = []
 
@@ -22,8 +22,14 @@ class searchTableViewCell: UITableViewCell {
     var currentUserId = Auth.auth().currentUser?.uid
     
     @IBAction func addFriendBtn(_ sender: Any) {
+        
         sendFriendRequest()
+        sentFriendRequest()
+       
+       buttonStyle.setTitle("Vän tillagd", for: .normal)
+        
     }
+    
     
     
     @IBOutlet weak var buttonStyle: UIButton!
@@ -32,6 +38,8 @@ class searchTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         buttonStyle.layer.cornerRadius = 10
+        buttonStyle.setTitle("Lägg till vän", for: .normal)
+       
         
 
     }
@@ -49,13 +57,27 @@ class searchTableViewCell: UITableViewCell {
             databaseReference = Database.database().reference()
 
             let referens = databaseReference.child((user?.id)!)
-            referens.child("friendRequests").child(currentUser.uid).setValue(false)
-
+            referens.child("friendRequests").child(currentUser.uid).setValue(true)
+            
         }
 
 
-
     }
+    
+    func sentFriendRequest(){
+        
+        if let currentUser = Auth.auth().currentUser{
+            
+            databaseReference = Database.database().reference()
+            
+            let referens = databaseReference.child(currentUser.uid)
+            referens.child("sendfriendRequests").child((user?.id)!).setValue(true)
+            
+        }
+        
+        
+    }
+
 
 
 }

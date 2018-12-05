@@ -7,33 +7,70 @@
 //
 
 import UIKit
+import Firebase
 
 class friendRequestViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var reqTableView: UITableView!
-    var requestData = ["Namn", "Namn", "Namn", "Namn"]
+    var ref: DatabaseReference!
+    var databaseHandle: DatabaseHandle?
+    var currentUserId = Auth.auth().currentUser?.uid
     
+    @IBOutlet weak var reqTableView: UITableView!
+    
+
     var sections: [String] = ["Vänförfrågningar"]
+    
+    var users : [String] = []
+    var user : User?
+    
+    var currentArray = [User]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         reqTableView.register(UINib(nibName: "cellFriendReq", bundle: nil), forCellReuseIdentifier: "myCellForFriend")
+        
+        
+        ref = Database.database().reference()
+        
+        ref.child(currentUserId!).child("friendRequests").observe(.value , with: { (snapshot) in
+            
+            var newUsers: [String] = []
+            
+            for user in snapshot.children{
+                
+                let listUser = (user as! DataSnapshot).key//User(snapshot: user as! DataSnapshot)
+                newUsers.append(listUser)
+            }
+            
+            self.users = newUsers
+            self.reqTableView.reloadData()
+            
+        })
+        
 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return requestData.count
+        return users.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = reqTableView.dequeueReusableCell(withIdentifier: "myCellForFriend") as? cellFriendTableViewCell else{
             return UITableViewCell()
         }
-        cell.nameLabel.text = requestData[indexPath.row]
-        return cell
         
+        ref.child(currentUserId!).child("friendRequests").child((user?.id)!)
+            .observeSingleEvent(of: .value, with: { (snapshot) in
+               
+                cell.nameLabel.text = self.users[indexPath.row]
+
+            })
+        
+        return cell
     }
+    
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section]
@@ -46,6 +83,8 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
+    
+    
     
     
     

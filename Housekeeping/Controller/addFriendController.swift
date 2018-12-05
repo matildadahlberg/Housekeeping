@@ -10,32 +10,31 @@ import UIKit
 import Firebase
 
 class addFriendController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-
+    
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle?
     var currentUserId = Auth.auth().currentUser?.uid
-
+    
     
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var addFriendTable: UITableView!
-
+    
     
     var users : [User] = []
+    var user : User?
     
-//    var array = [User]()
+    
+    //    var array = [User]()
     var currentArray = [User]()
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //setUpFriends()
+        
         setUpSearchBar()
         
-        
-        
-//        currentArray = array
         ref = Database.database().reference()
         
         ref.observe(.value, with: {(snapshot) in
@@ -49,37 +48,22 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             
             self.users = newUsers
-
+            
         })
-//        ref.observe(.value, with: {(snapshot) in
-//
-//            var newUsers: [User] = []
-//
-//            for user in snapshot.children{
-//
-//                let listUser = User(snapshot: user as! DataSnapshot)
-//                newUsers.append(listUser)
-//            }
-//            self.users = newUsers
-//            self.addFriendTable.reloadData()
-//            print(self.users)
-//
-//
-//        })
-  
+        
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("PRESSED")
     }
-  
+    
     
     private func setUpSearchBar(){
         searchBar.delegate = self
     }
     
     private func setUpFriends(){
-//        array.append(User(email: currentUserId!))
+        //        array.append(User(email: currentUserId!))
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,6 +77,23 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         cell.emailLabel.text = currentArray[indexPath.row].email
         cell.user = currentArray[indexPath.row]
+        
+        
+        ref.child(currentUserId!).child("sendfriendRequests").child((cell.user?.id)!)
+            .observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                
+                if snapshot.exists() == true {
+                    print("exists")
+                    cell.buttonStyle.isHidden = true
+                }
+                else {
+                    print("does not exist")
+                    cell.buttonStyle.setTitle("Lägg till vän", for: .normal)
+                }
+            }) { (error) in
+                print(error.localizedDescription)
+        }
         
         return cell
     }
@@ -112,12 +113,14 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
             user.email.lowercased().contains(searchText.lowercased())
         })
         addFriendTable.reloadData()
-
+        
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         
     }
-
-
+    
+ 
+    
+    
 }
