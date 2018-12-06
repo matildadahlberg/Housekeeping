@@ -55,8 +55,15 @@ class searchTableViewCell: UITableViewCell {
         if let currentUser = Auth.auth().currentUser{
 
             databaseReference = Database.database().reference()
+            
 
             let referens = databaseReference.child((user?.id)!)
+//            var infoUser = [String: AnyObject]()
+//
+//            infoUser = ["emailSender" : Auth.auth().currentUser?.email as AnyObject, "id" : currentUser.uid as AnyObject]
+//
+//            referens.child("friendRequests").setValue(infoUser)
+            
             referens.child("friendRequests").child(currentUser.uid).setValue(true)
             
         }
@@ -71,6 +78,13 @@ class searchTableViewCell: UITableViewCell {
             databaseReference = Database.database().reference()
             
             let referens = databaseReference.child(currentUser.uid)
+            
+//            var infoUser = [String: AnyObject]()
+//
+//            infoUser = ["emailRetriever" : user?.email as AnyObject, "id" : currentUser.uid as AnyObject]
+//
+//            referens.child("sendfriendRequests").setValue(infoUser)
+            
             referens.child("sendfriendRequests").child((user?.id)!).setValue(true)
             
         }

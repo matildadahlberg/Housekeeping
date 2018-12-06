@@ -25,7 +25,7 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
     var user : User?
     
     
-    //    var array = [User]()
+    //var array = [User]()
     var currentArray = [User]()
     
     
@@ -48,6 +48,7 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             
             self.users = newUsers
+            self.addFriendTable.reloadData()
             
         })
         
@@ -63,7 +64,7 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     private func setUpFriends(){
-        //        array.append(User(email: currentUserId!))
+        //array.append(User(email: currentUserId!))
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

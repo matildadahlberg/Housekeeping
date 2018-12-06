@@ -89,9 +89,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         let eventDB = Database.database().reference().child(currentUserId!).child("Events")
         let childRef = eventDB.childByAutoId()
         childRef.setValue(event.toAnyObject())
-        
-        print("HÄR!!!!: \(Date())")
-        
+       
         performSegue(withIdentifier: segueHome, sender: self)
         
     }

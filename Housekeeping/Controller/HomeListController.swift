@@ -16,20 +16,18 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     var ref: DatabaseReference!
-    var refUser: DatabaseReference!
     var databaseHandle: DatabaseHandle?
     var currentUserId = Auth.auth().currentUser?.uid
     
     var events : [Event] = []
     
+    var eventList : [Event]?
+    
     var event : Event?
 
     
     @IBOutlet weak var tableViewHome: UITableView!
-    
-    //    var sections = [
-    //        Section(date: "E, d MMM yyyy HH:mm", event: [String](), expanded: false)
-    //    ]
+  
     
     @IBAction func addEvent(_ sender: Any) {
         performSegue(withIdentifier: "goToAddEvent", sender: self)
@@ -132,9 +130,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-    
-    
-    
+   
 }
 
 

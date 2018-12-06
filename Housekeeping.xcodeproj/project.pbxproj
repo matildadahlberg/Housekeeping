@@ -24,14 +24,12 @@
 		456B1835219083B200DBF5D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 456B1833219083B200DBF5D6 /* LaunchScreen.storyboard */; };
 		456B1840219083B200DBF5D6 /* HousekeepingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B183F219083B200DBF5D6 /* HousekeepingTests.swift */; };
 		456B184B219083B200DBF5D6 /* HousekeepingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B184A219083B200DBF5D6 /* HousekeepingUITests.swift */; };
-		457280952197011B002AD90D /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457280942197011B002AD90D /* Section.swift */; };
 		4572809721970151002AD90D /* ExpandableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572809621970151002AD90D /* ExpandableHeaderView.swift */; };
 		457BE4DF21B57E97004F90DA /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457BE4DE21B57E97004F90DA /* StartViewController.swift */; };
 		457C806121AE9FD100022FB9 /* ShowFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C806021AE9FD100022FB9 /* ShowFriendsViewController.swift */; };
 		457C806321B0633100022FB9 /* friendRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C806221B0633100022FB9 /* friendRequestViewController.swift */; };
 		457C806521B1322100022FB9 /* cellFriendReq.xib in Resources */ = {isa = PBXBuildFile; fileRef = 457C806421B1322100022FB9 /* cellFriendReq.xib */; };
 		457C806721B1359600022FB9 /* cellFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C806621B1359600022FB9 /* cellFriendTableViewCell.swift */; };
-		457C806B21B1624900022FB9 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C806A21B1624900022FB9 /* Friends.swift */; };
 		459C7113219ACFF90051A813 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C7112219ACFF80051A813 /* Event.swift */; };
 		459C7115219AE0210051A813 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C7114219AE0210051A813 /* User.swift */; };
 		45FB3F39219435D700211006 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB3F38219435D700211006 /* LogInController.swift */; };
@@ -86,14 +84,12 @@
 		456B1846219083B200DBF5D6 /* HousekeepingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HousekeepingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		456B184A219083B200DBF5D6 /* HousekeepingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HousekeepingUITests.swift; sourceTree = "<group>"; };
 		456B184C219083B200DBF5D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		457280942197011B002AD90D /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		4572809621970151002AD90D /* ExpandableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableHeaderView.swift; sourceTree = "<group>"; };
 		457BE4DE21B57E97004F90DA /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		457C806021AE9FD100022FB9 /* ShowFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFriendsViewController.swift; sourceTree = "<group>"; };
 		457C806221B0633100022FB9 /* friendRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = friendRequestViewController.swift; sourceTree = "<group>"; };
 		457C806421B1322100022FB9 /* cellFriendReq.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cellFriendReq.xib; sourceTree = "<group>"; };
 		457C806621B1359600022FB9 /* cellFriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellFriendTableViewCell.swift; sourceTree = "<group>"; };
-		457C806A21B1624900022FB9 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
 		459C7112219ACFF80051A813 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		459C7114219AE0210051A813 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		45FB3F38219435D700211006 /* LogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
@@ -206,12 +202,10 @@
 		459B169E21942E5300EED642 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				457280942197011B002AD90D /* Section.swift */,
 				4572809621970151002AD90D /* ExpandableHeaderView.swift */,
 				455239DD2199C3C4005A8C8B /* SectionsForCleaningList.swift */,
 				459C7112219ACFF80051A813 /* Event.swift */,
 				459C7114219AE0210051A813 /* User.swift */,
-				457C806A21B1624900022FB9 /* Friends.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -510,7 +504,6 @@
 				4572809721970151002AD90D /* ExpandableHeaderView.swift in Sources */,
 				457BE4DF21B57E97004F90DA /* StartViewController.swift in Sources */,
 				457C806121AE9FD100022FB9 /* ShowFriendsViewController.swift in Sources */,
-				457C806B21B1624900022FB9 /* Friends.swift in Sources */,
 				45FB3F3D2194488700211006 /* ResetPasswordController.swift in Sources */,
 				45FE0DD221946F0C00AC4D3B /* AddEventController.swift in Sources */,
 				459C7115219AE0210051A813 /* User.swift in Sources */,
@@ -521,7 +514,6 @@
 				455239D82199B192005A8C8B /* ProfileViewController.swift in Sources */,
 				455C1E0E219D7EEB000EFDEE /* CustomTableViewCell.swift in Sources */,
 				455239D62199ADC4005A8C8B /* SettingsTableViewController.swift in Sources */,
-				457280952197011B002AD90D /* Section.swift in Sources */,
 				455239DC2199C16B005A8C8B /* ShowCleaningListViewController.swift in Sources */,
 				455239DE2199C3C4005A8C8B /* SectionsForCleaningList.swift in Sources */,
 				457C806321B0633100022FB9 /* friendRequestViewController.swift in Sources */,

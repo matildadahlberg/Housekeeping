@@ -14,6 +14,7 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle?
     var currentUserId = Auth.auth().currentUser?.uid
+    private let userRef = Database.database().reference()
     
     @IBOutlet weak var reqTableView: UITableView!
     
@@ -27,25 +28,30 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
         reqTableView.register(UINib(nibName: "cellFriendReq", bundle: nil), forCellReuseIdentifier: "myCellForFriend")
         
         
-        ref = Database.database().reference()
         
+        ref = Database.database().reference()
+
+     
         ref.child(currentUserId!).child("friendRequests").observe(.value , with: { (snapshot) in
-            
+  
             var newUsers: [String] = []
-            
+
             for user in snapshot.children{
-                
-                let listUser = (user as! DataSnapshot).key//User(snapshot: user as! DataSnapshot)
+
+                let listUser = (user as! DataSnapshot).key
                 newUsers.append(listUser)
+                print("KOLLA HÄÄÄR: \(snapshot)")
+
             }
-            
+
             self.users = newUsers
             self.reqTableView.reloadData()
-            
+
         })
         
 
@@ -56,18 +62,26 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = reqTableView.dequeueReusableCell(withIdentifier: "myCellForFriend") as? cellFriendTableViewCell else{
+            
+            
             return UITableViewCell()
+            
         }
         
-        ref.child(currentUserId!).child("friendRequests").child((user?.id)!)
-            .observeSingleEvent(of: .value, with: { (snapshot) in
-               
-                cell.nameLabel.text = self.users[indexPath.row]
-
+        userRef.queryOrdered(byChild: "email").queryEqual(toValue: user?.email)
+            .observe(.value, with: { snapshot in
+                if snapshot.exists() {
+                    print("user exists")
+                    
+                } else {
+                    print("user doesn’t exist")
+                    
+                }
             })
-        
+            //cell.nameLabel.text = users[indexPath.row]
+       
+    
         return cell
     }
     
@@ -83,6 +97,7 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
+
     
     
     

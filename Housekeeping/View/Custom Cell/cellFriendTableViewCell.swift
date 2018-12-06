@@ -45,10 +45,12 @@ class cellFriendTableViewCell: UITableViewCell {
             
             let reference = Database.database().reference()
             
-            // add to friendpage.
+            
+        
+            
             reference.child(currentUser.uid).child("friends").child((user?.id)!).setValue(true)
             
-            //Add to the other users "friends" page
+
             reference.child((user?.id)!).child("friends").child(currentUser.uid).setValue(true)
 
         }
@@ -61,13 +63,12 @@ class cellFriendTableViewCell: UITableViewCell {
         
         if let currentUser = Auth.auth().currentUser{
             
-            //delete request.
+            
             let reference = Database.database().reference()
             reference.child(currentUser.uid).child("friendRequests").child((user?.id)!).removeValue()
-        }
+            
+            reference.child((user?.id)!).child("sendfriendRequests").child(currentUser.uid).removeValue()
     }
-    
-    
-    
 
+}
 }

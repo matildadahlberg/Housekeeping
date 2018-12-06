@@ -41,9 +41,6 @@ class SignUpController: UIViewController {
         
     }
     
-    //        let eventDB = Database.database().reference().child(currentUserId!)
-    //        let nameDictionary = ["email": Auth.auth().currentUser?.email, "name" : NameTextField.text]
-    //        eventDB.childByAutoId().setValue(nameDictionary)
     
     
     @IBAction func SignUpPressed(_ sender: UIButton) {
