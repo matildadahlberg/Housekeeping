@@ -113,11 +113,7 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
         cell.removeBtn.addTarget(self, action: #selector(self.removeRequest), for: .touchUpInside)
         
         cell.nameLabel.text = users[indexPath.row].email
-        //cell.user?.email = users[indexPath.row]
-        //cell.user?.id = (user?.id)!
-        
-        
-        
+   
         return cell
     }
     
@@ -175,28 +171,9 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
 
             let reference = Database.database().reference()
             reference.child(currentUser.uid).child("friendRequests").child(deleteUser.id).removeValue()
-            //reference.child(user!.id).child("sendfriendRequests").child(deleteUser).removeValue()
+            reference.child(deleteUser.id).child("sendfriendRequests").child(deleteUser.id).removeValue()
         }
     }
-    
-//    func friendsRequestId(){
-//        ref = Database.database().reference()
-//
-//        ref.child(currentUserId!).child("friendRequests").observe(.value , with: { (snapshot) in
-//
-//            self.users = []
-//            for user in snapshot.children{
-//                let newUser = (user as! DataSnapshot).key
-//                self.getThisUser(userId: newUser, completion: { (user) in
-//                    if let user = user{
-//                        self.users.append(user.id)
-//                        print("HÄRAAA: \(snapshot)")
-//                        self.reqTableView.reloadData()
-//                    }
-//                })
-//            }
-//        })
-//    }
 
 }
 

@@ -80,8 +80,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.eventtitleCell.text = events[indexPath.row].eventTitle
         cell.userNameCell.text = events[indexPath.row].userName
-        
-       // cell.userNameCell.text = Auth.auth().currentUser?.displayName
+  
         cell.dateLabel.text = events[indexPath.row].dateTitle
         
         return cell
@@ -175,22 +174,6 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
                 })
             }
         })
-        
-//        ref.child("Events").observe(.value, with: {(snapshot) in
-//
-//            var newEvents: [Event] = []
-//
-//            for event in snapshot.children{
-//
-//                let listEvent = Event(snapshot: event as! DataSnapshot)
-//                newEvents.append(listEvent)
-//            }
-//            print(snapshot)
-//            self.events = newEvents
-//            self.tableViewHome.reloadData()
-//            print(self.events)
-//
-//        })
     }
     
     

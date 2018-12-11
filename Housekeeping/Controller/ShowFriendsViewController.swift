@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import Firebase
 
 class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var friendsData = ["Namn", "Namn", "Namn","Vänförfrågningar:"]
+    var ref: DatabaseReference!
+    var currentUserId = Auth.auth().currentUser?.uid
+    
+    //var friendsData = ["Namn", "Namn", "Namn","Vänförfrågningar:"]
     //var requestData: [String] = ["Vänförfrågningar:"]
 
     var sections: [String] = ["Vänner"]
+    var users : [User] = []
     
     //var sectionData: [Int: [String]] = [:]
     
@@ -24,18 +29,57 @@ class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
 
         
-        //sectionData = [0 : friendsData, 1 : requestData]
+        ref = Database.database().reference()
+        
+        ref.child(currentUserId!).child("friends").observe(.value , with: { (snapshot) in
+            
+            self.users = []
+            for user in snapshot.children{
+                let newUser = (user as! DataSnapshot).key
+                self.getThisUser(userId: newUser, completion: { (user) in
+                    if let user = user{
+                        self.users.append(user)//ha email här sen
+                        
+                        self.friendstableView.reloadData()
+                    }
+                })
+            }
+        })
+
     }
     
+    
+    func getThisUser(userId: String, completion: @escaping (_ user: User?)->()){
+        
+        var databaseReference: DatabaseReference!
+        databaseReference = Database.database().reference()
+        
+        databaseReference.child(userId).observeSingleEvent(of: .value) { (snapshot) in
+            
+            if snapshot.exists(){
+                let user = User(snapshot: snapshot)
+                completion(user)
+            }
+            else{
+                completion(nil)
+            }
+            
+        }
+        
+        
+    }
+        
+        //sectionData = [0 : friendsData, 1 : requestData]
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friendsData.count
+        return users.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
        
-        cell.textLabel?.text = friendsData[indexPath.row]
+        cell.textLabel?.text = users[indexPath.row].email
         //cell?.textLabel?.text = requestData[indexPath.row]
         
         return cell
@@ -61,19 +105,19 @@ class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         if editingStyle == .delete {
             print("Deleted")
             
-            self.friendsData.remove(at: indexPath.row)
+            self.users.remove(at: indexPath.row)
             self.friendstableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == friendsData.count - 1 {
+        if indexPath.row == users.count - 1 {
         performSegue(withIdentifier: segueId, sender: self)
         }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == friendsData.count - 1 {
+        if indexPath.row == users.count - 1 {
             cell.accessoryType = .disclosureIndicator
             cell.textLabel?.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
         
