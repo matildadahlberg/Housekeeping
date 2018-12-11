@@ -18,16 +18,16 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle?
     var currentUserId = Auth.auth().currentUser?.uid
-    
-    var events : [Event] = []
-    
-    var eventList : [Event]?
-    
-    var event : Event?
 
+    var events : [Event] = []
+    var event : Event?
+    
+    var user : User?
+    var users : [User] = []
+    
     
     @IBOutlet weak var tableViewHome: UITableView!
-  
+    
     
     @IBAction func addEvent(_ sender: Any) {
         performSegue(withIdentifier: "goToAddEvent", sender: self)
@@ -43,24 +43,26 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationController?.navigationBar.isHidden = false
         
         currentUserId = Auth.auth().currentUser?.uid
-        print( currentUserId)
+        
         ref = Database.database().reference().child(currentUserId!)
-   
+        
         ref.child("Events").observe(.value, with: {(snapshot) in
             
-            var newEvents: [Event] = []
+            //var newEvents: [Event] = []
             
             for event in snapshot.children{
                 
                 let listEvent = Event(snapshot: event as! DataSnapshot)
-                newEvents.append(listEvent)
+                self.events.append(listEvent)
             }
-            
-            self.events = newEvents
+            print(snapshot)
+           // self.events = newEvents
             self.tableViewHome.reloadData()
             print(self.events)
             
         })
+        getfriendsEvents()
+        
         
     }
     
@@ -77,8 +79,9 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! CustomTableViewCell
         
         cell.eventtitleCell.text = events[indexPath.row].eventTitle
-        print(Auth.auth().currentUser?.uid)
-        cell.userNameCell.text = Auth.auth().currentUser?.displayName
+        cell.userNameCell.text = events[indexPath.row].userName
+        
+       // cell.userNameCell.text = Auth.auth().currentUser?.displayName
         cell.dateLabel.text = events[indexPath.row].dateTitle
         
         return cell
@@ -88,12 +91,14 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     
     //radera genom att swipa
     func tableView(_ tableView: UITableView, commit editingStyle: CustomTableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let center = UNUserNotificationCenter.current()
         
         if editingStyle == .delete {
             let event = events[indexPath.row]
             self.events.remove(at: indexPath.row)
             self.tableViewHome.deleteRows(at: [indexPath], with: .automatic)
             removeFromDB(event: event)
+            center.removeAllPendingNotificationRequests()
             tableViewHome.reloadData()
             print(indexPath.row)
         }
@@ -123,18 +128,94 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     
     func removeFromDB(event : Event){
         
-        let eventDB = Database.database().reference().child(currentUserId!).child("Events").child(event.id)
-        eventDB.removeValue()
+        if (currentUserId != nil){
+            
+            let eventDB = Database.database().reference().child(currentUserId!).child("Events").child(event.id)
+            eventDB.removeValue()
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-   
+    
+    func getfriendsEvents(){
+        currentUserId = Auth.auth().currentUser?.uid
+        ref = Database.database().reference()
+        
+        ref.child(currentUserId!).child("friends").observe(.value , with: { (snapshot) in
+            
+            self.users = []
+            for user in snapshot.children{
+                let newUser = (user as! DataSnapshot).key
+                self.getThisUser(userId: newUser, completion: { (user) in
+                    if let user = user{
+                        self.users.append(user)
+                        
+                        self.ref.child(user.id).child("Events").observe(.value, with: {(snapshot) in
+                            
+                           // var newEvents: [Event] = []
+                            
+                            for event in snapshot.children{
+                                
+                                let listEvent = Event(snapshot: event as! DataSnapshot)
+                                self.events.append(listEvent)
+                            }
+                            print(snapshot)
+                           // self.events = newEvents
+                            self.tableViewHome.reloadData()
+                            print(self.events)
+                            
+                        })
+                       
+                        print("HÄÄÄÄR: \(snapshot)")
+                        
+                        self.tableViewHome.reloadData()
+                    }
+                })
+            }
+        })
+        
+//        ref.child("Events").observe(.value, with: {(snapshot) in
+//
+//            var newEvents: [Event] = []
+//
+//            for event in snapshot.children{
+//
+//                let listEvent = Event(snapshot: event as! DataSnapshot)
+//                newEvents.append(listEvent)
+//            }
+//            print(snapshot)
+//            self.events = newEvents
+//            self.tableViewHome.reloadData()
+//            print(self.events)
+//
+//        })
+    }
+    
+    
+    func getThisUser(userId: String, completion: @escaping (_ user: User?)->()){
+        
+        var databaseReference: DatabaseReference!
+        databaseReference = Database.database().reference()
+        
+        databaseReference.child(userId).observeSingleEvent(of: .value) { (snapshot) in
+            
+            if snapshot.exists(){
+                let user = User(snapshot: snapshot)
+                completion(user)
+            }
+            else{
+                completion(nil)
+            }
+            
+        }
+        
+        
+    }
+    
+    
 }
-
-
-
 
 
 

@@ -15,17 +15,17 @@ class Event {
     var dateTitle: String!
     var dateFormatter = DateFormatter()
     var eventTitle: String!
-    var repeatTime: Int
+    var userName : String
     
     var id: String!
     
-    init(dateTitle: String, eventTitle: String, repeatTime: Int){
+    init(dateTitle: String, eventTitle: String, userName: String){
 //        dateFormatter.locale = Locale(identifier: "sv")
 //        dateFormatter.dateFormat = "E, d MMM HH:mm"
         self.dateTitle = dateTitle
 //        self.dateTitle = dateFormatter.string(from: Date(dateTitle))
         self.eventTitle = eventTitle
-        self.repeatTime = repeatTime
+        self.userName = userName
         self.id = ""
     }
     
@@ -33,13 +33,13 @@ class Event {
         let snapshotValue = snapshot.value as! [String: AnyObject]
         dateTitle = (snapshotValue["DateTitle"] as! String)
         eventTitle = (snapshotValue["EventTitle"] as! String)
-        repeatTime = (snapshotValue["Repeat"] as! Int)
+        userName = (snapshotValue["username"] as! String)
         id = snapshot.key
     }
     
     
     func toAnyObject() -> Any {
-        return ["DateTitle": dateTitle, "EventTitle": eventTitle, "Repeat": repeatTime]
+        return ["DateTitle": dateTitle, "EventTitle": eventTitle, "username": userName]
     }
 }
 

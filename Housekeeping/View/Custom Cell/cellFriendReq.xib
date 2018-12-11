@@ -41,6 +41,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.1647058824" green="0.47450980390000003" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="tintColor" red="0.5" green="0.50540453770000004" blue="0.5" alpha="0.74467572770000001" colorSpace="custom" customColorSpace="sRGB"/>
                         <state key="normal" title="Bekräfta">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>

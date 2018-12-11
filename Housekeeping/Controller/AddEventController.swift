@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
 class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource  {
 
@@ -17,6 +18,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     var currentUserId = Auth.auth().currentUser?.uid
     
     var events : [Event] = []
+    var event : Event?
 
     let segueHome = "goToHome"
 
@@ -35,6 +37,8 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     
     var repeatDay = ["Aldrig","Varje dag", "Varje vecka", "Varannan vecka","Varje månad", "Varje år"]
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
@@ -56,7 +60,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         datePicker?.datePickerMode = .dateAndTime
         datePicker?.addTarget(self, action: #selector(AddEventController.dateChanged(datePicker:)), for: .valueChanged)
         
-
+        self.titleTextfield.delegate = self
         
         
         repeatTextfield.inputView = pickerRepeat
@@ -85,10 +89,15 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     @IBAction func pressedAdd(_ sender: Any) {
         //post the data to firebase
  
-        let event = Event(dateTitle: inputDateTextfield.text!, eventTitle: titleTextfield.text!, repeatTime: 1)
+//        let event = Event(dateTitle: inputDateTextfield.text!, eventTitle: titleTextfield.text!, repeatTime: 1)
+        
+        let event = Event(dateTitle: inputDateTextfield.text!, eventTitle: titleTextfield.text!, userName: (Auth.auth().currentUser?.displayName)!)
+        
         let eventDB = Database.database().reference().child(currentUserId!).child("Events")
         let childRef = eventDB.childByAutoId()
         childRef.setValue(event.toAnyObject())
+        
+        setNotification()
        
         performSegue(withIdentifier: segueHome, sender: self)
         
@@ -111,7 +120,30 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
   
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
+        let notification:UILocalNotification = UILocalNotification()
+        
         repeatTextfield.text = repeatDay[row]
+        
+        if repeatDay[0] == repeatTextfield.text {
+            print("aldrig")
+        }
+        if repeatDay[1] == repeatTextfield.text {
+            notification.repeatInterval = NSCalendar.Unit.day
+        }
+        if repeatDay[2] == repeatTextfield.text {
+            notification.repeatInterval = NSCalendar.Unit.weekday
+        }
+        if repeatDay[3] == repeatTextfield.text {
+            
+        }
+        if repeatDay[4] == repeatTextfield.text {
+            notification.repeatInterval = NSCalendar.Unit.month
+        }
+        if repeatDay[5] == repeatTextfield.text {
+            notification.repeatInterval = NSCalendar.Unit.year
+            
+        }
+        
         self.view.endEditing(false)
     }
 
@@ -122,13 +154,95 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
     }
     
+    func setNotification() {
+        let center = UNUserNotificationCenter.current()
+
+        getEvents()
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Du har hushållssysslor att göra!"
+        content.body = "Glöm inte att utföra dina hushållssysslor idag"
+        content.sound = UNNotificationSound.default
+        
+        let triggerDate = Calendar.current.dateComponents([.month, .day, .hour, .minute, .year], from: datePicker.date)
+     
+        let trigger = UNCalendarNotificationTrigger.init(dateMatching: triggerDate, repeats: true)
+        
+        let notification = UILocalNotification()
+        
+        if repeatDay[0] == repeatTextfield.text {
+            print("aldrig")
+        }
+        if repeatDay[1] == repeatTextfield.text {
+            //trigger.nextTriggerDate()?.addTimeInterval(pickerRepeat)
+            notification.repeatInterval = NSCalendar.Unit.day
+        }
+        if repeatDay[2] == repeatTextfield.text {
+            notification.repeatInterval = NSCalendar.Unit.weekday
+        }
+        if repeatDay[3] == repeatTextfield.text {
+            
+        }
+        if repeatDay[4] == repeatTextfield.text {
+            notification.repeatInterval = NSCalendar.Unit.month
+        }
+        if repeatDay[5] == repeatTextfield.text {
+            notification.repeatInterval = NSCalendar.Unit.year
+            
+        }
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString
+            , content: content, trigger: trigger)
+            center.add(request)
+        
+        
+        
+        
+    }
+        
+//
+//        dateComponents.hour = datePicker.calendar
+//        dateComponents.minute = 42
+//        dateComponents.weekday = 2
+//        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+//
+//        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+//        center.add(request)
+    //}
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        titleTextfield.resignFirstResponder()
+        return(true)
+    }
+    
+    func getEvents(){
+    currentUserId = Auth.auth().currentUser?.uid
+    
+    ref = Database.database().reference().child(currentUserId!)
+    
+        ref!.child("Events").observe(.value, with: {(snapshot) in
+    
+    var newEvents: [Event] = []
+    
+    for event in snapshot.children{
+    
+    let listEvent = Event(snapshot: event as! DataSnapshot)
+    newEvents.append(listEvent)
+    }
+    print(snapshot)
+    self.events = newEvents
+    
+    
+    })
+    }
+    
 //    func checkDate(){
 //        if Date.earlierDate(datePicker.date) == datePicker.date{
 //            addbuttonStyle.isEnabled = false
 //        }
 //
 //    }
-    
+//
 //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //        textField.resignFirstResponder()
 //        return true
@@ -136,6 +250,8 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
 //    func textFieldDidEndEditing(_ textField: UITextField) {
 //        checkName()
 //    }
+    
+    
     
     
     
