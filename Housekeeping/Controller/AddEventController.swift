@@ -19,9 +19,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     
     var events : [Event] = []
     var event : Event?
-    
-    
-    
+
     let segueHome = "goToHome"
     
     @IBOutlet weak var repeatTextfield: UITextField!
@@ -38,8 +36,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     var pickerRepeat = UIPickerView()
     
     var repeatDay = ["Aldrig","Varje dag", "Varje vecka", "Varannan vecka","Varje månad", "Varje år"]
-    
-    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +71,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     }
     
     
+    
     @objc func dateChanged(datePicker: UIDatePicker){
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "sv")
@@ -98,6 +96,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
         scheduleNotification()
         //setNotification()
+        print(UIApplication.shared.scheduledLocalNotifications?.count)
         
         performSegue(withIdentifier: segueHome, sender: self)
         
@@ -125,11 +124,11 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
         if repeatDay[0] == repeatTextfield.text {
             print("aldrig")
+            scheduleNotification()
         }
         if repeatDay[1] == repeatTextfield.text {
             let calander = Calendar(identifier: .gregorian)
             var components = calander.dateComponents(in: .current, from: datePicker.date)
-            let newComponents = DateComponents(calendar: calander, timeZone: .current, year: components.year, month: components.month, day: components.day, hour: components.hour, minute: components.minute, weekday: components.weekday)
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86_400, repeats: true)
             let content = UNMutableNotificationContent()
@@ -278,7 +277,65 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     }
     
     
+    
 }
+
+
+//    func checkDate(){
+//        if Date.earlierDate(datePicker.date) == datePicker.date{
+//            addbuttonStyle.isEnabled = false
+//        }
+//
+//    }
+//
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+
+
+//    func setNotification() {
+//
+//        let center = UNUserNotificationCenter.current()
+//
+//        let title = titleTextfield.text
+//
+//        let content = UNMutableNotificationContent()
+//        content.title = "Du har hushållssysslor att göra!"
+//        content.body = "Glöm inte att \(title!)!"
+//        content.badge = 0
+//        content.sound = UNNotificationSound.default
+//
+//        let dateComponents = Calendar.current.dateComponents([.hour, .minute, .weekday, .month, .year], from: datePicker.date)
+//
+//       let components = DateComponents()
+//        time.hour = dateComponents.hour!
+//        time.minute = dateComponents.minute!
+//        time.weekday = dateComponents.weekday!
+//        time.month = dateComponents.month!
+//        time.year = dateComponents.year!
+//        print(time.weekday)
+//
+//
+//        let trigger = UNCalendarNotificationTrigger.init(dateMatching: components, repeats: true)
+//
+//        let request = UNNotificationRequest(identifier: UUID().uuidString
+//            , content: content, trigger: trigger)
+//
+//            center.add(request, withCompletionHandler: nil)
+//    }
+//
+//}
+//
+//
+//struct time {
+//    static var hour = 0
+//    static var minute = 0
+//    static var weekday = 0
+//    static var month = 0
+//    static var year = 0
+//}
 
 
 

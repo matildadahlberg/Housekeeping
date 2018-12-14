@@ -33,13 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("notis funkar ej")
             }
         }
-        func incrementBadgeNumberBy(badgeNumberIncrement: Int) {
-            let currentBadgeNumber = UIApplication.shared.applicationIconBadgeNumber
-            let updatedBadgeNumber = currentBadgeNumber + badgeNumberIncrement
-            if (updatedBadgeNumber > -1) {
-                UIApplication.shared.applicationIconBadgeNumber = updatedBadgeNumber
-            }
-        }
+        
+            center.removeAllPendingNotificationRequests()
+        print(UIApplication.shared.scheduledLocalNotifications?.count)
+       center.removeAllDeliveredNotifications()
+        
         
         return true
     }

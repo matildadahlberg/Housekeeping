@@ -11,6 +11,7 @@ import Firebase
 
 class ResetPasswordController: UIViewController {
     
+    @IBOutlet weak var header: UILabel!
     
     @IBOutlet weak var EmailTextField: UITextField!
     
@@ -18,20 +19,20 @@ class ResetPasswordController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        ButtonStyle.layer.cornerRadius = 15
+        startAnimation()
+        ButtonStyle.layer.cornerRadius = 10
         ButtonStyle.showsTouchWhenHighlighted = true
         
         self.navigationController?.navigationBar.isHidden = false
     }
     
-
+    
     
     @IBAction func ChangePasswordButton(_ sender: Any) {
         resetPassword(email: EmailTextField.text!)
     }
     
-
+    
     func createAlertLogIn(title: String, message:String ){
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
@@ -53,5 +54,25 @@ class ResetPasswordController: UIViewController {
             }
         })
     }
-
+    
+    func startAnimation() {
+        
+        header.clipsToBounds = true
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.white.withAlphaComponent(0.8).cgColor, UIColor.clear.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.7, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.8)
+        gradientLayer.frame = header.bounds
+        header.layer.mask = gradientLayer
+        
+        let animation = CABasicAnimation(keyPath: "transform.translation.x")
+        animation.duration = 3
+        animation.fromValue = -header.frame.size.width
+        animation.toValue = header.frame.size.width
+        animation.repeatCount = .infinity
+        
+        gradientLayer.add(animation, forKey: "")
+        
+    }
+    
 }

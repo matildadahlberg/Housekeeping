@@ -20,13 +20,19 @@ class LogInController: UIViewController {
     
     @IBOutlet weak var CreateAccountButton: UIButton!
     
+    @IBOutlet weak var header: UILabel!
+    
     @IBOutlet weak var imageBG: UIImageView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        startAnimation()
+        
      
-        LogInButton.layer.cornerRadius = 15
-        CreateAccountButton.layer.cornerRadius = 15
+        LogInButton.layer.cornerRadius = 5
+        CreateAccountButton.layer.cornerRadius = 5
         
         LogInButton.showsTouchWhenHighlighted = true
         CreateAccountButton.showsTouchWhenHighlighted = true
@@ -39,6 +45,23 @@ class LogInController: UIViewController {
         }
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        startAnimation()
+        
+        
+        LogInButton.layer.cornerRadius = 5
+        CreateAccountButton.layer.cornerRadius = 5
+        
+        LogInButton.showsTouchWhenHighlighted = true
+        CreateAccountButton.showsTouchWhenHighlighted = true
+        
+        self.navigationController?.navigationBar.isHidden = true
+        
+        
+    }
+    
+   
     
 
 // tar bort tangentbordet när man klickar någonstans utanför det
@@ -81,6 +104,30 @@ func createAlertLogIn(title: String, message:String ){
         }
     }
     
+    func startAnimation() {
+        
+            header.clipsToBounds = true
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.colors = [UIColor.clear.cgColor, UIColor.white.withAlphaComponent(0.8).cgColor, UIColor.clear.cgColor]
+            gradientLayer.startPoint = CGPoint(x: 0.7, y: 1.0)
+            gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.8)
+            gradientLayer.frame = header.bounds
+            header.layer.mask = gradientLayer
+            
+            let animation = CABasicAnimation(keyPath: "transform.translation.x")
+            animation.duration = 3
+            animation.fromValue = -header.frame.size.width
+            animation.toValue = header.frame.size.width
+            animation.repeatCount = .infinity
+            
+            gradientLayer.add(animation, forKey: "")
+        
+    }
+  
+  
     
     
+    
+
+
 }

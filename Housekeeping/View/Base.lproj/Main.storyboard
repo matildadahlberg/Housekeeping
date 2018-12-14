@@ -18,14 +18,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="StartBG" translatesAutoresizingMaskIntoConstraints="NO" id="sUK-0b-zmd">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="sUK-0b-zmd">
                                 <rect key="frame" x="-23" y="-147" width="681" height="1021"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R2B-0x-9z3">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.16470588235294117" green="0.47450980392156861" blue="0.40392156862745099" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="hållet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zr5-vH-DMt">
                                 <rect key="frame" x="133" y="136" width="173" height="152"/>
@@ -51,7 +46,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kvj-px-SvF">
-                                <rect key="frame" x="125" y="483" width="125" height="40"/>
+                                <rect key="frame" x="88" y="483" width="200" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -63,7 +58,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8j-r5-sTb">
-                                <rect key="frame" x="125" y="543" width="125" height="40"/>
+                                <rect key="frame" x="88" y="543" width="200" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -112,13 +107,14 @@
                         <outlet property="EmailTextField" destination="Vcm-QF-bVz" id="pzY-tY-5Hv"/>
                         <outlet property="LogInButton" destination="Kvj-px-SvF" id="dId-2t-ujc"/>
                         <outlet property="PasswordTextfield" destination="BuP-0o-eCe" id="N7X-KR-bNC"/>
-                        <outlet property="imageBG" destination="R2B-0x-9z3" id="Y4V-ta-Bkh"/>
+                        <outlet property="header" destination="zr5-vH-DMt" id="Tgm-IS-I76"/>
+                        <outlet property="imageBG" destination="sUK-0b-zmd" id="acw-kH-CN3"/>
                         <segue destination="Qkl-pN-cPa" kind="show" identifier="goToHomeList" id="QRv-D8-YT5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="585" y="151"/>
+            <point key="canvasLocation" x="584.79999999999995" y="150.73891625615764"/>
         </scene>
         <!--addFriendPage-->
         <scene sceneID="rSj-M6-vkt">
@@ -191,7 +187,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rS-em-Zi7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6030" y="-596"/>
+            <point key="canvasLocation" x="5682" y="-1339"/>
         </scene>
         <!--HomePage-->
         <scene sceneID="BZ0-96-Ykp">
@@ -459,14 +455,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="StartBG" translatesAutoresizingMaskIntoConstraints="NO" id="A77-xi-uah">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="A77-xi-uah">
                                 <rect key="frame" x="-23" y="-147" width="681" height="1021"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jml-Y2-YHd">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.1647058824" green="0.47450980390000003" blue="0.4039215686" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
                             </imageView>
                             <textField opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aNY-iD-bgB">
                                 <rect key="frame" x="16" y="290" width="343" height="46"/>
@@ -525,7 +516,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ci2-fi-HFB">
-                                <rect key="frame" x="125" y="586" width="125" height="40"/>
+                                <rect key="frame" x="88" y="582" width="200" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -545,12 +536,13 @@
                         <outlet property="EmailTextField" destination="1iv-XF-RXJ" id="DIW-OE-Nnd"/>
                         <outlet property="NameTextField" destination="aNY-iD-bgB" id="mmA-3a-33f"/>
                         <outlet property="PasswordTextField" destination="2Jl-Uy-8yq" id="rVk-3W-nj7"/>
+                        <outlet property="header" destination="sqI-WQ-SSR" id="d2t-we-x20"/>
                         <segue destination="Qkl-pN-cPa" kind="show" identifier="goToHome" id="XNV-ES-0XY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kyE-X3-LmV" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1758" y="-996"/>
+            <point key="canvasLocation" x="1757.5999999999999" y="-996.05911330049264"/>
         </scene>
         <!--ResetPasswordPage-->
         <scene sceneID="GUU-Nv-QtT">
@@ -560,14 +552,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="StartBG" translatesAutoresizingMaskIntoConstraints="NO" id="Wq7-hw-KMI">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="Wq7-hw-KMI">
                                 <rect key="frame" x="-23" y="-147" width="681" height="1021"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CnT-kh-Il9">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.1647058824" green="0.47450980390000003" blue="0.4039215686" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="hållet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ca-hE-Zkv">
                                 <rect key="frame" x="133" y="136" width="173" height="152"/>
@@ -588,8 +575,15 @@
                                 <rect key="frame" x="88" y="162" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="E-postadress:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFu-sH-8l5">
+                                <rect key="frame" x="16" y="319" width="125" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTN-6d-9TI">
-                                <rect key="frame" x="114" y="444" width="146" height="40"/>
+                                <rect key="frame" x="88" y="445" width="200" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -600,13 +594,6 @@
                                     <action selector="ChangePasswordButton:" destination="llU-Od-oDF" eventType="touchUpInside" id="f0j-Pi-prn"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="E-postadress:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFu-sH-8l5">
-                                <rect key="frame" x="16" y="319" width="125" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="p5q-tv-fM0"/>
@@ -614,11 +601,12 @@
                     <connections>
                         <outlet property="ButtonStyle" destination="xTN-6d-9TI" id="ghd-x3-k2V"/>
                         <outlet property="EmailTextField" destination="tuu-Yl-aXX" id="HUT-XU-p1Q"/>
+                        <outlet property="header" destination="7Ca-hE-Zkv" id="Tax-18-RnO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wBN-MZ-IYq" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="585" y="1105"/>
+            <point key="canvasLocation" x="584.79999999999995" y="1104.6798029556651"/>
         </scene>
         <!--MyProfilePage-->
         <scene sceneID="PBP-Nn-kSc">
@@ -850,7 +838,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NwM-vM-VOX" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6029.6000000000004" y="150.73891625615764"/>
+            <point key="canvasLocation" x="5954" y="-306"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pfx-Xh-YCL">
@@ -873,16 +861,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="StartBG" width="3511" height="5266"/>
         <image name="VittHus" width="90" height="90"/>
         <image name="add_user_male" width="30" height="30"/>
+        <image name="bg" width="681" height="1021"/>
         <image name="home" width="30" height="30"/>
         <image name="literature" width="30" height="30"/>
         <image name="settings" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KQa-8M-NX9"/>
-        <segue reference="QRv-D8-YT5"/>
+        <segue reference="jZ8-2a-bjR"/>
+        <segue reference="XNV-ES-0XY"/>
         <segue reference="FEV-Et-h1L"/>
         <segue reference="Ysm-hh-s4q"/>
     </inferredMetricsTieBreakers>

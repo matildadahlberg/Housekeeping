@@ -21,6 +21,7 @@ class SignUpController: UIViewController {
     
     static let system = User()
     
+    @IBOutlet weak var header: UILabel!
     @IBOutlet weak var NameTextField: UITextField!
     @IBOutlet weak var EmailTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
@@ -31,8 +32,9 @@ class SignUpController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        startAnimation()
         
-        CreateAccButton.layer.cornerRadius = 15
+        CreateAccButton.layer.cornerRadius = 10
         CreateAccButton.showsTouchWhenHighlighted = true
         
         self.navigationController?.navigationBar.isHidden = false
@@ -112,6 +114,26 @@ class SignUpController: UIViewController {
         
         CreateAccButton.layer.cornerRadius = 15
         CreateAccButton.showsTouchWhenHighlighted = true
+        
+    }
+    
+    func startAnimation() {
+        
+        header.clipsToBounds = true
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.white.withAlphaComponent(0.8).cgColor, UIColor.clear.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.7, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.8)
+        gradientLayer.frame = header.bounds
+        header.layer.mask = gradientLayer
+        
+        let animation = CABasicAnimation(keyPath: "transform.translation.x")
+        animation.duration = 3
+        animation.fromValue = -header.frame.size.width
+        animation.toValue = header.frame.size.width
+        animation.repeatCount = .infinity
+        
+        gradientLayer.add(animation, forKey: "")
         
     }
     
