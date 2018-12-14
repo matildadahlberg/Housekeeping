@@ -35,6 +35,8 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in })
         
@@ -55,10 +57,8 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
                 let listEvent = Event(snapshot: event as! DataSnapshot)
                 self.events.append(listEvent)
             }
-            print(snapshot)
-           // self.events = newEvents
             self.tableViewHome.reloadData()
-            print(self.events)
+           // print(self.events)
             
         })
         getfriendsEvents()
@@ -90,16 +90,20 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     
     //radera genom att swipa
     func tableView(_ tableView: UITableView, commit editingStyle: CustomTableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        let center = UNUserNotificationCenter.current()
+        //let center = UNUserNotificationCenter.current()
         
+        if (currentUserId != nil){
         if editingStyle == .delete {
             let event = events[indexPath.row]
             self.events.remove(at: indexPath.row)
             self.tableViewHome.deleteRows(at: [indexPath], with: .automatic)
             removeFromDB(event: event)
-            center.removeAllPendingNotificationRequests()
-            tableViewHome.reloadData()
+            
+            //center.removeAllPendingNotificationRequests()
+            
+            //tableViewHome.reloadData()
             print(indexPath.row)
+        }
         }
         
         
@@ -166,9 +170,6 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
                             print(self.events)
                             
                         })
-                       
-                        print("HÄÄÄÄR: \(snapshot)")
-                        
                         self.tableViewHome.reloadData()
                     }
                 })

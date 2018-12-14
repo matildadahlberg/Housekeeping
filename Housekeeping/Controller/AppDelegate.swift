@@ -16,18 +16,28 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+      
+        
         
         let center = UNUserNotificationCenter.current()
+        
         
         center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             if granted {
                 print("Notis funkar!")
             } else {
                 print("notis funkar ej")
+            }
+        }
+        func incrementBadgeNumberBy(badgeNumberIncrement: Int) {
+            let currentBadgeNumber = UIApplication.shared.applicationIconBadgeNumber
+            let updatedBadgeNumber = currentBadgeNumber + badgeNumberIncrement
+            if (updatedBadgeNumber > -1) {
+                UIApplication.shared.applicationIconBadgeNumber = updatedBadgeNumber
             }
         }
         

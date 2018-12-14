@@ -13,8 +13,13 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var nameTextField: UITextField!
     
+    @IBOutlet weak var changeNameBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        nameTextField.layer.cornerRadius = 10
+        nameTextField.layer.borderWidth = 1
+        changeNameBtn.layer.cornerRadius = 10
         self.navigationController?.navigationBar.isHidden = false
 
         let name = Auth.auth().currentUser?.displayName

@@ -30,13 +30,12 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       
+        
         
         reqTableView.register(UINib(nibName: "cellFriendReq", bundle: nil), forCellReuseIdentifier: "myCellForFriend")
         
-        
-        
-        
-        
+
         ref = Database.database().reference()
         
         ref.child(currentUserId!).child("friendRequests").observe(.value , with: { (snapshot) in
@@ -53,8 +52,7 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
                 })
             }
         })
-         //friendsRequestId()
-  
+
     }
     
     
@@ -91,19 +89,7 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
             return UITableViewCell()
             
         }
-        
-//                userRef.queryOrdered(byChild: "id").queryEqual(toValue: user?.id)
-//                    .observe(.value, with: { snapshot in
-//                        if snapshot.exists() {
-//                            print("user exists")
-//
-//                        } else {
-//                            print("user doesn’t exist")
-//
-//                        }
-//                    })
-        //friendsRequestId()
-        
+  
         cell.acceptBtn.tag = indexPath.row
         cell.removeBtn.tag = indexPath.row
 
@@ -113,6 +99,7 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
         cell.removeBtn.addTarget(self, action: #selector(self.removeRequest), for: .touchUpInside)
         
         cell.nameLabel.text = users[indexPath.row].email
+        
    
         return cell
     }
@@ -136,9 +123,7 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
         sender.isEnabled = false
         
         let user = users[sender.tag]
-       // let userId =
-        
-        
+      
  
         if let currentUser = Auth.auth().currentUser{
             ref = Database.database().reference()
@@ -158,20 +143,19 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @objc func removeRequest(_ sender : UIButton){
-        
-        print("HEJ")
+  
         sender.isEnabled = false
         
         let deleteUser = users[sender.tag]
-        print("tar bort \(users[sender.tag])")
-        print(sender.tag)
         
         if let currentUser = Auth.auth().currentUser{
             
 
             let reference = Database.database().reference()
             reference.child(currentUser.uid).child("friendRequests").child(deleteUser.id).removeValue()
-            reference.child(deleteUser.id).child("sendfriendRequests").child(deleteUser.id).removeValue()
+            
+//            reference.child(deleteUser.id).child("sendfriendRequests").child(deleteUser.id).removeValue()
+            
         }
     }
 

@@ -49,14 +49,14 @@ class cellFriendTableViewCell: UITableViewCell {
     
     @IBAction func acceptPressed(_ sender: Any) {
     
-        acceptBtn.isSelected = true
+        acceptBtn.isHidden = true
         
     }
     
     
     @IBAction func removePressed(_ sender: Any) {
 
-        acceptBtn.isSelected = true
+        removeBtn.isHidden = true
     }
     
     

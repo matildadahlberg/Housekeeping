@@ -14,19 +14,20 @@ class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableV
     var ref: DatabaseReference!
     var currentUserId = Auth.auth().currentUser?.uid
     
-    //var friendsData = ["Namn", "Namn", "Namn","Vänförfrågningar:"]
-    //var requestData: [String] = ["Vänförfrågningar:"]
-
+    
+    @IBOutlet weak var friendsReqBtn: UIButton!
+    
     var sections: [String] = ["Vänner"]
     var users : [User] = []
-    
-    //var sectionData: [Int: [String]] = [:]
+    var user : User?
     
     var segueId = "goToFriendreq"
 
     @IBOutlet weak var friendstableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        friendsReqBtn.layer.cornerRadius = 10
 
         
         ref = Database.database().reference()
@@ -68,9 +69,7 @@ class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         
         
     }
-        
-        //sectionData = [0 : friendsData, 1 : requestData]
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
@@ -80,8 +79,7 @@ class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
        
         cell.textLabel?.text = users[indexPath.row].email
-        //cell?.textLabel?.text = requestData[indexPath.row]
-        
+  
         return cell
     }
     
@@ -103,27 +101,17 @@ class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            print("Deleted")
-            
+  
             self.users.remove(at: indexPath.row)
             self.friendstableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == users.count - 1 {
-        performSegue(withIdentifier: segueId, sender: self)
-        }
-    }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == users.count - 1 {
-            cell.accessoryType = .disclosureIndicator
-            cell.textLabel?.font = UIFont(name:"HelveticaNeue-Bold", size: 17.0)
+
+    @IBAction func showFriendsReq(_ sender: Any) {
         
-        }
+        performSegue(withIdentifier: segueId, sender: self)
     }
     
-
-
 }

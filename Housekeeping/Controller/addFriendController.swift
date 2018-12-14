@@ -23,13 +23,10 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var users : [User] = []
     var user : User?
-    
-    
-    //var array = [User]()
+ 
     var currentArray = [User]()
     
-    
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
