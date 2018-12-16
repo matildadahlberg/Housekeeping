@@ -31,7 +31,7 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         
        
-        
+        self.navigationController?.navigationBar.isHidden = false
         
         reqTableView.register(UINib(nibName: "cellFriendReq", bundle: nil), forCellReuseIdentifier: "myCellForFriend")
         
@@ -52,8 +52,12 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
                 })
             }
         })
+       
 
     }
+    
+ 
+    
     
     
     func getThisUser(userId: String, completion: @escaping (_ user: User?)->()){
@@ -100,8 +104,11 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
         
         cell.nameLabel.text = users[indexPath.row].email
         
-   
+        
+        
         return cell
+        reqTableView.reloadData()
+        
     }
     
     
@@ -132,12 +139,15 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
             
            //tar bort requesten
             reference.child(currentUser.uid).child("friendRequests").child(user.id).removeValue()
+            reference.child(user.id).child("sendfriendRequests").child(currentUserId!).removeValue()
             
             // lägger till i mina vänner
             reference.child(currentUser.uid).child("friends").child(user.id).setValue(true)
             
             //lägger till i den andra vännens vänner"
             reference.child(user.id).child("friends").child(currentUser.uid).setValue(true)
+            
+            self.reqTableView.reloadData()
   
         }
     }
@@ -153,6 +163,9 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
 
             let reference = Database.database().reference()
             reference.child(currentUser.uid).child("friendRequests").child(deleteUser.id).removeValue()
+            reference.child(user!.id).child("sendfriendRequests").child(currentUserId!).removeValue()
+            
+            self.reqTableView.reloadData()
             
 //            reference.child(deleteUser.id).child("sendfriendRequests").child(deleteUser.id).removeValue()
             

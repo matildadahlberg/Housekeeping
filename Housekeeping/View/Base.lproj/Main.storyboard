@@ -731,7 +731,7 @@
         <!--Friend Request View Controller-->
         <scene sceneID="eaC-I7-ZC2">
             <objects>
-                <viewController id="urX-PZ-U3N" customClass="friendRequestViewController" customModule="Housekeeping" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="showFriendsID" id="urX-PZ-U3N" customClass="friendRequestViewController" customModule="Housekeeping" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DJz-cr-46v">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

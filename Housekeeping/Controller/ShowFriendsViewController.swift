@@ -27,6 +27,8 @@ class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        friendstableView.register(UINib(nibName: "showFriendCell", bundle: nil), forCellReuseIdentifier: "showCell")
+        
         friendsReqBtn.layer.cornerRadius = 10
 
         
@@ -75,10 +77,20 @@ class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = friendstableView.dequeueReusableCell(withIdentifier: "showCell") as? showFriendTableCell else{
+            return UITableViewCell()
+        }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
        
-        cell.textLabel?.text = users[indexPath.row].email
+       
+        cell.nameLabel.text = users[indexPath.row].email
+        cell.removeButton.tag = indexPath.row
+        
+        
+        cell.removeButton.isEnabled = true
+        
+        cell.removeButton.addTarget(self, action: #selector(self.removeFriend), for: .touchUpInside)
   
         return cell
     }
@@ -99,13 +111,13 @@ class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-  
-            self.users.remove(at: indexPath.row)
-            self.friendstableView.deleteRows(at: [indexPath], with: .automatic)
-        }
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//
+//            self.users.remove(at: indexPath.row)
+//            self.friendstableView.deleteRows(at: [indexPath], with: .automatic)
+//        }
+//    }
     
     
 
@@ -114,4 +126,29 @@ class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         performSegue(withIdentifier: segueId, sender: self)
     }
     
+    @objc func removeFriend(_ sender : UIButton){
+        
+        sender.isEnabled = false
+        
+        let user = users[sender.tag]
+        
+        
+        if let currentUser = Auth.auth().currentUser{
+            ref = Database.database().reference()
+            
+            let reference = Database.database().reference()
+            
+            //tar bort vännen
+            reference.child(currentUser.uid).child("friends").child(user.id).removeValue()
+            reference.child(user.id).child("friends").child(currentUser.uid).removeValue()
+            
+            reference.child(user.id).child("sendfriendRequests").child(currentUserId!).removeValue()
+            
+            friendstableView.reloadData()
+            
+        }
+    }
+    
 }
+
+

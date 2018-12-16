@@ -36,9 +36,8 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
         
-        
+    
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in })
         
         tableViewHome.register(UINib(nibName: "cell", bundle: nil), forCellReuseIdentifier: "myCell")
@@ -58,14 +57,17 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
                 let listEvent = Event(snapshot: event as! DataSnapshot)
                 self.events.append(listEvent)
             }
+            
             self.tableViewHome.reloadData()
            // print(self.events)
             
         })
         getfriendsEvents()
+        friendBadge()
         
         
     }
+ 
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -118,10 +120,13 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         if tableView == tableViewHome {
             if tableView.cellForRow(at: indexPath)?.accessoryType == CustomTableViewCell.AccessoryType.checkmark{
                 tableView.cellForRow(at: indexPath)?.accessoryType = CustomTableViewCell.AccessoryType.none
+                
             }else{
                 tableView.cellForRow(at: indexPath)?.accessoryType = CustomTableViewCell.AccessoryType.checkmark
+                
             }
         }
+        
     }
     
     
@@ -199,6 +204,56 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    func friendBadge(){
+        ref = Database.database().reference()
+        ref.child(currentUserId!).child("friendRequests")
+            .observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                
+                if snapshot.exists() == true {
+                    print("exists")
+                    UIApplication.shared.applicationIconBadgeNumber = 1
+                    self.createAlert(title: "Vänförfrågan", message: "Du har fått en vänförfrågan!")
+                    if let tabItems = self.tabBarController?.tabBar.items {
+                        let tabItem = tabItems[2]
+                        tabItem.badgeValue = "1"
+                        
+                        
+                    }
+                    
+                }
+                else {
+                    print("does not exist")
+                    UIApplication.shared.applicationIconBadgeNumber = 0
+                    if let tabItems = self.tabBarController?.tabBar.items {
+                        let tabItem = tabItems[2]
+                        tabItem.badgeValue = nil
+                    }
+                }
+            }) { (error) in
+                print(error.localizedDescription)
+        }
+    }
+    
+    func createAlert(title: String, message:String ){
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+
+        self.present(alert, animated: true, completion: nil)
+//        let alert = UIAlertController(title: "Vänförfrågan", message: "Du har fått en vänförfrågan!", preferredStyle: .alert)
+//        let action = UIAlertAction(title: "Öppna", style: .default) { (action) -> Void in
+//            let viewControllerYouWantToPresent = self.storyboard?.instantiateViewController(withIdentifier: "showFriendsID")
+//            self.present(viewControllerYouWantToPresent!, animated: true, completion: nil)
+//        }
+//        alert.addAction(action)
+//        self.present(alert, animated: true, completion: nil)
+    }
+    
+ 
     
 }
 

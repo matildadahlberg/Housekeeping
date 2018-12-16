@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4506FB1421C5D6A20063EF5A /* showFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4506FB1321C5D6A20063EF5A /* showFriendCell.xib */; };
+		4506FB1621C5D7500063EF5A /* showFriendTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506FB1521C5D7500063EF5A /* showFriendTableCell.swift */; };
 		450D0D6A21931BB000F1A102 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 450D0D6921931BB000F1A102 /* GoogleService-Info.plist */; };
 		4544ACDA21A4358A00DE3448 /* addFriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4544ACD921A4358A00DE3448 /* addFriendController.swift */; };
 		4544ACDC21A436E800DE3448 /* searchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4544ACDB21A436E800DE3448 /* searchTableViewCell.swift */; };
@@ -61,6 +63,8 @@
 /* Begin PBXFileReference section */
 		1F7577EE2E88B501875DF53B /* Pods-Housekeeping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Housekeeping.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Housekeeping/Pods-Housekeeping.debug.xcconfig"; sourceTree = "<group>"; };
 		35849AA4E6671A8CABC413B9 /* Pods-HousekeepingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HousekeepingUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HousekeepingUITests/Pods-HousekeepingUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4506FB1321C5D6A20063EF5A /* showFriendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = showFriendCell.xib; sourceTree = "<group>"; };
+		4506FB1521C5D7500063EF5A /* showFriendTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = showFriendTableCell.swift; sourceTree = "<group>"; };
 		450D0D6921931BB000F1A102 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4544ACD921A4358A00DE3448 /* addFriendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addFriendController.swift; sourceTree = "<group>"; };
 		4544ACDB21A436E800DE3448 /* searchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchTableViewCell.swift; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 				4544ACDB21A436E800DE3448 /* searchTableViewCell.swift */,
 				457C806421B1322100022FB9 /* cellFriendReq.xib */,
 				457C806621B1359600022FB9 /* cellFriendTableViewCell.swift */,
+				4506FB1321C5D6A20063EF5A /* showFriendCell.xib */,
+				4506FB1521C5D7500063EF5A /* showFriendTableCell.swift */,
 			);
 			path = "Custom Cell";
 			sourceTree = "<group>";
@@ -371,6 +377,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4506FB1421C5D6A20063EF5A /* showFriendCell.xib in Resources */,
 				457C806521B1322100022FB9 /* cellFriendReq.xib in Resources */,
 				455C1E0C219D7DFE000EFDEE /* cell.xib in Resources */,
 				456B1835219083B200DBF5D6 /* LaunchScreen.storyboard in Resources */,
@@ -513,6 +520,7 @@
 				4544ACDA21A4358A00DE3448 /* addFriendController.swift in Sources */,
 				455239D82199B192005A8C8B /* ProfileViewController.swift in Sources */,
 				455C1E0E219D7EEB000EFDEE /* CustomTableViewCell.swift in Sources */,
+				4506FB1621C5D7500063EF5A /* showFriendTableCell.swift in Sources */,
 				455239D62199ADC4005A8C8B /* SettingsTableViewController.swift in Sources */,
 				455239DC2199C16B005A8C8B /* ShowCleaningListViewController.swift in Sources */,
 				455239DE2199C3C4005A8C8B /* SectionsForCleaningList.swift in Sources */,

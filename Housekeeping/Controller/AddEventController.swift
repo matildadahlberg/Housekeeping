@@ -5,7 +5,6 @@
 //  Created by Matilda Dahlberg on 2018-11-08.
 //  Copyright © 2018 Matilda Dahlberg. All rights reserved.
 //
-
 import UIKit
 import Firebase
 import UserNotifications
@@ -19,7 +18,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     
     var events : [Event] = []
     var event : Event?
-
+    
     let segueHome = "goToHome"
     
     @IBOutlet weak var repeatTextfield: UITextField!
@@ -36,10 +35,13 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     var pickerRepeat = UIPickerView()
     
     var repeatDay = ["Aldrig","Varje dag", "Varje vecka", "Varannan vecka","Varje månad", "Varje år"]
-   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UNUserNotificationCenter.current().delegate = (self as! UNUserNotificationCenterDelegate)
+        
         self.navigationController?.navigationBar.isHidden = false
         
         titleTextfield.layer.borderWidth = 0.5
@@ -253,6 +255,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         let content = UNMutableNotificationContent()
         content.title = "Du har hushållssysslor att göra!"
         content.body = "Glöm inte att \(titleTextfield.text!)!"
+        content.badge = 1
         content.sound = UNNotificationSound.default
         
         
@@ -280,6 +283,12 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     
 }
 
+extension AddEventController : UNUserNotificationCenterDelegate{
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+}
+
 
 //    func checkDate(){
 //        if Date.earlierDate(datePicker.date) == datePicker.date{
@@ -293,7 +302,6 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
 //        return true
 //    }
 //    func textFieldDidEndEditing(_ textField: UITextField) {
-
 
 //    func setNotification() {
 //
@@ -336,14 +344,4 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
 //    static var month = 0
 //    static var year = 0
 //}
-
-
-
-
-
-
-
-
-
-
 
