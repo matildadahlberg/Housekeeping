@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
             center.removeAllPendingNotificationRequests()
         print(UIApplication.shared.scheduledLocalNotifications?.count)
-       center.removeAllDeliveredNotifications()
+      center.removeAllDeliveredNotifications()
         
         
         return true

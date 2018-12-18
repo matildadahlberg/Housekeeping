@@ -92,6 +92,21 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
             }) { (error) in
                 print(error.localizedDescription)
         }
+        ref.child((cell.user?.id)!).child("sendfriendRequests").child(currentUserId!)
+            .observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                
+                if snapshot.exists() == true {
+                    print("exists")
+                    cell.buttonStyle.isHidden = true
+                }
+                else {
+                    print("does not exist")
+                    cell.buttonStyle.setTitle("Lägg till vän", for: .normal)
+                }
+            }) { (error) in
+                print(error.localizedDescription)
+        }
         
         return cell
     }
@@ -117,6 +132,8 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         
     }
+    
+    
     
  
     

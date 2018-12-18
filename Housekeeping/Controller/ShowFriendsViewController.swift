@@ -81,9 +81,6 @@ class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableV
             return UITableViewCell()
         }
         
-        
-       
-       
         cell.nameLabel.text = users[indexPath.row].email
         cell.removeButton.tag = indexPath.row
         
@@ -130,25 +127,26 @@ class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         
         sender.isEnabled = false
         
-        let user = users[sender.tag]
-        
+        let deleteUser = users[sender.tag]
         
         if let currentUser = Auth.auth().currentUser{
-            ref = Database.database().reference()
+            
             
             let reference = Database.database().reference()
+            reference.child(currentUser.uid).child("friends").child(deleteUser.id).removeValue()
             
-            //tar bort vännen
-            reference.child(currentUser.uid).child("friends").child(user.id).removeValue()
-            reference.child(user.id).child("friends").child(currentUser.uid).removeValue()
+            reference.child(deleteUser.id).child("friends").child(currentUserId!).removeValue()
             
-            reference.child(user.id).child("sendfriendRequests").child(currentUserId!).removeValue()
+            reference.child(deleteUser.id).child("sendfriendRequests").child(currentUserId!).removeValue()
+
             
-            friendstableView.reloadData()
+            //self.friendstableView.reloadData()
+            
+            
             
         }
     }
-    
+
 }
 
 

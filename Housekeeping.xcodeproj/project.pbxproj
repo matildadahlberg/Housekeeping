@@ -704,6 +704,7 @@
 			baseConfigurationReference = 1F7577EE2E88B501875DF53B /* Pods-Housekeeping.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A683995444;
 				INFOPLIST_FILE = Housekeeping/Info.plist;
@@ -723,6 +724,7 @@
 			baseConfigurationReference = D357684419CDE78F06B162C5 /* Pods-Housekeeping.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A683995444;
 				INFOPLIST_FILE = Housekeeping/Info.plist;

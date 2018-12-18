@@ -31,6 +31,9 @@
                         <state key="normal" title="Ta bort">
                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                         </state>
+                        <connections>
+                            <action selector="removePressed:" destination="T36-gn-Qh7" eventType="touchUpInside" id="TPQ-Qs-YVi"/>
+                        </connections>
                     </button>
                 </subviews>
             </tableViewCellContentView>

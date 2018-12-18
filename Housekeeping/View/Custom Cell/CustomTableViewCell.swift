@@ -9,15 +9,18 @@
 import UIKit
 
 class CustomTableViewCell: UITableViewCell {
+    
 
     @IBOutlet weak var userNameCell: UILabel!
     @IBOutlet weak var eventtitleCell: UILabel!
     
     @IBOutlet weak var dateLabel: UILabel!
     
+    @IBOutlet weak var repeatLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

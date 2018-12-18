@@ -50,6 +50,7 @@ class cellFriendTableViewCell: UITableViewCell {
     @IBAction func acceptPressed(_ sender: Any) {
     
         acceptBtn.isHidden = true
+        removeBtn.isHidden = true
         
     }
     
@@ -57,6 +58,7 @@ class cellFriendTableViewCell: UITableViewCell {
     @IBAction func removePressed(_ sender: Any) {
 
         removeBtn.isHidden = true
+        acceptBtn.isHidden = true
     }
     
     

@@ -19,7 +19,10 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     var events : [Event] = []
     var event : Event?
     
+    
     let segueHome = "goToHome"
+    
+    var identifier = UUID().uuidString
     
     @IBOutlet weak var repeatTextfield: UITextField!
     
@@ -32,27 +35,37 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     
     @IBOutlet weak var datePicker: UIDatePicker!
     
+    
     var pickerRepeat = UIPickerView()
     
     var repeatDay = ["Aldrig","Varje dag", "Varje vecka", "Varannan vecka","Varje månad", "Varje år"]
     
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+       
+        
         UNUserNotificationCenter.current().delegate = (self as! UNUserNotificationCenterDelegate)
         
         self.navigationController?.navigationBar.isHidden = false
+        let myColor = UIColor(red: 239.0/255, green: 239.0/255, blue: 244.0/255, alpha: 1.0)
         
         titleTextfield.layer.borderWidth = 0.5
         titleTextfield.layer.cornerRadius = 10
+        titleTextfield.layer.borderColor = myColor.cgColor
         
         inputDateTextfield.layer.borderWidth = 0.5
         inputDateTextfield.layer.cornerRadius = 10
+        inputDateTextfield.layer.borderColor = myColor.cgColor
         
         repeatTextfield.layer.borderWidth = 0.5
         repeatTextfield.layer.cornerRadius = 10
+        repeatTextfield.layer.borderColor = myColor.cgColor
         
+        self.navigationItem.rightBarButtonItem!.isEnabled = false
         
         ref = Database.database().reference()
         
@@ -90,14 +103,24 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     @IBAction func pressedAdd(_ sender: Any) {
         //post the data to firebase
         
-        let event = Event(dateTitle: inputDateTextfield.text!, eventTitle: titleTextfield.text!, userName: (Auth.auth().currentUser?.displayName)!)
+        
+        let event = Event(dateTitle: inputDateTextfield.text!, eventTitle: titleTextfield.text!, userName: (Auth.auth().currentUser?.displayName)!, id: identifier, repeatTime: repeatTextfield.text!)
+        
+        //event.id = identifier
         
         let eventDB = Database.database().reference().child(currentUserId!).child("Events")
         let childRef = eventDB.childByAutoId()
         childRef.setValue(event.toAnyObject())
         
-        scheduleNotification()
-        //setNotification()
+        //if repeatTextfield.text == ""{
+             scheduleNotification()
+        //}
+       
+       
+        
+        print("EventID \(event.id)")
+        print("Identifire \(identifier)")
+        
         print(UIApplication.shared.scheduledLocalNotifications?.count)
         
         performSegue(withIdentifier: segueHome, sender: self)
@@ -138,10 +161,12 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             content.body = "Glöm inte att \(titleTextfield.text!)!"
             content.sound = UNNotificationSound.default
             
+            var notiID = self.identifier
+            notiID += String("1")
+            let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
             
-            let request = UNNotificationRequest(identifier: "notificationDay", content: content, trigger: trigger)
+            print("varje dag : \(request.identifier)")
             
-            //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             UNUserNotificationCenter.current().add(request) {(error) in if let error = error {
                 print("Uh oh! we had an error:\(error)")
                 
@@ -158,10 +183,12 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             content.body = "Glöm inte att \(titleTextfield.text!)!"
             content.sound = UNNotificationSound.default
             
+            var notiID = self.identifier
+            notiID += String("2")
+            let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
             
-            let request = UNNotificationRequest(identifier: "notificationWeek", content: content, trigger: trigger)
+            print("varje vecka : \(request.identifier)")
             
-            //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             UNUserNotificationCenter.current().add(request) {(error) in if let error = error {
                 print("Uh oh! we had an error:\(error)")
                 
@@ -180,9 +207,10 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             content.sound = UNNotificationSound.default
             
             
-            let request = UNNotificationRequest(identifier: "notification2Week", content: content, trigger: trigger)
+            var notiID = self.identifier
+            notiID += String("3")
+            let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
             
-            //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             UNUserNotificationCenter.current().add(request) {(error) in if let error = error {
                 print("Uh oh! we had an error:\(error)")
                 
@@ -201,9 +229,10 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             content.sound = UNNotificationSound.default
             
             
-            let request = UNNotificationRequest(identifier: "notificationMonth", content: content, trigger: trigger)
+            var notiID = self.identifier
+            notiID += String("4")
+            let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
             
-            //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             UNUserNotificationCenter.current().add(request) {(error) in if let error = error {
                 print("Uh oh! we had an error:\(error)")
                 
@@ -222,15 +251,15 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             content.sound = UNNotificationSound.default
             
             
-            let request = UNNotificationRequest(identifier: "notificationYear", content: content, trigger: trigger)
-            
-            //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            var notiID = self.identifier
+            notiID += String("5")
+            let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
+           
             UNUserNotificationCenter.current().add(request) {(error) in if let error = error {
                 print("Uh oh! we had an error:\(error)")
                 
                 }
             }
-            
         }
         
         
@@ -242,6 +271,10 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         let text = titleTextfield.text ?? ""
         addbuttonStyle.isEnabled = !text.isEmpty
         
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+         self.navigationItem.rightBarButtonItem!.isEnabled = true
     }
     
     func scheduleNotification() {
@@ -260,10 +293,14 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
         
         
+        //let idName = titleTextfield.text
+        var notiID = self.identifier
+        notiID += String("6")
+        let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
         
-        let request = UNNotificationRequest(identifier: "textNotification", content: content, trigger: trigger)
+        print("original identifier was : \(request.identifier)")
         
-        //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+       
         UNUserNotificationCenter.current().add(request) {(error) in if let error = error {
             print("Uh oh! we had an error:\(error)")
             
@@ -271,8 +308,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         }
     }
     
-    
-    
+
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         titleTextfield.resignFirstResponder()
@@ -288,6 +324,10 @@ extension AddEventController : UNUserNotificationCenterDelegate{
         completionHandler([.alert, .sound])
     }
 }
+
+
+
+
 
 
 //    func checkDate(){

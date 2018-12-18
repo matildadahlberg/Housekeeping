@@ -26,5 +26,10 @@ class showFriendTableCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-
+    
+    @IBAction func removePressed(_ sender: Any) {
+        removeButton.isHidden = true
+    }
+    
+    
 }

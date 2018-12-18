@@ -14,7 +14,7 @@ import UserNotifications
 class HomeListController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
     //ExpandableHeaderViewDelegate
     
-    
+    let addEventText = AddEventController()
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle?
     var currentUserId = Auth.auth().currentUser?.uid
@@ -25,6 +25,8 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     var user : User?
     var users : [User] = []
     
+    
+    let center = UNUserNotificationCenter.current()
     
     @IBOutlet weak var tableViewHome: UITableView!
     
@@ -37,7 +39,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         
-    
+        
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in })
         
         tableViewHome.register(UINib(nibName: "cell", bundle: nil), forCellReuseIdentifier: "myCell")
@@ -83,28 +85,62 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.eventtitleCell.text = events[indexPath.row].eventTitle
         cell.userNameCell.text = events[indexPath.row].userName
-  
+        
+        if events[indexPath.row].repeatTime == "" || events[indexPath.row].repeatTime == "Aldrig" {
+            cell.repeatLabel.isHidden = true
+        } else {
+             cell.repeatLabel.text = events[indexPath.row].repeatTime
+        }
+        
+
         cell.dateLabel.text = events[indexPath.row].dateTitle
         
         return cell
         
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0
+        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
+        cell.layer.transform = transform
+        
+        UIView.animate(withDuration: 1.0){
+            cell.alpha = 1.0
+            cell.layer.transform = CATransform3DIdentity
+        }
+    }
+    
     
     //radera genom att swipa
     func tableView(_ tableView: UITableView, commit editingStyle: CustomTableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        //let center = UNUserNotificationCenter.current()
+        
         
         if (currentUserId != nil){
         if editingStyle == .delete {
+            for i in 1...6{
+                center.removePendingNotificationRequests(withIdentifiers: [events[indexPath.row].id + String(i)])
+                
+                center.removeDeliveredNotifications(withIdentifiers:  [events[indexPath.row].id + String(i)])
+                
+                let event = events[indexPath.row]
+                self.events.remove(at: indexPath.row)
+                self.tableViewHome.deleteRows(at: [indexPath], with: .automatic)
+                removeNotiFromDB(event: event)
+                
+                
+                //print( [events[indexPath.row].id + String(i)])
+                
+            }
+            
             let event = events[indexPath.row]
             self.events.remove(at: indexPath.row)
             self.tableViewHome.deleteRows(at: [indexPath], with: .automatic)
             removeFromDB(event: event)
             
-            //center.removeAllPendingNotificationRequests()
             
-            //tableViewHome.reloadData()
+            
+            
+            tableViewHome.reloadData()
             print(indexPath.row)
         }
         }
@@ -123,6 +159,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
                 
             }else{
                 tableView.cellForRow(at: indexPath)?.accessoryType = CustomTableViewCell.AccessoryType.checkmark
+               
                 
             }
         }
@@ -140,6 +177,14 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         if (currentUserId != nil){
             
             let eventDB = Database.database().reference().child(currentUserId!).child("Events").child(event.id)
+            eventDB.removeValue()
+        }
+    }
+    func removeNotiFromDB(event : Event){
+        
+        if (currentUserId != nil){
+            
+            let eventDB = Database.database().reference().child(currentUserId!).child("Events").child("eventID")
             eventDB.removeValue()
         }
     }
@@ -252,6 +297,8 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
 //        alert.addAction(action)
 //        self.present(alert, animated: true, completion: nil)
     }
+    
+    
     
  
     
