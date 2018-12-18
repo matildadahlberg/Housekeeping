@@ -46,8 +46,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         super.viewDidLoad()
         
         
-       
-        
+
         UNUserNotificationCenter.current().delegate = (self as! UNUserNotificationCenterDelegate)
         
         self.navigationController?.navigationBar.isHidden = false
@@ -106,7 +105,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
         let event = Event(dateTitle: inputDateTextfield.text!, eventTitle: titleTextfield.text!, userName: (Auth.auth().currentUser?.displayName)!, id: identifier, repeatTime: repeatTextfield.text!)
         
-        //event.id = identifier
+//        event.id = identifier
         
         let eventDB = Database.database().reference().child(currentUserId!).child("Events")
         let childRef = eventDB.childByAutoId()
@@ -161,7 +160,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             content.body = "Glöm inte att \(titleTextfield.text!)!"
             content.sound = UNNotificationSound.default
             
-            var notiID = self.identifier
+            var notiID = identifier
             notiID += String("1")
             let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
             
@@ -183,8 +182,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             content.body = "Glöm inte att \(titleTextfield.text!)!"
             content.sound = UNNotificationSound.default
             
-            var notiID = self.identifier
-            notiID += String("2")
+            var notiID = identifier
             let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
             
             print("varje vecka : \(request.identifier)")
@@ -207,8 +205,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             content.sound = UNNotificationSound.default
             
             
-            var notiID = self.identifier
-            notiID += String("3")
+            var notiID = identifier
             let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
             
             UNUserNotificationCenter.current().add(request) {(error) in if let error = error {
@@ -229,8 +226,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             content.sound = UNNotificationSound.default
             
             
-            var notiID = self.identifier
-            notiID += String("4")
+            var notiID = identifier
             let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
             
             UNUserNotificationCenter.current().add(request) {(error) in if let error = error {
@@ -251,8 +247,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             content.sound = UNNotificationSound.default
             
             
-            var notiID = self.identifier
-            notiID += String("5")
+            var notiID = identifier
             let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
            
             UNUserNotificationCenter.current().add(request) {(error) in if let error = error {
@@ -294,8 +289,8 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
         
         //let idName = titleTextfield.text
-        var notiID = self.identifier
-        notiID += String("6")
+        var notiID = identifier
+        //notiID += String("6")
         let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
         
         print("original identifier was : \(request.identifier)")

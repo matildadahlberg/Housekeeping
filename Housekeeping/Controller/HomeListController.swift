@@ -12,7 +12,9 @@ import UserNotifications
 
 
 class HomeListController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
-    //ExpandableHeaderViewDelegate
+    
+    var checkmarkSelected: Bool = false
+    let checkmarkSaveKey = "checkmark"
     
     let addEventText = AddEventController()
     var ref: DatabaseReference!
@@ -24,6 +26,8 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     
     var user : User?
     var users : [User] = []
+    
+    var selected = false
     
     
     let center = UNUserNotificationCenter.current()
@@ -117,20 +121,20 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         
         if (currentUserId != nil){
         if editingStyle == .delete {
-            for i in 1...6{
-                center.removePendingNotificationRequests(withIdentifiers: [events[indexPath.row].id + String(i)])
+            //for i in 1...6{
+                center.removePendingNotificationRequests(withIdentifiers: [events[indexPath.row].id])
                 
-                center.removeDeliveredNotifications(withIdentifiers:  [events[indexPath.row].id + String(i)])
+//                center.removeDeliveredNotifications(withIdentifiers:  [events[indexPath.row].id + String(i)])
+//
+//                let event = events[indexPath.row]
+//                self.events.remove(at: indexPath.row)
+//                self.tableViewHome.deleteRows(at: [indexPath], with: .automatic)
+//                removeNotiFromDB(event: event)
+            
                 
-                let event = events[indexPath.row]
-                self.events.remove(at: indexPath.row)
-                self.tableViewHome.deleteRows(at: [indexPath], with: .automatic)
-                removeNotiFromDB(event: event)
+                print( [events[indexPath.row].id])
                 
-                
-                //print( [events[indexPath.row].id + String(i)])
-                
-            }
+            //}
             
             let event = events[indexPath.row]
             self.events.remove(at: indexPath.row)
@@ -152,18 +156,21 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableViewHome.deselectRow(at: indexPath, animated: true)
-        
+
         if tableView == tableViewHome {
+
             if tableView.cellForRow(at: indexPath)?.accessoryType == CustomTableViewCell.AccessoryType.checkmark{
                 tableView.cellForRow(at: indexPath)?.accessoryType = CustomTableViewCell.AccessoryType.none
-                
+
             }else{
+
                 tableView.cellForRow(at: indexPath)?.accessoryType = CustomTableViewCell.AccessoryType.checkmark
-               
-                
+
+
             }
+
         }
-        
+
     }
     
     
@@ -289,14 +296,17 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         }))
 
         self.present(alert, animated: true, completion: nil)
-//        let alert = UIAlertController(title: "Vänförfrågan", message: "Du har fått en vänförfrågan!", preferredStyle: .alert)
-//        let action = UIAlertAction(title: "Öppna", style: .default) { (action) -> Void in
-//            let viewControllerYouWantToPresent = self.storyboard?.instantiateViewController(withIdentifier: "showFriendsID")
-//            self.present(viewControllerYouWantToPresent!, animated: true, completion: nil)
-//        }
-//        alert.addAction(action)
-//        self.present(alert, animated: true, completion: nil)
+
     }
+    
+    func checkmarkSaved(){
+        var checkmarkDefault = UserDefaults.standard
+        checkmarkDefault.set(checkmarkSelected, forKey: checkmarkSaveKey)
+        checkmarkDefault.synchronize()
+    }
+    
+    
+    
     
     
     
