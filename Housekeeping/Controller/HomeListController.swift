@@ -35,6 +35,8 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var tableViewHome: UITableView!
     
     
+    
+    
     @IBAction func addEvent(_ sender: Any) {
         performSegue(withIdentifier: "goToAddEvent", sender: self)
     }
@@ -99,6 +101,8 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
 
         cell.dateLabel.text = events[indexPath.row].dateTitle
         
+        
+        
         return cell
         
     }
@@ -122,24 +126,20 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         if (currentUserId != nil){
         if editingStyle == .delete {
             //for i in 1...6{
-                center.removePendingNotificationRequests(withIdentifiers: [events[indexPath.row].id])
+                center.removePendingNotificationRequests(withIdentifiers: [events[indexPath.row].eventID])
                 
-//                center.removeDeliveredNotifications(withIdentifiers:  [events[indexPath.row].id + String(i)])
-//
-//                let event = events[indexPath.row]
-//                self.events.remove(at: indexPath.row)
-//                self.tableViewHome.deleteRows(at: [indexPath], with: .automatic)
-//                removeNotiFromDB(event: event)
+                center.removeDeliveredNotifications(withIdentifiers:  [events[indexPath.row].eventID])
             
-                
-                print( [events[indexPath.row].id])
-                
-            //}
+            center.removePendingNotificationRequests(withIdentifiers: [events[indexPath.row].eventRepeatID])
             
-            let event = events[indexPath.row]
+            center.removeDeliveredNotifications(withIdentifiers:  [events[indexPath.row].eventRepeatID])
+
+
+            
+            let eventDB = events[indexPath.row]
             self.events.remove(at: indexPath.row)
             self.tableViewHome.deleteRows(at: [indexPath], with: .automatic)
-            removeFromDB(event: event)
+            removeFromDB(event: eventDB)
             
             
             
@@ -187,17 +187,10 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             eventDB.removeValue()
         }
     }
-    func removeNotiFromDB(event : Event){
-        
-        if (currentUserId != nil){
-            
-            let eventDB = Database.database().reference().child(currentUserId!).child("Events").child("eventID")
-            eventDB.removeValue()
-        }
-    }
+   
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 106
     }
     
     func getfriendsEvents(){

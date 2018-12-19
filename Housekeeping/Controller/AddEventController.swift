@@ -23,6 +23,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     let segueHome = "goToHome"
     
     var identifier = UUID().uuidString
+    var identifierRepeat = UUID().uuidString
     
     @IBOutlet weak var repeatTextfield: UITextField!
     
@@ -96,6 +97,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
         inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
         print(dateFormatter.string(from: datePicker.date))
+        print(Date())
         
     }
     
@@ -103,22 +105,17 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         //post the data to firebase
         
         
-        let event = Event(dateTitle: inputDateTextfield.text!, eventTitle: titleTextfield.text!, userName: (Auth.auth().currentUser?.displayName)!, id: identifier, repeatTime: repeatTextfield.text!)
-        
-//        event.id = identifier
+        let event = Event(dateTitle: inputDateTextfield.text!, eventTitle: titleTextfield.text!, userName: (Auth.auth().currentUser?.displayName)!, eventID: identifier, eventRepeatID: identifierRepeat, repeatTime: repeatTextfield.text!)
+ 
         
         let eventDB = Database.database().reference().child(currentUserId!).child("Events")
         let childRef = eventDB.childByAutoId()
         childRef.setValue(event.toAnyObject())
-        
-        //if repeatTextfield.text == ""{
+     
              scheduleNotification()
-        //}
+    
        
        
-        
-        print("EventID \(event.id)")
-        print("Identifire \(identifier)")
         
         print(UIApplication.shared.scheduledLocalNotifications?.count)
         
@@ -148,7 +145,6 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
         if repeatDay[0] == repeatTextfield.text {
             print("aldrig")
-            scheduleNotification()
         }
         if repeatDay[1] == repeatTextfield.text {
             let calander = Calendar(identifier: .gregorian)
@@ -160,8 +156,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             content.body = "Glöm inte att \(titleTextfield.text!)!"
             content.sound = UNNotificationSound.default
             
-            var notiID = identifier
-            notiID += String("1")
+            let notiID = identifierRepeat
             let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
             
             print("varje dag : \(request.identifier)")
@@ -182,7 +177,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             content.body = "Glöm inte att \(titleTextfield.text!)!"
             content.sound = UNNotificationSound.default
             
-            var notiID = identifier
+            let notiID = identifierRepeat
             let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
             
             print("varje vecka : \(request.identifier)")
@@ -205,7 +200,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             content.sound = UNNotificationSound.default
             
             
-            var notiID = identifier
+            let notiID = identifierRepeat
             let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
             
             UNUserNotificationCenter.current().add(request) {(error) in if let error = error {
@@ -226,7 +221,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             content.sound = UNNotificationSound.default
             
             
-            var notiID = identifier
+            let notiID = identifierRepeat
             let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
             
             UNUserNotificationCenter.current().add(request) {(error) in if let error = error {
@@ -247,7 +242,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             content.sound = UNNotificationSound.default
             
             
-            var notiID = identifier
+            let notiID = identifierRepeat
             let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
            
             UNUserNotificationCenter.current().add(request) {(error) in if let error = error {
@@ -289,7 +284,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
         
         //let idName = titleTextfield.text
-        var notiID = identifier
+        let notiID = identifier
         //notiID += String("6")
         let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
         

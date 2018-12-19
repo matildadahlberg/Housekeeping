@@ -18,17 +18,21 @@ class Event {
     var userName : String
     var repeatTime : String!
     
-    var id: String!
+    var eventID: String!
+    var eventRepeatID: String
+    var id : String
     
-    init(dateTitle: String, eventTitle: String, userName: String, id: String, repeatTime: String){
+    init(dateTitle: String, eventTitle: String, userName: String, eventID: String, eventRepeatID: String, repeatTime: String){
 //        dateFormatter.locale = Locale(identifier: "sv")
 //        dateFormatter.dateFormat = "E, d MMM HH:mm"
         self.dateTitle = dateTitle
 //        self.dateTitle = dateFormatter.string(from: Date(dateTitle))
         self.eventTitle = eventTitle
         self.userName = userName
-        self.id = id
+        self.eventID = eventID
+        self.eventRepeatID = eventRepeatID
         self.repeatTime = repeatTime
+        self.id = ""
     }
     
     init(snapshot: DataSnapshot) {
@@ -37,15 +41,16 @@ class Event {
         eventTitle = (snapshotValue["EventTitle"] as! String)
         userName = (snapshotValue["username"] as! String)
         repeatTime = (snapshotValue["repeatTime"] as! String)
-        id = (snapshotValue["eventID"] as! String)
+        eventID = (snapshotValue["eventID"] as! String)
+        eventRepeatID = (snapshotValue["eventRepeatID"] as! String)
         
         
-        //id = snapshot.key
+        id = snapshot.key
     }
     
     
     func toAnyObject() -> Any {
-        return ["DateTitle": dateTitle, "EventTitle": eventTitle, "username": userName, "repeatTime": repeatTime, "eventID" : id]
+        return ["DateTitle": dateTitle, "EventTitle": eventTitle, "username": userName, "repeatTime": repeatTime, "eventID" : eventID, "eventRepeatID" : eventRepeatID]
     }
 }
 
