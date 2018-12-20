@@ -1,26 +1,24 @@
 //
-//  CustomTableViewCell.swift
+//  RepeatTableViewCell.swift
 //  Housekeeping
 //
-//  Created by Matilda Dahlberg on 2018-11-15.
+//  Created by Matilda Dahlberg on 2018-12-19.
 //  Copyright © 2018 Matilda Dahlberg. All rights reserved.
 //
 
 import UIKit
 
-class CustomTableViewCell: UITableViewCell {
-    
-    
-    @IBOutlet weak var userNameCell: UILabel!
-    @IBOutlet weak var eventtitleCell: UILabel!
-    
-    @IBOutlet weak var dateLabel: UILabel!
-    
+class RepeatTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var eventLabel: UILabel!
+    
+    @IBOutlet weak var dateCellLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
+    
+    @IBOutlet weak var repeatLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,6 +26,5 @@ class CustomTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
 
 }

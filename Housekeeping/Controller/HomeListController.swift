@@ -27,6 +27,10 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     var user : User?
     var users : [User] = []
     
+    var date = Date()
+    let formatter = DateFormatter()
+    
+    
     var selected = false
     
     
@@ -43,12 +47,11 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
+      
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in })
         
         tableViewHome.register(UINib(nibName: "cell", bundle: nil), forCellReuseIdentifier: "myCell")
+        tableViewHome.register(UINib(nibName: "cellRepeat", bundle: nil), forCellReuseIdentifier: "cell2")
         
         self.navigationController?.navigationBar.isHidden = false
         
@@ -86,24 +89,23 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! CustomTableViewCell
-        
-        cell.eventtitleCell.text = events[indexPath.row].eventTitle
-        cell.userNameCell.text = events[indexPath.row].userName
-        
+ 
         if events[indexPath.row].repeatTime == "" || events[indexPath.row].repeatTime == "Aldrig" {
-            cell.repeatLabel.isHidden = true
-        } else {
-             cell.repeatLabel.text = events[indexPath.row].repeatTime
+            let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! CustomTableViewCell
+            cell.eventtitleCell.text = events[indexPath.row].eventTitle
+            cell.userNameCell.text = events[indexPath.row].userName
+            cell.dateLabel.text = events[indexPath.row].dateTitle
+            return cell
         }
         
+        let cell2 = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! RepeatTableViewCell
+            cell2.usernameLabel.text = events[indexPath.row].userName
+            cell2.eventLabel.text = events[indexPath.row].eventTitle
+            cell2.dateCellLabel.text = events[indexPath.row].dateTitle
+            cell2.repeatLabel.text = events[indexPath.row].repeatTime
 
-        cell.dateLabel.text = events[indexPath.row].dateTitle
+        return cell2
         
-        
-        
-        return cell
         
     }
     
@@ -116,6 +118,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             cell.alpha = 1.0
             cell.layer.transform = CATransform3DIdentity
         }
+        
     }
     
     
@@ -144,7 +147,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             
             
             
-            tableViewHome.reloadData()
+            
             print(indexPath.row)
         }
         }
@@ -297,14 +300,20 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         checkmarkDefault.set(checkmarkSelected, forKey: checkmarkSaveKey)
         checkmarkDefault.synchronize()
     }
-    
-    
-    
-    
-    
+
     
  
     
+}
+
+extension Date
+{
+    func toString(dateFormat format  : String ) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
+    }
 }
 
 

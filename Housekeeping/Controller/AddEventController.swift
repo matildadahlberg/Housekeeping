@@ -41,13 +41,13 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     
     var repeatDay = ["Aldrig","Varje dag", "Varje vecka", "Varannan vecka","Varje månad", "Varje år"]
     
- 
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-
+        
         UNUserNotificationCenter.current().delegate = (self as! UNUserNotificationCenterDelegate)
         
         self.navigationController?.navigationBar.isHidden = false
@@ -72,6 +72,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         datePicker?.datePickerMode = .dateAndTime
         datePicker?.addTarget(self, action: #selector(AddEventController.dateChanged(datePicker:)), for: .valueChanged)
         
+       
         self.titleTextfield.delegate = self
         
         
@@ -83,21 +84,56 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
         titleLabel.text = "Titel:"
         
+        
+        
     }
     
     
     
     @objc func dateChanged(datePicker: UIDatePicker){
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "sv")
-        dateFormatter.dateFormat = "E, d MMM HH:mm"
-        //datePicker.minimumDate = Date()
-        //datePicker.locale = Locale.current
+        
+   
+        if repeatDay[1] == repeatTextfield.text {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "sv")
+            dateFormatter.dateFormat = "HH:mm"
+            
+            inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
+            print("Varje dag")
+        }
+        if repeatDay[2] == repeatTextfield.text || repeatDay[3] == repeatTextfield.text{
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "sv")
+            dateFormatter.dateFormat = "E, HH:mm"
+
+            inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
+            print("Varje vecka eller varannan vecka")
+        }
+        if repeatDay[4] == repeatTextfield.text || repeatDay[5] == repeatTextfield.text{
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "sv")
+            dateFormatter.dateFormat = "d, HH:mm"
+
+            inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
+            
+            print("Varje månad eller varje år")
+        }
+
+        else{
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "sv")
+            dateFormatter.dateFormat = "E, d MMM HH:mm"
+            //datePicker.minimumDate = Date()
+            //datePicker.locale = Locale.current
+
+
+            inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
+            print(dateFormatter.string(from: datePicker.date))
+        }
         
         
-        inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
-        print(dateFormatter.string(from: datePicker.date))
-        print(Date())
+        
+        
         
     }
     
@@ -106,16 +142,16 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
         
         let event = Event(dateTitle: inputDateTextfield.text!, eventTitle: titleTextfield.text!, userName: (Auth.auth().currentUser?.displayName)!, eventID: identifier, eventRepeatID: identifierRepeat, repeatTime: repeatTextfield.text!)
- 
+        
         
         let eventDB = Database.database().reference().child(currentUserId!).child("Events")
         let childRef = eventDB.childByAutoId()
         childRef.setValue(event.toAnyObject())
-     
-             scheduleNotification()
-    
-       
-       
+        
+        scheduleNotification()
+        
+        
+        
         
         print(UIApplication.shared.scheduledLocalNotifications?.count)
         
@@ -244,7 +280,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             
             let notiID = identifierRepeat
             let request = UNNotificationRequest(identifier: notiID, content: content, trigger: trigger)
-           
+            
             UNUserNotificationCenter.current().add(request) {(error) in if let error = error {
                 print("Uh oh! we had an error:\(error)")
                 
@@ -263,8 +299,9 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-         self.navigationItem.rightBarButtonItem!.isEnabled = true
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.navigationItem.rightBarButtonItem!.isEnabled = true
     }
     
     func scheduleNotification() {
@@ -290,7 +327,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
         print("original identifier was : \(request.identifier)")
         
-       
+        
         UNUserNotificationCenter.current().add(request) {(error) in if let error = error {
             print("Uh oh! we had an error:\(error)")
             
@@ -298,7 +335,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         }
     }
     
-
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         titleTextfield.resignFirstResponder()
