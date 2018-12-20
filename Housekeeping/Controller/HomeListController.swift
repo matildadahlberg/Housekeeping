@@ -129,36 +129,57 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     //radera genom att swipa
     func tableView(_ tableView: UITableView, commit editingStyle: CustomTableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
+
+//        if (currentUserId != nil){
+//        if editingStyle == .delete {
+//            //for i in 1...6{
+//                center.removePendingNotificationRequests(withIdentifiers: [events[indexPath.row].eventID])
+//
+//                center.removeDeliveredNotifications(withIdentifiers:  [events[indexPath.row].eventID])
+//
+//            center.removePendingNotificationRequests(withIdentifiers: [events[indexPath.row].eventRepeatID])
+//
+//            center.removeDeliveredNotifications(withIdentifiers:  [events[indexPath.row].eventRepeatID])
+//
+//
+//
+//            let eventDB = events[indexPath.row]
+//            self.events.remove(at: indexPath.row)
+//            self.tableViewHome.deleteRows(at: [indexPath], with: .automatic)
+//            removeFromDB(event: eventDB)
+//
+//
+//            print(indexPath.row)
+//        }
+//
+//        }
+      
+    }
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        if (currentUserId != nil){
-        if editingStyle == .delete {
-            //for i in 1...6{
-                center.removePendingNotificationRequests(withIdentifiers: [events[indexPath.row].eventID])
-                
-                center.removeDeliveredNotifications(withIdentifiers:  [events[indexPath.row].eventID])
-            
-            center.removePendingNotificationRequests(withIdentifiers: [events[indexPath.row].eventRepeatID])
-            
-            center.removeDeliveredNotifications(withIdentifiers:  [events[indexPath.row].eventRepeatID])
-
-
-            
-            let eventDB = events[indexPath.row]
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            // delete item at indexPath
+//            self.tableViewHome.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+            let eventDB = self.events[indexPath.row]
             self.events.remove(at: indexPath.row)
             self.tableViewHome.deleteRows(at: [indexPath], with: .automatic)
-            removeFromDB(event: eventDB)
-            
-            
-            
-            
-            
-            print(indexPath.row)
-        }
+            self.removeFromDB(event: eventDB)
+            print(self.tableViewHome)
         }
         
+        let edit = UITableViewRowAction(style: .default, title: "Edit") { (action, indexPath) in
+            // share item at indexPath
+            //print("I want to share: \(self.tableViewHome[indexPath.row])")
+        }
+        
+        edit.backgroundColor = UIColor.lightGray
+        
+        return [delete, edit]
         
     }
     
+
     // lägger till ett checkmark vid högra sidan i tableviewn om man klickar på den och tar bort om man klickar igen
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
