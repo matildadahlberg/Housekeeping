@@ -22,6 +22,7 @@ class Event {
     var eventRepeatID: String
     var id : String
     
+
     init(dateTitle: String, eventTitle: String, userName: String, eventID: String, eventRepeatID: String, repeatTime: String){
 //        dateFormatter.locale = Locale(identifier: "sv")
 //        dateFormatter.dateFormat = "E, d MMM HH:mm"
@@ -32,6 +33,7 @@ class Event {
         self.eventID = eventID
         self.eventRepeatID = eventRepeatID
         self.repeatTime = repeatTime
+ 
         self.id = ""
     }
     
@@ -43,9 +45,12 @@ class Event {
         repeatTime = (snapshotValue["repeatTime"] as! String)
         eventID = (snapshotValue["eventID"] as! String)
         eventRepeatID = (snapshotValue["eventRepeatID"] as! String)
-        
+     
         
         id = snapshot.key
+        
+    
+        
     }
     
     

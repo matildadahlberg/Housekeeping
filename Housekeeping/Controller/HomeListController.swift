@@ -13,8 +13,6 @@ import UserNotifications
 
 class HomeListController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
     
-    var checkmarkSelected: Bool = false
-    let checkmarkSaveKey = "checkmark"
     
     let addEventText = AddEventController()
     var ref: DatabaseReference!
@@ -95,8 +93,12 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             cell.eventtitleCell.text = events[indexPath.row].eventTitle
             cell.userNameCell.text = events[indexPath.row].userName
             cell.dateLabel.text = events[indexPath.row].dateTitle
+            
+            
             return cell
         }
+        
+        
         
         let cell2 = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! RepeatTableViewCell
             cell2.usernameLabel.text = events[indexPath.row].userName
@@ -105,6 +107,8 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             cell2.repeatLabel.text = events[indexPath.row].repeatTime
 
         return cell2
+        
+        
         
         
     }
@@ -165,6 +169,8 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             if tableView.cellForRow(at: indexPath)?.accessoryType == CustomTableViewCell.AccessoryType.checkmark{
                 tableView.cellForRow(at: indexPath)?.accessoryType = CustomTableViewCell.AccessoryType.none
 
+
+
             }else{
 
                 tableView.cellForRow(at: indexPath)?.accessoryType = CustomTableViewCell.AccessoryType.checkmark
@@ -173,6 +179,8 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             }
 
         }
+        
+
 
     }
     
@@ -190,6 +198,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             eventDB.removeValue()
         }
     }
+   
    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -295,26 +304,16 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
 
     }
     
-    func checkmarkSaved(){
-        var checkmarkDefault = UserDefaults.standard
-        checkmarkDefault.set(checkmarkSelected, forKey: checkmarkSaveKey)
-        checkmarkDefault.synchronize()
-    }
-
-    
+ 
  
     
 }
 
-extension Date
-{
-    func toString(dateFormat format  : String ) -> String
-    {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: self)
-    }
-}
+
+
+
+
+
 
 
 

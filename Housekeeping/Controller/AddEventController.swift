@@ -9,6 +9,10 @@ import UIKit
 import Firebase
 import UserNotifications
 
+enum repeatValue : String {
+    case never = "Aldrig", day = "Varje dag", week = "Varje vecka", twoTimesInMounth = "Varannan vecka", mounth = "Varje månad", year = "Varje år"
+}
+
 class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource  {
     
     
@@ -39,15 +43,17 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     
     var pickerRepeat = UIPickerView()
     
-    var repeatDay = ["Aldrig","Varje dag", "Varje vecka", "Varannan vecka","Varje månad", "Varje år"]
+    //var repeatDay = ["Aldrig","Varje dag", "Varje vecka", "Varannan vecka","Varje månad", "Varje år"]
     
+    var repeatDay : [repeatValue] = [repeatValue.never, repeatValue.day, repeatValue.week, repeatValue.twoTimesInMounth, repeatValue.mounth, repeatValue.year]
+    var selectedRepeatVal = repeatValue.never
+    
+   
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
+
         UNUserNotificationCenter.current().delegate = (self as! UNUserNotificationCenterDelegate)
         
         self.navigationController?.navigationBar.isHidden = false
@@ -84,56 +90,40 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
         titleLabel.text = "Titel:"
         
-        
-        
     }
     
     
     
     @objc func dateChanged(datePicker: UIDatePicker){
         
-   
-        if repeatDay[1] == repeatTextfield.text {
-            let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale(identifier: "sv")
-            dateFormatter.dateFormat = "HH:mm"
-            
-            inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
-            print("Varje dag")
-        }
-        if repeatDay[2] == repeatTextfield.text || repeatDay[3] == repeatTextfield.text{
-            let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale(identifier: "sv")
-            dateFormatter.dateFormat = "E, HH:mm"
-
-            inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
-            print("Varje vecka eller varannan vecka")
-        }
-        if repeatDay[4] == repeatTextfield.text || repeatDay[5] == repeatTextfield.text{
-            let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale(identifier: "sv")
-            dateFormatter.dateFormat = "d, HH:mm"
-
-            inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
-            
-            print("Varje månad eller varje år")
-        }
-
-        else{
-            let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale(identifier: "sv")
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "sv")
+        
+        switch selectedRepeatVal {
+        case .never:
             dateFormatter.dateFormat = "E, d MMM HH:mm"
-            //datePicker.minimumDate = Date()
-            //datePicker.locale = Locale.current
-
-
-            inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
-            print(dateFormatter.string(from: datePicker.date))
+            print(selectedRepeatVal.rawValue)
+        case .day:
+            dateFormatter.dateFormat = "HH:mm"
+            print(selectedRepeatVal.rawValue)
+        case .week:
+            dateFormatter.dateFormat = "E, HH:mm"
+            
+            print(selectedRepeatVal.rawValue)
+        case .twoTimesInMounth:
+            dateFormatter.dateFormat = "E, HH:mm"
+            print(selectedRepeatVal.rawValue)
+        case .mounth:
+            dateFormatter.dateFormat = "d, HH:mm"
+            
+            print(selectedRepeatVal.rawValue)
+        case .year:
+            dateFormatter.dateFormat = "d, HH:mm"
+            print(selectedRepeatVal.rawValue)
         }
-        
-        
-        
-        
+        inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
+    
+    
         
     }
     
@@ -143,7 +133,10 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
         let event = Event(dateTitle: inputDateTextfield.text!, eventTitle: titleTextfield.text!, userName: (Auth.auth().currentUser?.displayName)!, eventID: identifier, eventRepeatID: identifierRepeat, repeatTime: repeatTextfield.text!)
         
+    
         
+        
+       
         let eventDB = Database.database().reference().child(currentUserId!).child("Events")
         let childRef = eventDB.childByAutoId()
         childRef.setValue(event.toAnyObject())
@@ -170,19 +163,20 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return repeatDay[row]
+        return repeatDay[row].rawValue
     }
     
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
+        selectedRepeatVal = repeatDay[row]
+        repeatTextfield.text = selectedRepeatVal.rawValue
         
-        repeatTextfield.text = repeatDay[row]
-        
-        if repeatDay[0] == repeatTextfield.text {
-            print("aldrig")
-        }
-        if repeatDay[1] == repeatTextfield.text {
+        switch selectedRepeatVal {
+        case .never:
+            
+            print(selectedRepeatVal.rawValue)
+        case .day:
             let calander = Calendar(identifier: .gregorian)
             var components = calander.dateComponents(in: .current, from: datePicker.date)
             
@@ -202,8 +196,8 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
                 
                 }
             }
-        }
-        if repeatDay[2] == repeatTextfield.text {
+            print(selectedRepeatVal.rawValue)
+        case .week:
             let calander = Calendar(identifier: .gregorian)
             var components = calander.dateComponents(in: .current, from: datePicker.date)
             
@@ -223,9 +217,8 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
                 
                 }
             }
-            
-        }
-        if repeatDay[3] == repeatTextfield.text {
+            print(selectedRepeatVal.rawValue)
+        case .twoTimesInMounth:
             let calander = Calendar(identifier: .gregorian)
             var components = calander.dateComponents(in: .current, from: datePicker.date)
             
@@ -244,9 +237,9 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
                 
                 }
             }
+            print(selectedRepeatVal.rawValue)
             
-        }
-        if repeatDay[4] == repeatTextfield.text {
+        case .mounth:
             let calander = Calendar(identifier: .gregorian)
             var components = calander.dateComponents(in: .current, from: datePicker.date)
             
@@ -265,9 +258,9 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
                 
                 }
             }
+            print(selectedRepeatVal.rawValue)
             
-        }
-        if repeatDay[5] == repeatTextfield.text {
+        case .year:
             let calander = Calendar(identifier: .gregorian)
             var components = calander.dateComponents(in: .current, from: datePicker.date)
             
@@ -286,9 +279,11 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
                 
                 }
             }
+            print(selectedRepeatVal.rawValue)
+            
         }
-        
-        
+        dateChanged(datePicker: datePicker)
+    
         self.view.endEditing(false)
     }
     
@@ -356,59 +351,4 @@ extension AddEventController : UNUserNotificationCenterDelegate{
 
 
 
-
-//    func checkDate(){
-//        if Date.earlierDate(datePicker.date) == datePicker.date{
-//            addbuttonStyle.isEnabled = false
-//        }
-//
-//    }
-//
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        return true
-//    }
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-
-//    func setNotification() {
-//
-//        let center = UNUserNotificationCenter.current()
-//
-//        let title = titleTextfield.text
-//
-//        let content = UNMutableNotificationContent()
-//        content.title = "Du har hushållssysslor att göra!"
-//        content.body = "Glöm inte att \(title!)!"
-//        content.badge = 0
-//        content.sound = UNNotificationSound.default
-//
-//        let dateComponents = Calendar.current.dateComponents([.hour, .minute, .weekday, .month, .year], from: datePicker.date)
-//
-//       let components = DateComponents()
-//        time.hour = dateComponents.hour!
-//        time.minute = dateComponents.minute!
-//        time.weekday = dateComponents.weekday!
-//        time.month = dateComponents.month!
-//        time.year = dateComponents.year!
-//        print(time.weekday)
-//
-//
-//        let trigger = UNCalendarNotificationTrigger.init(dateMatching: components, repeats: true)
-//
-//        let request = UNNotificationRequest(identifier: UUID().uuidString
-//            , content: content, trigger: trigger)
-//
-//            center.add(request, withCompletionHandler: nil)
-//    }
-//
-//}
-//
-//
-//struct time {
-//    static var hour = 0
-//    static var minute = 0
-//    static var weekday = 0
-//    static var month = 0
-//    static var year = 0
-//}
 
