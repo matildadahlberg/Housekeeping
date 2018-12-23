@@ -18,9 +18,12 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     var ref: DatabaseReference!
     var databaseHandle: DatabaseHandle?
     var currentUserId = Auth.auth().currentUser?.uid
+    let refs = Database.database().reference(withPath: "Events")
 
+   
     var events : [Event] = []
     var event : Event?
+    var eventList : [Event]?
     
     var user : User?
     var users : [User] = []
@@ -28,8 +31,6 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     var date = Date()
     let formatter = DateFormatter()
     
-    
-    var selected = false
     
     
     let center = UNUserNotificationCenter.current()
@@ -46,6 +47,9 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
       
+        
+        
+        
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in })
         
         tableViewHome.register(UINib(nibName: "cell", bundle: nil), forCellReuseIdentifier: "myCell")
@@ -68,7 +72,8 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             }
             
             self.tableViewHome.reloadData()
-           // print(self.events)
+            //print(self.events)
+            
             
         })
         getfriendsEvents()
@@ -76,7 +81,16 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         
         
     }
- 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // deselect the selected row if any
+        let selectedRow: IndexPath? = tableViewHome.indexPathForSelectedRow
+        if let selectedRowNotNill = selectedRow {
+            tableViewHome.deselectRow(at: selectedRowNotNill, animated: true)
+        }
+    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -87,13 +101,16 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
- 
+        
         if events[indexPath.row].repeatTime == "" || events[indexPath.row].repeatTime == "Aldrig" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! CustomTableViewCell
-            cell.eventtitleCell.text = events[indexPath.row].eventTitle
-            cell.userNameCell.text = events[indexPath.row].userName
-            cell.dateLabel.text = events[indexPath.row].dateTitle
+            let ev = events[indexPath.row]
+            cell.eventtitleCell.text = ev.eventTitle
+            cell.userNameCell.text = ev.userName
+            cell.dateLabel.text = ev.dateTitle
             
+           
+           toggleCellCheckbox(cell, isCompleted: ev.completed)
             
             return cell
         }
@@ -101,109 +118,94 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         let cell2 = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! RepeatTableViewCell
-            cell2.usernameLabel.text = events[indexPath.row].userName
-            cell2.eventLabel.text = events[indexPath.row].eventTitle
-            cell2.dateCellLabel.text = events[indexPath.row].dateTitle
-            cell2.repeatLabel.text = events[indexPath.row].repeatTime
-
+        let ev = events[indexPath.row]
+        cell2.usernameLabel.text = ev.userName
+        cell2.eventLabel.text = ev.eventTitle
+        cell2.dateCellLabel.text = ev.dateTitle
+        cell2.repeatLabel.text = ev.repeatTime
+       
+        toggleCellCheckbox(cell2, isCompleted: ev.completed)
+        
+   
         return cell2
         
-        
-        
-        
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.alpha = 0
-        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
-        cell.layer.transform = transform
-        
-        UIView.animate(withDuration: 1.0){
-            cell.alpha = 1.0
-            cell.layer.transform = CATransform3DIdentity
-        }
+   
         
     }
+
+//
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        cell.alpha = 0
+//        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
+//        cell.layer.transform = transform
+//
+//        UIView.animate(withDuration: 1.0){
+//            cell.alpha = 1.0
+//            cell.layer.transform = CATransform3DIdentity
+//        }
+//
+//    }
     
     
     //radera genom att swipa
     func tableView(_ tableView: UITableView, commit editingStyle: CustomTableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
+        
+                if (currentUserId != nil){
+                if editingStyle == .delete {
+                    //for i in 1...6{
+                        center.removePendingNotificationRequests(withIdentifiers: [events[indexPath.row].eventID])
+        
+                        center.removeDeliveredNotifications(withIdentifiers:  [events[indexPath.row].eventID])
+        
+                    center.removePendingNotificationRequests(withIdentifiers: [events[indexPath.row].eventRepeatID])
+        
+                    center.removeDeliveredNotifications(withIdentifiers:  [events[indexPath.row].eventRepeatID])
+        
+        
+        
+                    let eventDB = events[indexPath.row]
+                    self.events.remove(at: indexPath.row)
+                    self.tableViewHome.deleteRows(at: [indexPath], with: .automatic)
+                    removeFromDB(event: eventDB)
+        
+        
+                    print(indexPath.row)
+                }
+        
+                }
+        
+    }
 
-//        if (currentUserId != nil){
-//        if editingStyle == .delete {
-//            //for i in 1...6{
-//                center.removePendingNotificationRequests(withIdentifiers: [events[indexPath.row].eventID])
-//
-//                center.removeDeliveredNotifications(withIdentifiers:  [events[indexPath.row].eventID])
-//
-//            center.removePendingNotificationRequests(withIdentifiers: [events[indexPath.row].eventRepeatID])
-//
-//            center.removeDeliveredNotifications(withIdentifiers:  [events[indexPath.row].eventRepeatID])
-//
-//
-//
-//            let eventDB = events[indexPath.row]
-//            self.events.remove(at: indexPath.row)
-//            self.tableViewHome.deleteRows(at: [indexPath], with: .automatic)
-//            removeFromDB(event: eventDB)
-//
-//
-//            print(indexPath.row)
-//        }
-//
-//        }
-      
-    }
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            // delete item at indexPath
-//            self.tableViewHome.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-            let eventDB = self.events[indexPath.row]
-            self.events.remove(at: indexPath.row)
-            self.tableViewHome.deleteRows(at: [indexPath], with: .automatic)
-            self.removeFromDB(event: eventDB)
-            print(self.tableViewHome)
-        }
-        
-        let edit = UITableViewRowAction(style: .default, title: "Edit") { (action, indexPath) in
-            // share item at indexPath
-            //print("I want to share: \(self.tableViewHome[indexPath.row])")
-        }
-        
-        edit.backgroundColor = UIColor.lightGray
-        
-        return [delete, edit]
-        
-    }
+
     
-
     // lägger till ett checkmark vid högra sidan i tableviewn om man klickar på den och tar bort om man klickar igen
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        tableViewHome.deselectRow(at: indexPath, animated: true)
+        guard let cell = tableViewHome.cellForRow(at: indexPath) else { return }
 
-        if tableView == tableViewHome {
+        let ev = events[indexPath.row]
 
-            if tableView.cellForRow(at: indexPath)?.accessoryType == CustomTableViewCell.AccessoryType.checkmark{
-                tableView.cellForRow(at: indexPath)?.accessoryType = CustomTableViewCell.AccessoryType.none
+        let toggledCompletion = !ev.completed
 
+        toggleCellCheckbox(cell, isCompleted: toggledCompletion)
 
-
-            }else{
-
-                tableView.cellForRow(at: indexPath)?.accessoryType = CustomTableViewCell.AccessoryType.checkmark
-
-
-            }
-
-        }
-        
-
+        ev.ref?.updateChildValues([
+            "completed": toggledCompletion
+            ])
 
     }
+
+    func toggleCellCheckbox(_ cell: UITableViewCell, isCompleted: Bool) {
+        if !isCompleted {
+            cell.accessoryType = .none
+            
+        } else {
+            cell.accessoryType = .checkmark
+            
+        }
+    }
+   
     
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -219,8 +221,8 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             eventDB.removeValue()
         }
     }
-   
-   
+    
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 106
@@ -241,7 +243,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
                         
                         self.ref.child(user.id).child("Events").observe(.value, with: {(snapshot) in
                             
-                           // var newEvents: [Event] = []
+                            // var newEvents: [Event] = []
                             
                             for event in snapshot.children{
                                 
@@ -249,12 +251,12 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
                                 self.events.append(listEvent)
                             }
                             print(snapshot)
-                           // self.events = newEvents
-                            self.tableViewHome.reloadData()
+                            // self.events = newEvents
+                            //self.tableViewHome.reloadData()
                             print(self.events)
                             
                         })
-                        self.tableViewHome.reloadData()
+                        //self.tableViewHome.reloadData()
                     }
                 })
             }
@@ -316,17 +318,17 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     func createAlert(title: String, message:String ){
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-
+        
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {(action) in
             alert.dismiss(animated: true, completion: nil)
         }))
-
+        
         self.present(alert, animated: true, completion: nil)
-
+        
     }
     
- 
- 
+    
+    
     
 }
 

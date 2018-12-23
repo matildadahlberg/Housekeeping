@@ -36,6 +36,7 @@
 		457C806721B1359600022FB9 /* cellFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C806621B1359600022FB9 /* cellFriendTableViewCell.swift */; };
 		459C7113219ACFF90051A813 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C7112219ACFF80051A813 /* Event.swift */; };
 		459C7115219AE0210051A813 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C7114219AE0210051A813 /* User.swift */; };
+		45A50D6821CC101B003F28AD /* EditEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A50D6721CC101B003F28AD /* EditEventController.swift */; };
 		45FB3F39219435D700211006 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB3F38219435D700211006 /* LogInController.swift */; };
 		45FB3F3B219436BD00211006 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB3F3A219436BD00211006 /* SignUpController.swift */; };
 		45FB3F3D2194488700211006 /* ResetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB3F3C2194488700211006 /* ResetPasswordController.swift */; };
@@ -100,6 +101,7 @@
 		457C806621B1359600022FB9 /* cellFriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellFriendTableViewCell.swift; sourceTree = "<group>"; };
 		459C7112219ACFF80051A813 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		459C7114219AE0210051A813 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		45A50D6721CC101B003F28AD /* EditEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventController.swift; sourceTree = "<group>"; };
 		45FB3F38219435D700211006 /* LogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
 		45FB3F3A219436BD00211006 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		45FB3F3C2194488700211006 /* ResetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordController.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				457C806021AE9FD100022FB9 /* ShowFriendsViewController.swift */,
 				457C806221B0633100022FB9 /* friendRequestViewController.swift */,
 				457BE4DE21B57E97004F90DA /* StartViewController.swift */,
+				45A50D6721CC101B003F28AD /* EditEventController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45A50D6821CC101B003F28AD /* EditEventController.swift in Sources */,
 				456B182A219083B100DBF5D6 /* HomeListController.swift in Sources */,
 				4572809721970151002AD90D /* ExpandableHeaderView.swift in Sources */,
 				457BE20C21CAD822008DB204 /* RepeatTableViewCell.swift in Sources */,

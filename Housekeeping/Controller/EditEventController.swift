@@ -1,21 +1,29 @@
 //
-//  AddEventController.swift
+//  EditEventController.swift
 //  Housekeeping
 //
-//  Created by Matilda Dahlberg on 2018-11-08.
+//  Created by Matilda Dahlberg on 2018-12-20.
 //  Copyright © 2018 Matilda Dahlberg. All rights reserved.
 //
+
+
 import UIKit
 import Firebase
 import UserNotifications
+//
+//enum repeatValue : String {
+//    case never = "Aldrig", day = "Varje dag", week = "Varje vecka", twoTimesInMounth = "Varannan vecka", mounth = "Varje månad", year = "Varje år"
+//}
 
-enum repeatValue : String {
-    case never = "Aldrig", day = "Varje dag", week = "Varje vecka", twoTimesInMounth = "Varannan vecka", mounth = "Varje månad", year = "Varje år"
-}
-
-class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource  {
+class EditEventController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource  {
     
+    @IBOutlet weak var titleTextfield: UITextField!
     
+    @IBOutlet weak var repeatTextfield: UITextField!
+    
+    @IBOutlet weak var dateTextfield: UITextField!
+    
+    @IBOutlet weak var datepicker: UIDatePicker!
     var ref: DatabaseReference?
     var databaseHandle: DatabaseHandle?
     var currentUserId = Auth.auth().currentUser?.uid
@@ -23,23 +31,17 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     var events : [Event] = []
     var event : Event?
     
+    var originalEvent : Event?
     
-    let segueHome = "goToHome"
+    var getTitle = String()
+    var getDate = String()
+    var getRepeat = String()
     
+    
+  
     var identifier = UUID().uuidString
     var identifierRepeat = UUID().uuidString
-    
-    @IBOutlet weak var repeatTextfield: UITextField!
-    
-    @IBOutlet weak var addbuttonStyle: UIBarButtonItem!
-    
-    @IBOutlet weak var titleLabel: UILabel!
-    
-    @IBOutlet weak var titleTextfield: UITextField!
-    @IBOutlet weak var inputDateTextfield: UITextField!
-    
-    @IBOutlet weak var datePicker: UIDatePicker!
-    
+  
     
     var pickerRepeat = UIPickerView()
     
@@ -48,13 +50,14 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     var repeatDay : [repeatValue] = [repeatValue.never, repeatValue.day, repeatValue.week, repeatValue.twoTimesInMounth, repeatValue.mounth, repeatValue.year]
     var selectedRepeatVal = repeatValue.never
     
-   
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        UNUserNotificationCenter.current().delegate = (self as! UNUserNotificationCenterDelegate)
+        
+        guard originalEvent != nil else {
+            return
+        }
+//        UNUserNotificationCenter.current().delegate = (self as UNUserNotificationCenterDelegate)
         
         self.navigationController?.navigationBar.isHidden = false
         let myColor = UIColor(red: 239.0/255, green: 239.0/255, blue: 244.0/255, alpha: 1.0)
@@ -62,23 +65,23 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         titleTextfield.layer.borderWidth = 0.5
         titleTextfield.layer.cornerRadius = 10
         titleTextfield.layer.borderColor = myColor.cgColor
-        
-        inputDateTextfield.layer.borderWidth = 0.5
-        inputDateTextfield.layer.cornerRadius = 10
-        inputDateTextfield.layer.borderColor = myColor.cgColor
-        
-        repeatTextfield.layer.borderWidth = 0.5
-        repeatTextfield.layer.cornerRadius = 10
-        repeatTextfield.layer.borderColor = myColor.cgColor
+
+        dateTextfield!.layer.borderWidth = 0.5
+        dateTextfield!.layer.cornerRadius = 10
+        dateTextfield!.layer.borderColor = myColor.cgColor
+
+        repeatTextfield!.layer.borderWidth = 0.5
+        repeatTextfield!.layer.cornerRadius = 10
+        repeatTextfield!.layer.borderColor = myColor.cgColor
         
         self.navigationItem.rightBarButtonItem!.isEnabled = false
         
         ref = Database.database().reference()
         
-        datePicker?.datePickerMode = .dateAndTime
-        datePicker?.addTarget(self, action: #selector(AddEventController.dateChanged(datePicker:)), for: .valueChanged)
+        datepicker?.datePickerMode = .dateAndTime
+        datepicker?.addTarget(self, action: #selector(EditEventController.dateChanged(datepicker:)), for: .valueChanged)
         
-       
+        
         self.titleTextfield.delegate = self
         
         
@@ -87,14 +90,34 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         pickerRepeat.delegate = self
         pickerRepeat.dataSource = self
         
+        titleTextfield.text = getTitle
+        dateTextfield.text = getDate
+        repeatTextfield.text = getRepeat
         
-        titleLabel.text = "Titel:"
+ 
+        
+    }
+    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //getEvents()
+
+    
+        guard let originalEvent = originalEvent else {
+            return
+        }
+        
+        self.dateTextfield.text = originalEvent.dateTitle
+        self.titleTextfield.text = originalEvent.eventTitle
+        self.repeatTextfield.text = originalEvent.repeatTime
+        
         
     }
     
     
     
-    @objc func dateChanged(datePicker: UIDatePicker){
+    @objc func dateChanged(datepicker: UIDatePicker){
         
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "sv")
@@ -121,36 +144,13 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             dateFormatter.dateFormat = "d, HH:mm"
             print(selectedRepeatVal.rawValue)
         }
-        inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
-    
-    
+        dateTextfield.text = dateFormatter.string(from: datepicker.date)
+        
+        
         
     }
     
-    @IBAction func pressedAdd(_ sender: Any) {
-        //post the data to firebase
-        
-        
-        let event = Event(dateTitle: inputDateTextfield.text!, eventTitle: titleTextfield.text!, userName: (Auth.auth().currentUser?.displayName)!, eventID: identifier, eventRepeatID: identifierRepeat, repeatTime: repeatTextfield.text!, completed: false)
-        
-    
-        
-        
-       
-        let eventDB = Database.database().reference().child(currentUserId!).child("Events")
-        let childRef = eventDB.childByAutoId()
-        childRef.setValue(event.toAnyObject())
-        
-        scheduleNotification()
-        
-        
-        
-        
-        print(UIApplication.shared.scheduledLocalNotifications?.count)
-        
-        performSegue(withIdentifier: segueHome, sender: self)
-        
-    }
+
     
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -178,7 +178,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             print(selectedRepeatVal.rawValue)
         case .day:
             let calander = Calendar(identifier: .gregorian)
-            var components = calander.dateComponents(in: .current, from: datePicker.date)
+            var components = calander.dateComponents(in: .current, from: datepicker.date)
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86_400, repeats: true)
             let content = UNMutableNotificationContent()
@@ -199,7 +199,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             print(selectedRepeatVal.rawValue)
         case .week:
             let calander = Calendar(identifier: .gregorian)
-            var components = calander.dateComponents(in: .current, from: datePicker.date)
+            var components = calander.dateComponents(in: .current, from: datepicker.date)
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 604_800, repeats: true)
             let content = UNMutableNotificationContent()
@@ -220,7 +220,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             print(selectedRepeatVal.rawValue)
         case .twoTimesInMounth:
             let calander = Calendar(identifier: .gregorian)
-            var components = calander.dateComponents(in: .current, from: datePicker.date)
+            var components = calander.dateComponents(in: .current, from: datepicker.date)
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1_209_600, repeats: true)
             let content = UNMutableNotificationContent()
@@ -241,7 +241,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             
         case .mounth:
             let calander = Calendar(identifier: .gregorian)
-            var components = calander.dateComponents(in: .current, from: datePicker.date)
+            var components = calander.dateComponents(in: .current, from: datepicker.date)
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2_629_800, repeats: true)
             let content = UNMutableNotificationContent()
@@ -262,7 +262,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             
         case .year:
             let calander = Calendar(identifier: .gregorian)
-            var components = calander.dateComponents(in: .current, from: datePicker.date)
+            var components = calander.dateComponents(in: .current, from: datepicker.date)
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 31_557_600, repeats: true)
             let content = UNMutableNotificationContent()
@@ -282,18 +282,12 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             print(selectedRepeatVal.rawValue)
             
         }
-        dateChanged(datePicker: datePicker)
-    
+        dateChanged(datepicker: datepicker)
+        
         self.view.endEditing(false)
     }
     
-    
-    func checkName(){
-        let text = titleTextfield.text ?? ""
-        addbuttonStyle.isEnabled = !text.isEmpty
-        
-    }
-    
+  
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.navigationItem.rightBarButtonItem!.isEnabled = true
@@ -302,7 +296,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     func scheduleNotification() {
         
         let calander = Calendar(identifier: .gregorian)
-        var components = calander.dateComponents(in: .current, from: datePicker.date)
+        var components = calander.dateComponents(in: .current, from: datepicker.date)
         let newComponents = DateComponents(calendar: calander, timeZone: .current, year: components.year, month: components.month, day: components.day, hour: components.hour, minute: components.minute, weekday: components.weekday)
         
         
@@ -337,11 +331,31 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         return(true)
     }
     
+    func getEvents(){
+        currentUserId = Auth.auth().currentUser?.uid
+        
+        ref = Database.database().reference().child(currentUserId!)
+        
+        ref!.child("Events").observe(.value, with: {(snapshot) in
+            
+            //var newEvents: [Event] = []
+            
+            for event in snapshot.children{
+                
+                let listEvent = Event(snapshot: event as! DataSnapshot)
+                self.events.append(listEvent)
+            }
+         
+            // print(self.events)
+            
+        })
+    }
+    
     
     
 }
 
-extension AddEventController : UNUserNotificationCenterDelegate{
+extension EditEventController : UNUserNotificationCenterDelegate{
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound])
     }

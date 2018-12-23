@@ -10,7 +10,7 @@ import UIKit
 
 class CustomTableViewCell: UITableViewCell {
     
-    
+ 
     @IBOutlet weak var userNameCell: UILabel!
     @IBOutlet weak var eventtitleCell: UILabel!
     
@@ -28,6 +28,8 @@ class CustomTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+
     
 
 }

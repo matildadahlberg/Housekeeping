@@ -11,7 +11,7 @@ import Firebase
 import FirebaseAuth
 
 class Event {
-    
+    let ref: DatabaseReference?
     var dateTitle: String!
     var dateFormatter = DateFormatter()
     var eventTitle: String!
@@ -22,8 +22,10 @@ class Event {
     var eventRepeatID: String
     var id : String
     
+    var completed : Bool
+    
 
-    init(dateTitle: String, eventTitle: String, userName: String, eventID: String, eventRepeatID: String, repeatTime: String){
+    init(dateTitle: String, eventTitle: String, userName: String, eventID: String, eventRepeatID: String, repeatTime: String, completed: Bool){
 //        dateFormatter.locale = Locale(identifier: "sv")
 //        dateFormatter.dateFormat = "E, d MMM HH:mm"
         self.dateTitle = dateTitle
@@ -33,8 +35,11 @@ class Event {
         self.eventID = eventID
         self.eventRepeatID = eventRepeatID
         self.repeatTime = repeatTime
+        self.completed = completed
  
         self.id = ""
+        
+        self.ref = nil
     }
     
     init(snapshot: DataSnapshot) {
@@ -45,9 +50,12 @@ class Event {
         repeatTime = (snapshotValue["repeatTime"] as! String)
         eventID = (snapshotValue["eventID"] as! String)
         eventRepeatID = (snapshotValue["eventRepeatID"] as! String)
+        completed = (snapshotValue["completed"] as! Bool)
      
         
         id = snapshot.key
+        
+        self.ref = snapshot.ref
         
     
         
@@ -55,7 +63,7 @@ class Event {
     
     
     func toAnyObject() -> Any {
-        return ["DateTitle": dateTitle, "EventTitle": eventTitle, "username": userName, "repeatTime": repeatTime, "eventID" : eventID, "eventRepeatID" : eventRepeatID]
+        return ["DateTitle": dateTitle, "EventTitle": eventTitle, "username": userName, "repeatTime": repeatTime, "eventID" : eventID, "eventRepeatID" : eventRepeatID, "completed" : completed]
     }
 }
 
