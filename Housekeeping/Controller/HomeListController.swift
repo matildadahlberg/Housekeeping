@@ -67,7 +67,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         
-          //tableViewHome.reloadData()
+        tableViewHome.reloadData()
         
         
         
@@ -193,7 +193,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, commit editingStyle: CustomTableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         
-        //if (currentUserId != nil){
+        if (currentUserId != nil){
             if editingStyle == .delete {
                 
                 center.removePendingNotificationRequests(withIdentifiers: [events[indexPath.row].eventID])
@@ -215,36 +215,38 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
                 print(indexPath.row)
             }
             
-        //}
+        }
         
     }
     
     
     
     // lägger till ett checkmark vid högra sidan i tableviewn om man klickar på den och tar bort om man klickar igen
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, event : Event)
     {
         
-         //if (currentUserId != nil){
-            
-          
-        
+         if (currentUserId != nil){
+       
         guard let cell = tableViewHome.cellForRow(at: indexPath) else { return }
         
         let ev = events[indexPath.row]
+            
+              events[indexPath.row].completed = !events[indexPath.row].completed
         
         let toggledCompletion = !ev.completed
         
         toggleCellCheckbox(cell, isCompleted: toggledCompletion)
+            
+            
         
         ev.ref?.updateChildValues([
             "completed": toggledCompletion
             ])
-       //}
+       }
     }
     
     func toggleCellCheckbox(_ cell: UITableViewCell, isCompleted: Bool) {
-         //if (currentUserId != nil){
+         if (currentUserId != nil){
         if !isCompleted {
             cell.accessoryType = .none
             
@@ -252,7 +254,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             cell.accessoryType = .checkmark
             
         }
-        //}
+        }
     }
     
     
@@ -264,11 +266,11 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     
     func removeFromDB(event : Event){
         
-        //if (currentUserId != nil){
+        if (currentUserId != nil){
             
             let eventDB = Database.database().reference().child(currentUserId!).child("Events").child(event.id)
             eventDB.removeValue()
-        //}
+        }
     }
     
     
