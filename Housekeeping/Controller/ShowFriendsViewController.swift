@@ -108,15 +108,6 @@ class ShowFriendsViewController: UIViewController, UITableViewDelegate, UITableV
         return true
     }
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//
-//            self.users.remove(at: indexPath.row)
-//            self.friendstableView.deleteRows(at: [indexPath], with: .automatic)
-//        }
-//    }
-    
-    
 
     @IBAction func showFriendsReq(_ sender: Any) {
         

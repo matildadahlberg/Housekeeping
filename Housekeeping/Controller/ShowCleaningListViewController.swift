@@ -14,17 +14,19 @@ class ShowCleaningListViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var tableView: UITableView!
     
     var sections = [
-        SectionForCleaningList(title: "Varje dag", list: ["Bädda sängen","Torka av duschen","Rengöra toalettstolen","Torka av köksytorna","Torka av kokplattorna -", "efter att du använt dem","Diska","Sopa köksgolvet",
-            "I slutet av dagen: plocka undan saker -", "som ligger framme och sätt smutsiga -", "kläder i tvättkorgen."], expanded: false),
-        SectionForCleaningList(title: "Varje vecka", list: ["Byt sängkläder och handdukar","Tvätta","Dammtorka","Dammsug mattor och golv","Svabba golven med en mopp","Städa badrummet ordentligt","Rengör speglar och tandborstmuggen","Torka av insidan av mikrovågsugnen","Torka av köksmaskiner och alla ytor -", "som inte rengörs dagligen"], expanded: false),
-        SectionForCleaningList(title: "Varje månad", list: ["Tvätta fönstren","Rengör persienner och gardiner","Tvätta alla dörrmattor","Rengör diskmaskinen, tvättmaskinen -", "och dammsugaren","Släng all mat som inte längre är ätbar –", "tänk på att smaka och lukta först,", "se dig inte blind på bäst-före-datumet","– och torka ur alla skåp."], expanded: false),
-        SectionForCleaningList(title: "Var 3-6 månad", list: ["Dammsug madrasser","Tvätta täcken, kuddar och madrassöverdrag","Torka ur kylskåpet","Rengör frysen","Städa ugnen noggrant,", "både på ut- och insidan","Rensa garaget eller förrådet -", "på onödiga prylar"], expanded: false),
+        SectionForCleaningList(title: "Varje dag", list: ["Bädda sängen","Torka av duschen","Rengöra toalettstolen","Torka av köksytorna","Torka av kokplattorna efter att du använt dem","Diska","Sopa köksgolvet",
+            "I slutet av dagen: plocka undan saker som ligger framme och sätt smutsiga kläder i tvättkorgen."], expanded: false),
+        SectionForCleaningList(title: "Varje vecka", list: ["Byt sängkläder och handdukar","Tvätta","Dammtorka","Dammsug mattor och golv","Svabba golven med en mopp","Städa badrummet ordentligt","Rengör speglar och tandborstmuggen","Torka av insidan av mikrovågsugnen","Torka av köksmaskiner och alla ytor som inte rengörs dagligen"], expanded: false),
+        SectionForCleaningList(title: "Varje månad", list: ["Tvätta fönstren","Rengör persienner och gardiner","Tvätta alla dörrmattor","Rengör diskmaskinen, tvättmaskinen och dammsugaren","Släng all mat som inte längre är ätbar, tänk på att smaka och lukta först, se dig inte blind på bäst-före-datumet och torka ur alla skåp."], expanded: false),
+        SectionForCleaningList(title: "Var 3-6 månad", list: ["Dammsug madrasser","Tvätta täcken, kuddar och madrassöverdrag","Torka ur kylskåpet","Rengör frysen","Städa ugnen noggrant både på ut- och insidan","Rensa garaget eller förrådet på onödiga prylar"], expanded: false),
         SectionForCleaningList(title: "Varje år", list: ["Torka av fönsterramarna","Torka av glödlamporna","Rengör stoppade möbler och", "mattor på djupet","Rengör kakelugnar och eldstäder","Se till att skorstenen blir sotad"], expanded: false)
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
+        
+        tableView.register(UINib(nibName: "cellClean", bundle: nil), forCellReuseIdentifier: "cellClean")
 
         // Do any additional setup after loading the view.
     }
@@ -38,13 +40,13 @@ class ShowCleaningListViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44
+        return 80
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(sections[indexPath.section].expanded){
-            return 44
+            return 91
         }else{
             return 0
         }
@@ -64,9 +66,9 @@ class ShowCleaningListViewController: UIViewController, UITableViewDelegate, UIT
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "labelCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellClean") as! cleanTableViewCell
         
-        cell.textLabel?.text = sections[indexPath.section].list[indexPath.row]
+        cell.label.text = sections[indexPath.section].list[indexPath.row]
         return cell
         
     }

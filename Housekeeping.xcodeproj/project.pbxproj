@@ -10,6 +10,8 @@
 		4506FB1421C5D6A20063EF5A /* showFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4506FB1321C5D6A20063EF5A /* showFriendCell.xib */; };
 		4506FB1621C5D7500063EF5A /* showFriendTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506FB1521C5D7500063EF5A /* showFriendTableCell.swift */; };
 		450D0D6A21931BB000F1A102 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 450D0D6921931BB000F1A102 /* GoogleService-Info.plist */; };
+		4522D18321D04293004B8470 /* cellClean.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4522D18221D04293004B8470 /* cellClean.xib */; };
+		4522D18521D0431F004B8470 /* cleanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4522D18421D0431F004B8470 /* cleanTableViewCell.swift */; };
 		4544ACDA21A4358A00DE3448 /* addFriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4544ACD921A4358A00DE3448 /* addFriendController.swift */; };
 		4544ACDC21A436E800DE3448 /* searchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4544ACDB21A436E800DE3448 /* searchTableViewCell.swift */; };
 		455239D62199ADC4005A8C8B /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455239D52199ADC4005A8C8B /* SettingsTableViewController.swift */; };
@@ -69,6 +71,8 @@
 		4506FB1321C5D6A20063EF5A /* showFriendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = showFriendCell.xib; sourceTree = "<group>"; };
 		4506FB1521C5D7500063EF5A /* showFriendTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = showFriendTableCell.swift; sourceTree = "<group>"; };
 		450D0D6921931BB000F1A102 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4522D18221D04293004B8470 /* cellClean.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cellClean.xib; sourceTree = "<group>"; };
+		4522D18421D0431F004B8470 /* cleanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cleanTableViewCell.swift; sourceTree = "<group>"; };
 		4544ACD921A4358A00DE3448 /* addFriendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addFriendController.swift; sourceTree = "<group>"; };
 		4544ACDB21A436E800DE3448 /* searchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchTableViewCell.swift; sourceTree = "<group>"; };
 		455239D52199ADC4005A8C8B /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 				4506FB1521C5D7500063EF5A /* showFriendTableCell.swift */,
 				457BE20921CAD7F6008DB204 /* cellRepeat.xib */,
 				457BE20B21CAD822008DB204 /* RepeatTableViewCell.swift */,
+				4522D18221D04293004B8470 /* cellClean.xib */,
+				4522D18421D0431F004B8470 /* cleanTableViewCell.swift */,
 			);
 			path = "Custom Cell";
 			sourceTree = "<group>";
@@ -387,6 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				457BE20A21CAD7F6008DB204 /* cellRepeat.xib in Resources */,
+				4522D18321D04293004B8470 /* cellClean.xib in Resources */,
 				4506FB1421C5D6A20063EF5A /* showFriendCell.xib in Resources */,
 				457C806521B1322100022FB9 /* cellFriendReq.xib in Resources */,
 				455C1E0C219D7DFE000EFDEE /* cell.xib in Resources */,
@@ -534,6 +541,7 @@
 				455C1E0E219D7EEB000EFDEE /* CustomTableViewCell.swift in Sources */,
 				4506FB1621C5D7500063EF5A /* showFriendTableCell.swift in Sources */,
 				455239D62199ADC4005A8C8B /* SettingsTableViewController.swift in Sources */,
+				4522D18521D0431F004B8470 /* cleanTableViewCell.swift in Sources */,
 				455239DC2199C16B005A8C8B /* ShowCleaningListViewController.swift in Sources */,
 				455239DE2199C3C4005A8C8B /* SectionsForCleaningList.swift in Sources */,
 				457C806321B0633100022FB9 /* friendRequestViewController.swift in Sources */,
