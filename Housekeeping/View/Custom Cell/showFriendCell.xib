@@ -18,23 +18,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xiN-JB-LKU">
-                        <rect key="frame" x="16" y="14" width="172" height="20.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="172" id="2Oo-qC-NEX"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xiN-JB-LKU">
+                        <rect key="frame" x="16" y="14" width="172" height="31.5"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNm-AX-Egp">
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNm-AX-Egp">
                         <rect key="frame" x="294" y="14" width="65" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="65" id="ODp-kP-1I4"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="YdX-hr-09c"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="aWc-dZ-zA1"/>
-                            <constraint firstAttribute="height" constant="30" id="nTH-Vp-ETh"/>
-                        </constraints>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" title="Ta bort">
                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                         </state>
@@ -43,14 +36,6 @@
                         </connections>
                     </button>
                 </subviews>
-                <constraints>
-                    <constraint firstItem="xiN-JB-LKU" firstAttribute="leading" secondItem="JcF-kw-UWV" secondAttribute="leadingMargin" id="00b-8c-tqA"/>
-                    <constraint firstItem="bNm-AX-Egp" firstAttribute="trailing" secondItem="JcF-kw-UWV" secondAttribute="trailingMargin" id="DPv-K6-2vd"/>
-                    <constraint firstItem="xiN-JB-LKU" firstAttribute="centerY" secondItem="JcF-kw-UWV" secondAttribute="centerY" id="EfY-An-PNx"/>
-                    <constraint firstItem="bNm-AX-Egp" firstAttribute="centerY" secondItem="JcF-kw-UWV" secondAttribute="centerY" id="JSk-Yh-U5X"/>
-                    <constraint firstItem="bNm-AX-Egp" firstAttribute="top" secondItem="xiN-JB-LKU" secondAttribute="top" id="ast-F8-KGW"/>
-                    <constraint firstItem="xiN-JB-LKU" firstAttribute="top" secondItem="JcF-kw-UWV" secondAttribute="topMargin" constant="3" id="mhr-eU-5L5"/>
-                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="nameLabel" destination="xiN-JB-LKU" id="hS0-ZT-cEM"/>

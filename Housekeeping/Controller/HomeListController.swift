@@ -5,7 +5,6 @@
 //  Created by Matilda Dahlberg on 2018-11-05.
 //  Copyright © 2018 Matilda Dahlberg. All rights reserved.
 //
-
 import UIKit
 import Firebase
 import UserNotifications
@@ -47,7 +46,12 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        tableViewHome.dataSource = self
+//        tableViewHome.delegate = self
+//
+//         self.tableViewHome.allowsSelection = true
         
+        //tableViewHome.allowsMultipleSelectionDuringEditing = false
         
         
         
@@ -58,7 +62,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.navigationController?.navigationBar.isHidden = false
         
-     
+        
         
         
         getEvents()
@@ -83,17 +87,17 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             tableViewHome.deselectRow(at: selectedRowNotNill, animated: true)
         }
         
-//        getEvents()
-//        getfriendsEvents()
-//        friendBadge()
+        //        getEvents()
+        //        getfriendsEvents()
+        //        friendBadge()
     }
     
     func getEvents(){
-    currentUserId = Auth.auth().currentUser?.uid
-    
-    ref = Database.database().reference().child(currentUserId!)
+        currentUserId = Auth.auth().currentUser?.uid
         
-    //ref.child("Events").observe(.childAdded, with: {(snapshot) in
+        ref = Database.database().reference().child(currentUserId!)
+        
+        //ref.child("Events").observe(.childAdded, with: {(snapshot) in
         
         ref.child("Events").observe(.childAdded, with: {(snapshot) in
             if snapshot.exists(){
@@ -104,28 +108,29 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
                 
             }
         })
-    
-//    ref.child("Events").observe(.value, with: {(snapshot) in
-//
-//    //self.events.removeAll()
-//
-//
-//    //var newEvents: [Event] = []
-//
-//    for event in snapshot.children{
-//
-//    let listEvent = Event(snapshot: event as! DataSnapshot)
-//    self.events.append(listEvent)
-//    }
-//
-//
-//    self.tableViewHome.reloadData()
-//    //print(self.events)
-//
-//
-//
-//
-//    })
+        //self.tableViewHome.reloadData()
+        
+        //    ref.child("Events").observe(.value, with: {(snapshot) in
+        //
+        //    //self.events.removeAll()
+        //
+        //
+        //    //var newEvents: [Event] = []
+        //
+        //    for event in snapshot.children{
+        //
+        //    let listEvent = Event(snapshot: event as! DataSnapshot)
+        //    self.events.append(listEvent)
+        //    }
+        //
+        //
+        //    self.tableViewHome.reloadData()
+        //    //print(self.events)
+        //
+        //
+        //
+        //
+        //    })
     }
     
     
@@ -151,16 +156,18 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             cell.userNameCell.text = ev.userName
             cell.dateLabel.text = ev.dateTitle
             
-            
             toggleCellCheckbox(cell, isCompleted: ev.completed)
+           
             
             events.sort(by: {$0.dateTitle < $1.dateTitle})
             
-            result = cell
+           result = cell
+        
         } else{
             
             let cell2 = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! RepeatTableViewCell
             let ev = events[indexPath.row]
+            
             cell2.usernameLabel.text = ev.userName
             cell2.eventLabel.text = ev.eventTitle
             cell2.dateCellLabel.text = ev.dateTitle
@@ -168,11 +175,14 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             
             toggleCellCheckbox(cell2, isCompleted: ev.completed)
             
+            
             //events.sort(by: {$0.dateTitle < $1.dateTitle})
             
             result = cell2
+            
         }
         return result
+        
     }
     
     
@@ -222,38 +232,41 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     // lägger till ett checkmark vid högra sidan i tableviewn om man klickar på den och tar bort om man klickar igen
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, event : Event)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) //,  event : Event)
     {
+        print("hej HÄR ar det")
         
-         if (currentUserId != nil){
-       
-        guard let cell = tableViewHome.cellForRow(at: indexPath) else { return }
-        
-        let ev = events[indexPath.row]
-            
-              events[indexPath.row].completed = !events[indexPath.row].completed
-        
-        let toggledCompletion = !ev.completed
-        
-        toggleCellCheckbox(cell, isCompleted: toggledCompletion)
-            
-            
-        
-        ev.ref?.updateChildValues([
-            "completed": toggledCompletion
-            ])
-       }
+        if (currentUserId != nil){
+
+            guard let cell = tableViewHome.cellForRow(at: indexPath) else { return }
+
+            let ev = events[indexPath.row]
+
+            //events[indexPath.row].completed = !events[indexPath.row].completed
+
+            let toggledCompletion = !ev.completed
+
+            events[indexPath.row].completed = toggledCompletion
+
+            toggleCellCheckbox(cell, isCompleted: toggledCompletion)
+
+
+
+            ev.ref?.updateChildValues([
+                "completed": toggledCompletion
+                ])
+        }
     }
     
     func toggleCellCheckbox(_ cell: UITableViewCell, isCompleted: Bool) {
-         if (currentUserId != nil){
-        if !isCompleted {
-            cell.accessoryType = .none
-            
-        } else {
-            cell.accessoryType = .checkmark
-            
-        }
+        if (currentUserId != nil){
+            if !isCompleted {
+                cell.accessoryType = .none
+                
+            } else {
+                cell.accessoryType = .checkmark
+                
+            }
         }
     }
     
@@ -295,22 +308,22 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
                     if let user = user{
                         self.users.append(user)
                         
-//                        self.ref.child(user.id).child("Events").observe(.value, with: {(snapshot) in
-//
-//
-//
-//                            for event in snapshot.children{
-//
-//                                let listEvent = Event(snapshot: event as! DataSnapshot)
-//                                self.events.append(listEvent)
-//                            }
-//                            print(snapshot)
-//                            // self.events = newEvents
-//
-//                            self.tableViewHome.reloadData()
-//                            print(self.events)
-//
-//                        })
+                        //                        self.ref.child(user.id).child("Events").observe(.value, with: {(snapshot) in
+                        //
+                        //
+                        //
+                        //                            for event in snapshot.children{
+                        //
+                        //                                let listEvent = Event(snapshot: event as! DataSnapshot)
+                        //                                self.events.append(listEvent)
+                        //                            }
+                        //                            print(snapshot)
+                        //                            // self.events = newEvents
+                        //
+                        //                            self.tableViewHome.reloadData()
+                        //                            print(self.events)
+                        //
+                        //                        })
                         self.ref.child(user.id).child("Events").observe(.childAdded, with: {(snapshot) in
                             if snapshot.exists(){
                                 let listEvent = Event(snapshot: snapshot )
@@ -395,13 +408,3 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     
     
 }
-
-
-
-
-
-
-
-
-
-

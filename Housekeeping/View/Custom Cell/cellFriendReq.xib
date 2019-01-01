@@ -18,21 +18,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Namn" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nn7-q8-sI7">
-                        <rect key="frame" x="16" y="15" width="157" height="25"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="157" id="C1B-ZR-wet"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Namn" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nn7-q8-sI7">
+                        <rect key="frame" x="16" y="15" width="157" height="29.5"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pPK-TR-75U">
-                        <rect key="frame" x="294" y="14" width="65" height="27"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="65" id="0bn-v4-Lcg"/>
-                            <constraint firstAttribute="height" constant="30" id="JZU-C6-Apz"/>
-                        </constraints>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pPK-TR-75U">
+                        <rect key="frame" x="294" y="14" width="65" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <state key="normal" title="Ta bort">
                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -41,14 +36,10 @@
                             <action selector="removePressed:" destination="bAh-pO-03c" eventType="touchUpInside" id="zVb-U3-hZB"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1M-0o-8G5">
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1M-0o-8G5">
                         <rect key="frame" x="221" y="14" width="65" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.1647058824" green="0.47450980390000003" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="OUv-gJ-8cX"/>
-                            <constraint firstAttribute="width" constant="65" id="bxY-qo-EtU"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="fYp-Zi-ffv"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="tintColor" red="0.5" green="0.50540453770000004" blue="0.5" alpha="0.74467572770000001" colorSpace="custom" customColorSpace="sRGB"/>
                         <state key="normal" title="Bekräfta">
@@ -59,20 +50,6 @@
                         </connections>
                     </button>
                 </subviews>
-                <constraints>
-                    <constraint firstItem="pPK-TR-75U" firstAttribute="baseline" secondItem="f1M-0o-8G5" secondAttribute="firstBaseline" id="0gV-tO-z2M"/>
-                    <constraint firstItem="pPK-TR-75U" firstAttribute="trailing" secondItem="EeA-sN-LEA" secondAttribute="trailingMargin" id="7aw-3b-yeU"/>
-                    <constraint firstItem="pPK-TR-75U" firstAttribute="trailing" secondItem="EeA-sN-LEA" secondAttribute="trailingMargin" id="J9G-kD-Pyi"/>
-                    <constraint firstItem="pPK-TR-75U" firstAttribute="centerY" secondItem="EeA-sN-LEA" secondAttribute="centerY" id="S2v-Rk-dly"/>
-                    <constraint firstItem="nn7-q8-sI7" firstAttribute="centerY" secondItem="EeA-sN-LEA" secondAttribute="centerY" id="ZOi-K2-Zog"/>
-                    <constraint firstItem="nn7-q8-sI7" firstAttribute="top" secondItem="EeA-sN-LEA" secondAttribute="topMargin" constant="4" id="amz-WN-aaI"/>
-                    <constraint firstItem="pPK-TR-75U" firstAttribute="top" secondItem="EeA-sN-LEA" secondAttribute="topMargin" constant="3" id="bJW-cI-VbM"/>
-                    <constraint firstItem="pPK-TR-75U" firstAttribute="top" secondItem="f1M-0o-8G5" secondAttribute="top" id="e8F-av-smF"/>
-                    <constraint firstItem="pPK-TR-75U" firstAttribute="leading" secondItem="f1M-0o-8G5" secondAttribute="trailing" constant="8" symbolic="YES" id="g7P-9n-Mbk"/>
-                    <constraint firstItem="f1M-0o-8G5" firstAttribute="leading" secondItem="nn7-q8-sI7" secondAttribute="trailing" constant="48" id="ggc-pW-qW2"/>
-                    <constraint firstItem="nn7-q8-sI7" firstAttribute="leading" secondItem="EeA-sN-LEA" secondAttribute="leadingMargin" id="jMm-dv-AL5"/>
-                    <constraint firstItem="f1M-0o-8G5" firstAttribute="top" secondItem="EeA-sN-LEA" secondAttribute="topMargin" constant="3" id="lEN-6G-706"/>
-                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="acceptBtn" destination="f1M-0o-8G5" id="5Bl-yC-BWc"/>
