@@ -148,6 +148,10 @@ class friendRequestViewController: UIViewController, UITableViewDelegate, UITabl
             
             //lägger till i den andra vännens vänner"
             reference.child(user.id).child("friends").child(currentUser.uid).setValue(true)
+            
+           // performSegue(withIdentifier: "goBackFriends", sender: self)
+            
+           
           
             
         }

@@ -32,6 +32,8 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
         
         setUpSearchBar()
         
+        
+        
         ref = Database.database().reference()
         
         ref.observe(.value, with: {(snapshot) in
@@ -50,6 +52,7 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
         })
         
     }
+   
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("PRESSED")
@@ -84,6 +87,7 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
                 if snapshot.exists() == true {
                     print("exists")
                     cell.buttonStyle.isHidden = true
+                   
                 }
                 else {
                     print("does not exist")
@@ -99,6 +103,7 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
                 if snapshot.exists() == true {
                     print("exists")
                     cell.buttonStyle.isHidden = true
+                   
                 }
                 else {
                     print("does not exist")

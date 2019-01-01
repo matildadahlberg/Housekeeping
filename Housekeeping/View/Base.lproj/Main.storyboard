@@ -754,6 +754,7 @@
                     </view>
                     <connections>
                         <outlet property="reqTableView" destination="egy-rp-q0D" id="VqA-dz-4g2"/>
+                        <segue destination="O4e-pD-h5s" kind="show" identifier="goBackFriends" id="Qr6-6v-gYL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xH3-s7-ulN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -935,6 +936,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jZ8-2a-bjR"/>
+        <segue reference="Qr6-6v-gYL"/>
         <segue reference="XNV-ES-0XY"/>
         <segue reference="FEV-Et-h1L"/>
         <segue reference="Ysm-hh-s4q"/>

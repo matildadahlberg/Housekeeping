@@ -45,15 +45,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        tableViewHome.dataSource = self
-//        tableViewHome.delegate = self
-//
-//         self.tableViewHome.allowsSelection = true
-        
-        //tableViewHome.allowsMultipleSelectionDuringEditing = false
-        
-        
+
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in })
         
@@ -87,9 +79,6 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             tableViewHome.deselectRow(at: selectedRowNotNill, animated: true)
         }
         
-        //        getEvents()
-        //        getfriendsEvents()
-        //        friendBadge()
     }
     
     func getEvents(){
@@ -157,10 +146,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             cell.dateLabel.text = ev.dateTitle
             
             toggleCellCheckbox(cell, isCompleted: ev.completed)
-           
-            
-            events.sort(by: {$0.dateTitle < $1.dateTitle})
-            
+          
            result = cell
         
         } else{
@@ -174,13 +160,11 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
             cell2.repeatLabel.text = ev.repeatTime
             
             toggleCellCheckbox(cell2, isCompleted: ev.completed)
-            
-            
-            //events.sort(by: {$0.dateTitle < $1.dateTitle})
-            
+      
             result = cell2
             
         }
+        events.sort(by: {$0.dateTitle < $1.dateTitle})
         return result
         
     }
@@ -235,6 +219,7 @@ class HomeListController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) //,  event : Event)
     {
         print("hej HÄR ar det")
+        
         
         if (currentUserId != nil){
 
