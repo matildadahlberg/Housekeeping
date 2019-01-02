@@ -935,10 +935,10 @@
         <image name="settings" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jZ8-2a-bjR"/>
+        <segue reference="KQa-8M-NX9"/>
         <segue reference="Qr6-6v-gYL"/>
-        <segue reference="XNV-ES-0XY"/>
-        <segue reference="FEV-Et-h1L"/>
+        <segue reference="QRv-D8-YT5"/>
+        <segue reference="ln6-U8-KsQ"/>
         <segue reference="Ysm-hh-s4q"/>
     </inferredMetricsTieBreakers>
 </document>

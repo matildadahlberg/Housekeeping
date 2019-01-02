@@ -91,12 +91,13 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
                 else {
                     print("does not exist")
+                    cell.buttonStyle.isHidden = false
                     cell.buttonStyle.setTitle("Lägg till vän", for: .normal)
                 }
             }) { (error) in
                 print(error.localizedDescription)
         }
-        ref.child((cell.user?.id)!).child("sendfriendRequests").child(currentUserId!)
+        ref.child((cell.user?.id)!).child("friends").child(currentUserId!)
             .observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                 
@@ -107,6 +108,7 @@ class addFriendController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
                 else {
                     print("does not exist")
+                    cell.buttonStyle.isHidden = false
                     cell.buttonStyle.setTitle("Lägg till vän", for: .normal)
                 }
             }) { (error) in
