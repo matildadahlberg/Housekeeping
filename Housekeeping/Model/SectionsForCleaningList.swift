@@ -13,9 +13,7 @@ struct SectionForCleaningList {
     var title: String!
     var list: [String]!
     var expanded: Bool!
-   
-    
-    
+
     init(title: String, list: [String], expanded: Bool){
         self.title = title
         self.list = list

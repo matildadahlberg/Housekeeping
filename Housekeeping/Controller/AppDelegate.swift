@@ -22,11 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
       
          UIApplication.shared.applicationIconBadgeNumber = 0
-        
-        
+
         let center = UNUserNotificationCenter.current()
-        
-        
+
         center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             if granted {
                 print("Notis funkar!")
@@ -39,15 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(UIApplication.shared.scheduledLocalNotifications?.count)
         center.removeAllDeliveredNotifications()
         
-     
-        
-        
         return true
     }
-//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: Any]?) -> Bool {
-//
-//
-//    }
+
     
     override init() {
         super.init()

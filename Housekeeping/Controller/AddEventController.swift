@@ -15,7 +15,6 @@ enum repeatValue : String {
 
 class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource  {
     
-    
     var ref: DatabaseReference?
     var databaseHandle: DatabaseHandle?
     var currentUserId = Auth.auth().currentUser?.uid
@@ -23,8 +22,13 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     var events : [Event] = []
     var event : Event?
     
-    
     let segueHome = "goToHome"
+    
+    var day = 86_400
+    var week = 604_800
+    var twoTimesInMounth = 1_209_600
+    var mounth = 2_629_800
+    var year = 31_557_600
     
     var identifier = UUID().uuidString
     var identifierRepeat = UUID().uuidString
@@ -43,17 +47,15 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
     
     var pickerRepeat = UIPickerView()
     
-    //var repeatDay = ["Aldrig","Varje dag", "Varje vecka", "Varannan vecka","Varje månad", "Varje år"]
-    
     var repeatDay : [repeatValue] = [repeatValue.never, repeatValue.day, repeatValue.week, repeatValue.twoTimesInMounth, repeatValue.mounth, repeatValue.year]
     var selectedRepeatVal = repeatValue.never
     
-   
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         UNUserNotificationCenter.current().delegate = (self as! UNUserNotificationCenterDelegate)
         
         self.navigationController?.navigationBar.isHidden = false
@@ -78,7 +80,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         datePicker?.datePickerMode = .dateAndTime
         datePicker?.addTarget(self, action: #selector(AddEventController.dateChanged(datePicker:)), for: .valueChanged)
         
-       
+        
         self.titleTextfield.delegate = self
         
         
@@ -122,8 +124,8 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             print(selectedRepeatVal.rawValue)
         }
         inputDateTextfield.text = dateFormatter.string(from: datePicker.date)
-    
-    
+        
+        
         
     }
     
@@ -133,10 +135,10 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         
         let event = Event(dateTitle: inputDateTextfield.text!, eventTitle: titleTextfield.text!, userName: (Auth.auth().currentUser?.displayName)!, eventID: identifier, eventRepeatID: identifierRepeat, repeatTime: repeatTextfield.text!, completed: false)
         
-    
         
         
-       
+        
+        
         let eventDB = Database.database().reference().child(currentUserId!).child("Events")
         let childRef = eventDB.childByAutoId()
         childRef.setValue(event.toAnyObject())
@@ -180,7 +182,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             let calander = Calendar(identifier: .gregorian)
             var components = calander.dateComponents(in: .current, from: datePicker.date)
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86_400, repeats: true)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(day), repeats: true)
             let content = UNMutableNotificationContent()
             content.title = "Du har hushållssysslor att göra!"
             content.body = "Glöm inte att \(titleTextfield.text!)!"
@@ -201,7 +203,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             let calander = Calendar(identifier: .gregorian)
             var components = calander.dateComponents(in: .current, from: datePicker.date)
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 604_800, repeats: true)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(week), repeats: true)
             let content = UNMutableNotificationContent()
             content.title = "Du har hushållssysslor att göra!"
             content.body = "Glöm inte att \(titleTextfield.text!)!"
@@ -222,7 +224,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             let calander = Calendar(identifier: .gregorian)
             var components = calander.dateComponents(in: .current, from: datePicker.date)
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1_209_600, repeats: true)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(twoTimesInMounth), repeats: true)
             let content = UNMutableNotificationContent()
             content.title = "Du har hushållssysslor att göra!"
             content.body = "Glöm inte att \(titleTextfield.text!)!"
@@ -243,7 +245,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             let calander = Calendar(identifier: .gregorian)
             var components = calander.dateComponents(in: .current, from: datePicker.date)
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2_629_800, repeats: true)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(mounth), repeats: true)
             let content = UNMutableNotificationContent()
             content.title = "Du har hushållssysslor att göra!"
             content.body = "Glöm inte att \(titleTextfield.text!)!"
@@ -264,7 +266,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             let calander = Calendar(identifier: .gregorian)
             var components = calander.dateComponents(in: .current, from: datePicker.date)
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 31_557_600, repeats: true)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(year), repeats: true)
             let content = UNMutableNotificationContent()
             content.title = "Du har hushållssysslor att göra!"
             content.body = "Glöm inte att \(titleTextfield.text!)!"
@@ -283,7 +285,7 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
             
         }
         dateChanged(datePicker: datePicker)
-    
+        
         self.view.endEditing(false)
     }
     
@@ -330,15 +332,10 @@ class AddEventController: UIViewController, UITextFieldDelegate, UIPickerViewDel
         }
     }
     
-    
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         titleTextfield.resignFirstResponder()
         return(true)
-    }
-    
-    
-    
+    }  
 }
 
 extension AddEventController : UNUserNotificationCenterDelegate{

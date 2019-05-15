@@ -24,19 +24,15 @@ class Event {
     
     var completed : Bool
     
-
     init(dateTitle: String, eventTitle: String, userName: String, eventID: String, eventRepeatID: String, repeatTime: String, completed: Bool){
-//        dateFormatter.locale = Locale(identifier: "sv")
-//        dateFormatter.dateFormat = "E, d MMM HH:mm"
         self.dateTitle = dateTitle
-//        self.dateTitle = dateFormatter.string(from: Date(dateTitle))
         self.eventTitle = eventTitle
         self.userName = userName
         self.eventID = eventID
         self.eventRepeatID = eventRepeatID
         self.repeatTime = repeatTime
         self.completed = completed
- 
+        
         self.id = ""
         
         self.ref = nil
@@ -51,17 +47,13 @@ class Event {
         eventID = (snapshotValue["eventID"] as! String)
         eventRepeatID = (snapshotValue["eventRepeatID"] as! String)
         completed = (snapshotValue["completed"] as! Bool)
-     
+        
         
         id = snapshot.key
         
         self.ref = snapshot.ref
-        
-    
-        
     }
-    
-    
+
     func toAnyObject() -> Any {
         return ["DateTitle": dateTitle, "EventTitle": eventTitle, "username": userName, "repeatTime": repeatTime, "eventID" : eventID, "eventRepeatID" : eventRepeatID, "completed" : completed]
     }

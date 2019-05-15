@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import SVProgressHUD
 
-class LogInController: UIViewController {
+class LogInController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var EmailTextField: UITextField!
     
@@ -29,6 +29,8 @@ class LogInController: UIViewController {
         super.viewDidLoad()
         
         startAnimation()
+        
+        PasswordTextfield.delegate = self
         
      
         LogInButton.layer.cornerRadius = 5
@@ -60,9 +62,6 @@ class LogInController: UIViewController {
         
         
     }
-    
-   
-    
 
 // tar bort tangentbordet när man klickar någonstans utanför det
 override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -70,8 +69,8 @@ override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 }
 
 // tar bort tangentbordet när man klicka på return
-func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
+func textFieldShouldReturn(_ PasswordTextField: UITextField) -> Bool {
+    PasswordTextField.resignFirstResponder()
     return(true)
 }
 

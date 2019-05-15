@@ -216,7 +216,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="F8f-gm-OK7"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Kommande aktiviteter" id="kGS-Vn-uqH">
+                    <navigationItem key="navigationItem" title="Kommande hushållssysslor" id="kGS-Vn-uqH">
                         <barButtonItem key="backBarButtonItem" title=" " id="shP-by-ecE"/>
                         <barButtonItem key="leftBarButtonItem" image="add_user_male" style="plain" id="zbe-nK-Q7I">
                             <connections>
@@ -318,7 +318,7 @@
                                 <color key="sectionIndexColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="aEt-zl-yXB" style="IBUITableViewCellStyleDefault" id="gne-P4-7Ba">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="aEt-zl-yXB" style="IBUITableViewCellStyleDefault" id="gne-P4-7Ba">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gne-P4-7Ba" id="mNN-o3-qPK">
@@ -935,8 +935,8 @@
         <image name="settings" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KQa-8M-NX9"/>
-        <segue reference="Qr6-6v-gYL"/>
+        <segue reference="jZ8-2a-bjR"/>
+        <segue reference="ewx-Ue-pfB"/>
         <segue reference="QRv-D8-YT5"/>
         <segue reference="ln6-U8-KsQ"/>
         <segue reference="Ysm-hh-s4q"/>
